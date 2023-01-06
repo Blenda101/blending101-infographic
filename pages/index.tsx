@@ -1,8 +1,13 @@
 import Head from "next/head";
 import { Fragment } from "react";
+import Age from "../components/sections/Age";
+import Chronic from "../components/sections/Chronic";
 import Footer from "../components/sections/Footer";
 import Hero from "../components/sections/Hero";
+import Locations from "../components/sections/Locations";
+import Race from "../components/sections/Race";
 import Summary from "../components/sections/Summary";
+import Trends from "../components/sections/Trends";
 
 export default function Home() {
   return (
@@ -16,6 +21,15 @@ export default function Home() {
       <main>
         <Hero />
         <Summary />
+        <section id="Chronic-Diseases">
+          <div className="container-fluid w-90">
+            <Chronic />
+            <Race />
+            <Age />
+          </div>
+        </section>
+        <Trends />
+        <Locations />
       </main>
       <Footer />
     </Fragment>

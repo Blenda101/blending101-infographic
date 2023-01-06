@@ -16,6 +16,31 @@ a {
   text-decoration: none;
 }
 
+.swiper-wrapper {
+  align-items: center !important;
+  /* margin: 0 10px; */
+}
+.slider-main {
+  display: flex;
+  align-items: center;
+}
+
+.prev {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.next {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.prev svg,
+.next svg {
+  height: 20px;
+  color: #7cbc39;
+}
+
 .clr-green {
   color: #7cbc39;
 }
@@ -150,7 +175,7 @@ section#Chronic-Diseases .small-icon:last-child {
 .bg-clr-scnd {
   background: #f4f4f4;
   border-radius: 18px;
-  padding: 20px 0;
+  padding: 15px 10px;
 }
 .first_text h3 {
   font-weight: 700;
@@ -222,7 +247,7 @@ section#Chronic-Diseases .small-icon:last-child {
 #Chronic-Diseases .bg-clr {
   background: #e8f8d2;
   border-radius: 18px;
-  padding: 20px 10px;
+  padding: 15px 10px;
 }
 
 /**********trends section**********/
@@ -323,9 +348,6 @@ footer li {
   display: none;
 }
 .banner-img img {
-  width: 100%;
-}
-.graph-img img {
   width: 100%;
 }
 
@@ -556,7 +578,7 @@ footer li {
   .bg-clr-scnd {
     background: #f4f4f4;
     border-radius: 18px;
-    padding: 20px 10px 10px !important;
+    /* padding: 20px 10px 10px !important; */
   }
 }
 
