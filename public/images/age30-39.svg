@@ -1,39 +1,9 @@
-<svg width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="37.6461" cy="37.7325" r="36.9908" fill="url(#paint0_linear_2113_35)"/>
-<circle r="30.2139" transform="matrix(-1 0 0 1 37.6465 37.7324)" fill="url(#paint1_linear_2113_35)"/>
-<g filter="url(#filter0_i_2113_35)">
-<path d="M40.0333 7.61298C32.3725 7.0059 24.7682 9.34078 18.7682 14.1424C12.7681 18.944 8.8232 25.8516 7.73629 33.4591C6.64938 41.0667 8.50219 48.8025 12.9176 55.0923C17.333 61.382 23.9792 65.7528 31.5035 67.3153L32.8156 60.9968C26.8983 59.7681 21.6717 56.3308 18.1993 51.3844C14.727 46.4381 13.2699 40.3545 14.1247 34.3719C14.9794 28.3892 18.0818 22.957 22.8003 19.1809C27.5188 15.4048 33.4989 13.5687 39.5235 14.0461L40.0333 7.61298Z" fill="#7CBC39"/>
-</g>
-<circle cx="37.6462" cy="37.7324" r="24.0017" fill="url(#paint2_linear_2113_35)"/>
-<path d="M31 28.5526L45.0921 28.5526" stroke="#7CBC39" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M31 48.4474L45.0921 48.4474" stroke="#7CBC39" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M32.2435 28.6908H43.8488V32.5592C43.8488 35.7639 41.2509 38.3618 38.0462 38.3618C34.8415 38.3618 32.2435 35.7639 32.2435 32.5592V28.6908Z" stroke="#7CBC39" stroke-width="1.38158"/>
-<path d="M33.6249 32.0395H42.467V32.8355C42.467 35.2772 40.4876 37.2566 38.0459 37.2566C35.6042 37.2566 33.6249 35.2772 33.6249 32.8355V32.0395Z" fill="#7CBC39" stroke="#7CBC39" stroke-width="1.38158"/>
-<path d="M32.2435 48.3092H43.8488V44.4408C43.8488 41.2361 41.2509 38.6382 38.0462 38.6382C34.8415 38.6382 32.2435 41.2361 32.2435 44.4408V48.3092Z" stroke="#7CBC39" stroke-width="1.38158"/>
-<path d="M37.3424 47.1096L32 48H44L38.6576 47.1096C38.2222 47.037 37.7778 47.037 37.3424 47.1096Z" fill="#7CBC39"/>
-<path d="M38 37V47" stroke="#7CBC39" stroke-width="0.5" stroke-linecap="round" stroke-dasharray="1 1"/>
-<defs>
-<filter id="filter0_i_2113_35" x="7.43262" y="7.5185" width="33.6822" height="59.7968" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="1.08165"/>
-<feGaussianBlur stdDeviation="1.08165"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"/>
-<feBlend mode="normal" in2="shape" result="effect1_innerShadow_2113_35"/>
-</filter>
-<linearGradient id="paint0_linear_2113_35" x1="74.637" y1="39.3293" x2="0.655273" y2="39.3293" gradientUnits="userSpaceOnUse">
-<stop stop-color="#EAEAEA"/>
-<stop offset="1" stop-color="white"/>
-</linearGradient>
-<linearGradient id="paint1_linear_2113_35" x1="60.4278" y1="31.5181" x2="-1.79491e-07" y2="31.5181" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F1F1F1"/>
-<stop offset="1" stop-color="white"/>
-</linearGradient>
-<linearGradient id="paint2_linear_2113_35" x1="61.6479" y1="38.7685" x2="13.6445" y2="38.7685" gradientUnits="userSpaceOnUse">
-<stop stop-color="#DCDCDC"/>
-<stop offset="1" stop-color="white"/>
-</linearGradient>
-</defs>
+<svg width="16" height="23" viewBox="0 0 16 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.55263L15.0921 1.55263" stroke="#7CBC39" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1 21.4474L15.0921 21.4474" stroke="#7CBC39" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.2434 1.69079H13.8487V5.55921C13.8487 8.76392 11.2507 11.3618 8.04603 11.3618C4.84133 11.3618 2.2434 8.76391 2.2434 5.55921V1.69079Z" stroke="#7CBC39" stroke-width="1.38158"/>
+<path d="M8.04605 10.2566C5.67272 10.2566 3.73618 8.38648 3.62961 6.03947H12.4625C12.3559 8.38648 10.4194 10.2566 8.04605 10.2566Z" fill="#7CBC39" stroke="#7CBC39" stroke-width="1.38158"/>
+<path d="M2.2434 21.3092H13.8487V17.4408C13.8487 14.2361 11.2507 11.6382 8.04603 11.6382C4.84133 11.6382 2.2434 14.2361 2.2434 17.4408V21.3092Z" stroke="#7CBC39" stroke-width="1.38158"/>
+<path d="M6.73509 19.4216L2 21H14L9.26491 19.4216C8.44384 19.1479 7.55616 19.1479 6.73509 19.4216Z" fill="#7CBC39"/>
+<path d="M8 10V20" stroke="#7CBC39" stroke-width="0.5" stroke-linecap="round" stroke-dasharray="1 1"/>
 </svg>

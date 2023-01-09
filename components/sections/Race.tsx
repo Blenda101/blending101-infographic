@@ -5,6 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Specs from "../shared/Specs";
 
 const Race = () => {
   const sliderRef = useRef<any>(null);
@@ -63,81 +64,25 @@ const Race = () => {
           }}
         >
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/White.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>White</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="White" value={60} image="/images/White.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Black.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Black</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Black" value={60} image="/images/Black.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/hispanic.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Hispanic</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Hispanic" value={60} image="/images/hispanic.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Asian.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Asian</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Asian" value={60} image="/images/Asian.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/other.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Other</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Other" value={60} image="/images/other.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Male.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Male</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Male" value={60} image="/images/Male.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Female.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Female</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Female" value={60} image="/images/Female.svg" />
           </SwiperSlide>
         </Swiper>
         <div className="next" onClick={handleNext}>

@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faDna,
 } from "@fortawesome/free-solid-svg-icons";
+import Specs from "../shared/Specs";
 
 const Age = () => {
   const sliderRef = useRef<any>(null);
@@ -59,81 +61,25 @@ const Age = () => {
           }}
         >
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age20-29.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>20-29</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="20-29" value={70} image="/images/age20-29.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age30-39.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>30-39</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="30-39" value={70} image="/images/age30-39.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age40-49.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>40-49</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="40-49" value={70} image="/images/age40-49.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age50-59.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>50-59</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="50-59" value={70} image="/images/age50-59.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age60-69.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>60-69</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="60-69" value={70} image="/images/age60-69.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age70-79.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>70-79</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="70-79" value={70} image="/images/age70-79.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/age80+.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>80+</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="80+" value={70} image="/images/age80+.svg" />
           </SwiperSlide>
         </Swiper>
         <div className="next" onClick={handleNext}>

@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faHeartPulse,
+  faLungs,
+  faBrain,
 } from "@fortawesome/free-solid-svg-icons";
+import Specs from "../shared/Specs";
 
 const Chronic = () => {
   const sliderRef = useRef<any>(null);
@@ -59,84 +63,33 @@ const Chronic = () => {
           }}
         >
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Hear_ Disease.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Heart Disease</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Heart Disease" value={70} icon={faHeartPulse} />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Cancer.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Cancer</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Cancer" value={60} image="/images/Cancer.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Lung_Disease.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Lung Disease</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Lung Disease" value={45} icon={faLungs} />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Kidney_Disease.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Kidney Disease</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs
+              caption="Kidney Disease"
+              value={34}
+              image="/images/Kidney_Disease.svg"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Diabetes.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Diabetes</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Diabetes" value={34} image="/images/Diabetes.svg" />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Alzheime.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>
-                  Alzheimer & <br />
-                  Dementia
-                </p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs
+              caption="Alzheimer & Dementia"
+              value={45}
+              image="/images/Alzheime.svg"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <div className="small-icon">
-              <div className="icon">
-                <img src="/images/Stroke.svg" alt="" />
-              </div>
-              <div className="desc">
-                <p>Stroke</p>
-                <p className="numbers">48%</p>
-              </div>
-            </div>
+            <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
           </SwiperSlide>
         </Swiper>
         <div className="next" onClick={handleNext}>

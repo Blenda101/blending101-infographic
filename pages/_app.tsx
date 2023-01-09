@@ -1,4 +1,5 @@
 import "../styles/style.css";
+import "../public/css/test.scss";
 import "swiper/css";
 import "swiper/css/navigation";
 

@@ -1,4 +1,5 @@
 import React from "react";
+import Honeycomb from "../Honeycomb";
 
 const Locations = () => {
   return (
@@ -19,11 +20,7 @@ const Locations = () => {
               />
             </div>
             <div className="chart-img text-center">
-              <img
-                src="/images/loaction-img.svg"
-                className=" img-fluid "
-                alt=" "
-              />
+              <Honeycomb />
             </div>
           </div>
         </div>
