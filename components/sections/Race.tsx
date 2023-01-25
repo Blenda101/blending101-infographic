@@ -5,9 +5,17 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import Specs from "../shared/Specs";
+import Specs, { ICategory } from "../shared/Specs";
+import { criteriaVar } from "../../graphql/Infograph";
 
-const Race = () => {
+interface RaceProps {
+  active: string;
+  races: ICategory[];
+  sex: ICategory[];
+}
+
+const Race = (props: RaceProps) => {
+  const { active, races, sex } = props;
   const sliderRef = useRef<any>(null);
   const swiper = sliderRef?.current?.swiper;
   const handlePrev = useCallback(() => {
@@ -20,7 +28,14 @@ const Race = () => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  console.log(swiper);
+  const raceSexClickHandler = (name: string) => {
+    const criteria = criteriaVar();
+    criteriaVar({
+      ...criteria,
+      param: name,
+    });
+  };
+
   return (
     <div className=" m-top-20">
       <div className="row ">
@@ -63,10 +78,20 @@ const Race = () => {
             },
           }}
         >
-          <SwiperSlide>
-            <Specs caption="White" value={60} image="/images/White.svg" />
-          </SwiperSlide>
-          <SwiperSlide>
+          {races.map((race) => (
+            <SwiperSlide
+              key={race._id}
+              onClick={() => raceSexClickHandler(race._id)}
+            >
+              <Specs
+                active={active}
+                caption={race._id}
+                value={Math.round(race.percentage)}
+                image="/images/White.svg"
+              />
+            </SwiperSlide>
+          ))}
+          {/* <SwiperSlide>
             <Specs caption="Black" value={60} image="/images/Black.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -77,13 +102,20 @@ const Race = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Specs caption="Other" value={60} image="/images/other.svg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs caption="Male" value={60} image="/images/Male.svg" />
-          </SwiperSlide>
-          <SwiperSlide>
+          </SwiperSlide> */}
+          {sex.map((s) => (
+            <SwiperSlide key={s._id} onClick={() => raceSexClickHandler(s._id)}>
+              <Specs
+                active={active}
+                caption={s._id}
+                value={Math.round(s.percentage)}
+                image="/images/Male.svg"
+              />
+            </SwiperSlide>
+          ))}
+          {/* <SwiperSlide>
             <Specs caption="Female" value={60} image="/images/Female.svg" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <div className="next" onClick={handleNext}>
           <FontAwesomeIcon icon={faChevronRight} />

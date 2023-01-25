@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-12 text-center">
             <div className=" footer-logo ">
-              <img src=" /images/footer-logo.svg " alt=" " />
+              <img src="/images/footer-logo.svg " alt=" " />
             </div>
             <div className="social-icon ">
               <ul>

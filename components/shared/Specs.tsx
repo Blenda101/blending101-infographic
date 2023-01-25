@@ -3,16 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./Specs.module.scss";
 
+export type ICategory = { _id: string; percentage: number };
+
 interface SpecsProps {
+  active: string;
   caption: string;
   value: number;
   icon?: IconDefinition;
   image?: string;
 }
+
 const Specs = (props: SpecsProps) => {
-  const { caption, value, icon, image } = props;
+  const { active, caption, value, icon, image } = props;
   return (
-    <div className="small-icon">
+    <div
+      className={`small-icon ${active === caption ? "small-icon-active" : ""}`}
+    >
       <div className={styles.progress}>
         <svg className={styles.progress__svg}>
           <defs>

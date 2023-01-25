@@ -1,40 +1,24 @@
-.container {
+.container-test {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
 }
-.wrapper {
+.wrapper-test {
   height: 20rem;
   width: 20rem;
   background-color: #f1f1f1;
 }
 
-.svg {
+.svg-test {
   background-color: bisque;
-  height: 195px;
-  width: 195px;
+  height: 300px;
+  width: 300px;
 }
 
 .circle {
-  fill: none;
-  stroke-width: 10px;
-  &:nth-child(1) {
-    stroke: red;
-  }
-  &:nth-child(2) {
-    // stroke: #7bba38;
-  }
-  &:nth-child(3) {
-    stroke: rebeccapurple;
-  }
-  &:nth-child(4) {
-    stroke: pink;
-  }
-  // &:nth-child(3) {
-  //   stroke-dasharray: 0;
-  //   stroke-dashoffset: 0;
-  //   stroke: #f1f1f1;
-  // }
+  fill: blueviolet;
+  stroke-width: 20px;
+  stroke: rebeccapurple;
 }

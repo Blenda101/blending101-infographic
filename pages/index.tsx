@@ -1,5 +1,7 @@
+import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import { Fragment } from "react";
+
 import Age from "../components/sections/Age";
 import Chronic from "../components/sections/Chronic";
 import Footer from "../components/sections/Footer";
@@ -8,8 +10,20 @@ import Locations from "../components/sections/Locations";
 import Race from "../components/sections/Race";
 import Summary from "../components/sections/Summary";
 import Trends from "../components/sections/Trends";
+import { CriteriaState } from "../graphql/Infograph";
 
-export default function Home() {
+import { GET_CRITERIA, GET_SUMMARY } from "../graphql/Query";
+
+function Home() {
+  const { data: criteriaState } = useQuery<{ criteria: CriteriaState }>(
+    GET_CRITERIA,
+  );
+  const { data, loading, error } = useQuery(GET_SUMMARY, {
+    variables: {
+      year: criteriaState?.criteria?.year,
+      state: criteriaState?.criteria?.state,
+    },
+  });
   return (
     <Fragment>
       <Head>
@@ -23,9 +37,19 @@ export default function Home() {
         <Summary />
         <section id="Chronic-Diseases">
           <div className="container-fluid w-90">
-            <Chronic />
-            <Race />
-            <Age />
+            <Chronic
+              active={criteriaState?.criteria.disease || ""}
+              diseases={data?.showInfoData?.diseases || []}
+            />
+            <Race
+              active={criteriaState?.criteria.param || ""}
+              races={data?.showInfoData?.race || []}
+              sex={data?.showInfoData?.sex || []}
+            />
+            <Age
+              active={criteriaState?.criteria.param || ""}
+              ages={data?.showInfoData?.age || []}
+            />
           </div>
         </section>
         <Trends />
@@ -35,3 +59,5 @@ export default function Home() {
     </Fragment>
   );
 }
+
+export default Home;

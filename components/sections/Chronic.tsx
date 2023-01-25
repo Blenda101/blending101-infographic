@@ -8,9 +8,16 @@ import {
   faLungs,
   faBrain,
 } from "@fortawesome/free-solid-svg-icons";
-import Specs from "../shared/Specs";
+import Specs, { ICategory } from "../shared/Specs";
+import { criteriaVar } from "../../graphql/Infograph";
 
-const Chronic = () => {
+interface ChronicProps {
+  active: string;
+  diseases: ICategory[];
+}
+
+const Chronic = (props: ChronicProps) => {
+  const { active, diseases } = props;
   const sliderRef = useRef<any>(null);
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -21,6 +28,14 @@ const Chronic = () => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
+
+  const diseaseClickHandler = (name: string) => {
+    const criteria = criteriaVar();
+    criteriaVar({
+      ...criteria,
+      disease: name,
+    });
+  };
 
   return (
     <Fragment>
@@ -62,10 +77,20 @@ const Chronic = () => {
             },
           }}
         >
-          <SwiperSlide>
-            <Specs caption="Heart Disease" value={70} icon={faHeartPulse} />
-          </SwiperSlide>
-          <SwiperSlide>
+          {diseases.map((disease) => (
+            <SwiperSlide
+              key={disease?._id}
+              onClick={() => diseaseClickHandler(disease?._id)}
+            >
+              <Specs
+                active={active}
+                caption={disease?._id}
+                value={Math.round(disease?.percentage)}
+                icon={faHeartPulse}
+              />
+            </SwiperSlide>
+          ))}
+          {/* <SwiperSlide>
             <Specs caption="Cancer" value={60} image="/images/Cancer.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -90,7 +115,7 @@ const Chronic = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
-          </SwiperSlide>
+          </SwiperSlide>*/}
         </Swiper>
         <div className="next" onClick={handleNext}>
           <FontAwesomeIcon icon={faChevronRight} />

@@ -6,9 +6,15 @@ import {
   faChevronRight,
   faDna,
 } from "@fortawesome/free-solid-svg-icons";
-import Specs from "../shared/Specs";
+import Specs, { ICategory } from "../shared/Specs";
+import { criteriaVar } from "../../graphql/Infograph";
 
-const Age = () => {
+interface AgeProps {
+  active: string;
+  ages: ICategory[];
+}
+
+const Age = ({ active, ages }: AgeProps) => {
   const sliderRef = useRef<any>(null);
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -19,6 +25,14 @@ const Age = () => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
+
+  const ageClickHandler = (name: string) => {
+    const criteria = criteriaVar();
+    criteriaVar({
+      ...criteria,
+      param: name,
+    });
+  };
 
   return (
     <Fragment>
@@ -36,7 +50,7 @@ const Age = () => {
         <Swiper
           ref={sliderRef}
           spaceBetween={10}
-          slidesPerView={7}
+          slidesPerView={6}
           breakpoints={{
             300: {
               slidesPerView: 2,
@@ -55,12 +69,23 @@ const Age = () => {
               spaceBetween: 10,
             },
             1400: {
-              slidesPerView: 7,
+              slidesPerView: 6,
               spaceBetween: 10,
             },
           }}
         >
-          <SwiperSlide>
+          {ages.map((age) => (
+            <SwiperSlide key={age._id} onClick={() => ageClickHandler(age._id)}>
+              <Specs
+                active={active}
+                caption={age._id}
+                value={Math.round(age.percentage)}
+                image="/images/age20-29.svg"
+              />
+            </SwiperSlide>
+          ))}
+
+          {/* <SwiperSlide>
             <Specs caption="20-29" value={70} image="/images/age20-29.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -80,7 +105,7 @@ const Age = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Specs caption="80+" value={70} image="/images/age80+.svg" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <div className="next" onClick={handleNext}>
           <FontAwesomeIcon icon={faChevronRight} />

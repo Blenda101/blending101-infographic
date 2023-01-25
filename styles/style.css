@@ -151,6 +151,11 @@ section#Chronic-Diseases .small-icon:last-child {
 .small-icon {
   border: 1px solid #fff;
 }
+.small-icon-active {
+  border: 1px solid #fe5717;
+  filter: drop-shadow(0px 9px 14px rgba(0, 0, 0, 0.12));
+  cursor: pointer;
+}
 .first_text:hover {
   border: 1px solid #fe5717;
   border-radius: 9px;
