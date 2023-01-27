@@ -9,6 +9,7 @@ const typeDefs = gql`
     param: String
     year: String
     state: String
+    variant: String
   }
   extend type Query {
     criteria: Criteria

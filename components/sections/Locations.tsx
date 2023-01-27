@@ -1,7 +1,19 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import { useQuery } from "@apollo/client";
+import React, { useMemo } from "react";
+
 import Honeycomb from "../Honeycomb";
 
+import { GET_STATE_DATA } from "../../graphql/Query";
+
 const Locations = () => {
+  const { data } = useQuery(GET_STATE_DATA);
+
+  const states = useMemo(() => {
+    if (data?.getStateData) return JSON.parse(data?.getStateData);
+    else return null;
+  }, [data?.getStateData]);
+
   return (
     <section id="location-sec">
       <div className="container-fluid w-90">
@@ -20,7 +32,7 @@ const Locations = () => {
               />
             </div>
             <div className="chart-img text-center">
-              <Honeycomb />
+              <Honeycomb dictionary={states} />
             </div>
           </div>
         </div>

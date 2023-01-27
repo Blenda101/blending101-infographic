@@ -1,21 +1,23 @@
 import React, { useEffect, useRef } from "react";
+import { criteriaVar } from "../graphql/Infograph";
 
-const Dictionary = {
-  ID: 2.9,
-  WA: 1.7,
-  MT: 3.5,
-  AK: 2.3,
-};
-const Honeycomb = () => {
+interface HoneycombProps {
+  dictionary: any;
+}
+
+const Honeycomb = (props: HoneycombProps) => {
+  const { dictionary } = props;
   const maps = useRef<SVGGElement>(null);
+
   useEffect(() => {
     const states = maps.current?.querySelectorAll("g");
     states?.forEach((state) => {
-      const value = (Dictionary as any)[state.id];
+      const value = dictionary ? (dictionary as any)[state.id]?.prevalence : 0;
       const text: SVGPathElement = state.children[1] as any;
       const polygon: SVGPathElement = state.children[0] as any;
       if (!polygon) return;
 
+      state.style.cursor = "pointer";
       polygon.style.opacity = "1";
 
       if (value >= 1.6 && value < 2.1) {
@@ -34,8 +36,25 @@ const Honeycomb = () => {
         polygon.style.fill = "#E5E5E5";
         text.style.fill = "black";
       }
+
+      state.addEventListener("click", (e) => {
+        // Resetting all the polygons stroke to none
+        states?.forEach((state) => {
+          const polygon: SVGPathElement = state.children[0] as any;
+          polygon.style.stroke = "none";
+        });
+
+        //Adding style to the selected polygon
+        polygon.style.stroke = "#333";
+        polygon.style.strokeWidth = "3";
+        text.style.stroke = "none";
+
+        const criteria = criteriaVar();
+        criteriaVar({ ...criteria, state: state.id });
+      });
     });
   }, []);
+
   return (
     <svg
       width="996"

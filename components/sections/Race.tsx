@@ -6,7 +6,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Specs, { ICategory } from "../shared/Specs";
-import { criteriaVar } from "../../graphql/Infograph";
+import { criteriaVar, IVariant } from "../../graphql/Infograph";
 
 interface RaceProps {
   active: string;
@@ -28,11 +28,12 @@ const Race = (props: RaceProps) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  const raceSexClickHandler = (name: string) => {
+  const raceSexClickHandler = (name: string, variant: IVariant) => {
     const criteria = criteriaVar();
     criteriaVar({
       ...criteria,
       param: name,
+      variant,
     });
   };
 
@@ -54,7 +55,6 @@ const Race = (props: RaceProps) => {
         <Swiper
           ref={sliderRef}
           spaceBetween={10}
-          slidesPerView={7}
           breakpoints={{
             300: {
               slidesPerView: 2,
@@ -81,7 +81,7 @@ const Race = (props: RaceProps) => {
           {races.map((race) => (
             <SwiperSlide
               key={race._id}
-              onClick={() => raceSexClickHandler(race._id)}
+              onClick={() => raceSexClickHandler(race._id, "RACE")}
             >
               <Specs
                 active={active}
@@ -103,8 +103,12 @@ const Race = (props: RaceProps) => {
           <SwiperSlide>
             <Specs caption="Other" value={60} image="/images/other.svg" />
           </SwiperSlide> */}
+          <div style={{ height: 5, width: 2, background: "#333" }}></div>
           {sex.map((s) => (
-            <SwiperSlide key={s._id} onClick={() => raceSexClickHandler(s._id)}>
+            <SwiperSlide
+              key={s._id}
+              onClick={() => raceSexClickHandler(s._id, "SEX")}
+            >
               <Specs
                 active={active}
                 caption={s._id}

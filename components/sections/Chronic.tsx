@@ -47,50 +47,52 @@ const Chronic = (props: ChronicProps) => {
         </div>
       </div>
       <div className="slider-main bg-clr">
-        <div className="prev" onClick={handlePrev}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </div>
-        <Swiper
-          ref={sliderRef}
-          spaceBetween={10}
-          slidesPerView={7}
-          breakpoints={{
-            300: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            760: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1000: {
-              slidesPerView: 5,
-              spaceBetween: 10,
-            },
-            1200: {
-              slidesPerView: 6,
-              spaceBetween: 10,
-            },
-            1400: {
-              slidesPerView: 7,
-              spaceBetween: 10,
-            },
-          }}
-        >
-          {diseases.map((disease) => (
-            <SwiperSlide
-              key={disease?._id}
-              onClick={() => diseaseClickHandler(disease?._id)}
+        {diseases.length !== 0 && (
+          <Fragment>
+            <div className="prev" onClick={handlePrev}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+            <Swiper
+              ref={sliderRef}
+              spaceBetween={10}
+              slidesPerView={7}
+              breakpoints={{
+                300: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                760: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1000: {
+                  slidesPerView: 5,
+                  spaceBetween: 10,
+                },
+                1200: {
+                  slidesPerView: 6,
+                  spaceBetween: 10,
+                },
+                1400: {
+                  slidesPerView: 7,
+                  spaceBetween: 10,
+                },
+              }}
             >
-              <Specs
-                active={active}
-                caption={disease?._id}
-                value={Math.round(disease?.percentage)}
-                icon={faHeartPulse}
-              />
-            </SwiperSlide>
-          ))}
-          {/* <SwiperSlide>
+              {diseases.map((disease) => (
+                <SwiperSlide
+                  key={disease?._id}
+                  onClick={() => diseaseClickHandler(disease?._id)}
+                >
+                  <Specs
+                    active={active}
+                    caption={disease?._id}
+                    value={Math.round(disease?.percentage)}
+                    icon={faHeartPulse}
+                  />
+                </SwiperSlide>
+              ))}
+              {/* <SwiperSlide>
             <Specs caption="Cancer" value={60} image="/images/Cancer.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -116,10 +118,12 @@ const Chronic = (props: ChronicProps) => {
           <SwiperSlide>
             <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
           </SwiperSlide>*/}
-        </Swiper>
-        <div className="next" onClick={handleNext}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </div>
+            </Swiper>
+            <div className="next" onClick={handleNext}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          </Fragment>
+        )}
       </div>
     </Fragment>
   );

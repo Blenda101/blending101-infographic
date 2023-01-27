@@ -1,8 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const GET_SUMMARY = gql`
-  query Summary($year: String, $state: String) {
-    showInfoData(state: $state, year: $year) {
+  query Summary(
+    $year: String
+    $state: String
+    $disease: String
+    $age: String
+    $sex: String
+    $race: String
+  ) {
+    showInfoData(
+      state: $state
+      year: $year
+      sex: $sex
+      age: $age
+      race: $race
+      disease: $disease
+    ) {
       diseases {
         _id
         percentage
@@ -44,6 +58,20 @@ export const GET_TRENDS = gql`
   }
 `;
 
+export const GET_COMPARE_TRENDS = gql`
+  query GetCompareTrends($type: String!) {
+    getCompareData(type: $type) {
+      year
+      fotmatedData {
+        category: _id
+        sampleSize
+        value
+        percentage
+      }
+    }
+  }
+`;
+
 export const GET_CRITERIA = gql`
   query Criteria {
     criteria @client {
@@ -51,6 +79,13 @@ export const GET_CRITERIA = gql`
       param
       disease
       state
+      variant
     }
+  }
+`;
+
+export const GET_STATE_DATA = gql`
+  query GetStateData {
+    getStateData
   }
 `;

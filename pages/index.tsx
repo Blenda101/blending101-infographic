@@ -18,10 +18,15 @@ function Home() {
   const { data: criteriaState } = useQuery<{ criteria: CriteriaState }>(
     GET_CRITERIA,
   );
-  const { data, loading, error } = useQuery(GET_SUMMARY, {
+  const criteria = criteriaState?.criteria;
+  const { data } = useQuery(GET_SUMMARY, {
     variables: {
-      year: criteriaState?.criteria?.year,
-      state: criteriaState?.criteria?.state,
+      year: criteria?.year,
+      state: criteria?.state,
+      disease: criteria?.disease,
+      age: criteria?.variant === "AGE" ? criteria?.param : "",
+      sex: criteria?.variant === "SEX" ? criteria?.param : "",
+      race: criteria?.variant === "RACE" ? criteria?.param : "",
     },
   });
   return (
@@ -34,7 +39,8 @@ function Home() {
       </Head>
       <main>
         <Hero />
-        <Summary />
+        <Summary {...criteriaState?.criteria!} />
+        <Trends {...criteriaState?.criteria!} />
         <section id="Chronic-Diseases">
           <div className="container-fluid w-90">
             <Chronic
@@ -52,7 +58,6 @@ function Home() {
             />
           </div>
         </section>
-        <Trends />
         <Locations />
       </main>
       <Footer />

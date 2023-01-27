@@ -7,7 +7,7 @@ import {
   faDna,
 } from "@fortawesome/free-solid-svg-icons";
 import Specs, { ICategory } from "../shared/Specs";
-import { criteriaVar } from "../../graphql/Infograph";
+import { criteriaVar, IVariant } from "../../graphql/Infograph";
 
 interface AgeProps {
   active: string;
@@ -31,6 +31,7 @@ const Age = ({ active, ages }: AgeProps) => {
     criteriaVar({
       ...criteria,
       param: name,
+      variant: "AGE",
     });
   };
 
@@ -43,49 +44,53 @@ const Age = ({ active, ages }: AgeProps) => {
           </div>
         </div>
       </div>
-      <div className="slider-main bg-clr">
-        <div className="prev" onClick={handlePrev}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </div>
-        <Swiper
-          ref={sliderRef}
-          spaceBetween={10}
-          slidesPerView={6}
-          breakpoints={{
-            300: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            760: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1000: {
-              slidesPerView: 5,
-              spaceBetween: 10,
-            },
-            1200: {
-              slidesPerView: 6,
-              spaceBetween: 10,
-            },
-            1400: {
-              slidesPerView: 6,
-              spaceBetween: 10,
-            },
-          }}
-        >
-          {ages.map((age) => (
-            <SwiperSlide key={age._id} onClick={() => ageClickHandler(age._id)}>
-              <Specs
-                active={active}
-                caption={age._id}
-                value={Math.round(age.percentage)}
-                image="/images/age20-29.svg"
-              />
-            </SwiperSlide>
-          ))}
+      <div className="slider-main bg-clr-scnd">
+        {ages.length !== 0 && (
+          <Fragment>
+            <div className="prev" onClick={handlePrev}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+            <Swiper
+              ref={sliderRef}
+              spaceBetween={10}
+              breakpoints={{
+                300: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                760: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1000: {
+                  slidesPerView: 5,
+                  spaceBetween: 10,
+                },
+                1200: {
+                  slidesPerView: 6,
+                  spaceBetween: 10,
+                },
+                1400: {
+                  slidesPerView: 6,
+                  spaceBetween: 10,
+                },
+              }}
+            >
+              {ages.map((age) => (
+                <SwiperSlide
+                  key={age._id}
+                  onClick={() => ageClickHandler(age._id)}
+                >
+                  <Specs
+                    active={active}
+                    caption={age._id}
+                    value={Math.round(age.percentage)}
+                    image="/images/age20-29.svg"
+                  />
+                </SwiperSlide>
+              ))}
 
-          {/* <SwiperSlide>
+              {/* <SwiperSlide>
             <Specs caption="20-29" value={70} image="/images/age20-29.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -106,10 +111,12 @@ const Age = ({ active, ages }: AgeProps) => {
           <SwiperSlide>
             <Specs caption="80+" value={70} image="/images/age80+.svg" />
           </SwiperSlide> */}
-        </Swiper>
-        <div className="next" onClick={handleNext}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </div>
+            </Swiper>
+            <div className="next" onClick={handleNext}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          </Fragment>
+        )}
       </div>
     </Fragment>
   );
