@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Tooltip as Popover, ITooltip } from "react-tooltip";
 import { GET_CRITERIA } from "../../graphql/Query";
 
@@ -15,7 +15,13 @@ interface TooltipProps extends ITooltip {
 const Tooltip = (props: TooltipProps) => {
   const { anchor, title, value, dot, ...tooltip } = props;
   const { data } = useQuery(GET_CRITERIA);
-  return (
+  const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  return isMounted ? (
     <Popover
       anchorId={anchor}
       delayShow={2000}
@@ -40,6 +46,8 @@ const Tooltip = (props: TooltipProps) => {
         %
       </h6>
     </Popover>
+  ) : (
+    <Fragment />
   );
 };
 
