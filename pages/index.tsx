@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 
 import Age from "../components/sections/Age";
 import Chronic from "../components/sections/Chronic";
@@ -29,6 +29,7 @@ function Home() {
       race: criteria?.variant === "RACE" ? criteria?.param : "",
     },
   });
+
   return (
     <Fragment>
       <Head>
@@ -58,7 +59,7 @@ function Home() {
             />
           </div>
         </section>
-        <Locations />
+        <Locations {...criteriaState?.criteria!} />
       </main>
       <Footer />
     </Fragment>

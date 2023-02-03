@@ -4,11 +4,20 @@
   width: 75px;
   margin-left: 7px;
   margin-top: 2px;
+  @media only screen and (max-width: 600px) {
+    height: 50px; //Circle Radius * 2 + Stroke Width
+    width: 50px;
+  }
   &__svg {
     position: relative;
     height: 75px; //Circle Radius * 2 + Stroke Width
     width: 75px;
     transform: rotate(270deg);
+    @media only screen and (max-width: 600px) {
+      height: 50px; //Circle Radius * 2 + Stroke Width
+      width: 50px;
+    }
+
     circle {
       width: 68px; //Large Circle Radius * 2
       height: 68px;
@@ -50,6 +59,10 @@
       height: 1.7rem;
       width: 1.7rem;
       color: #7bba38;
+      @media only screen and (max-width: 600px) {
+        height: 1.2rem;
+        width: 1.2rem;
+      }
     }
   }
 }
@@ -69,5 +82,25 @@
   }
   100% {
     opacity: 10;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .banner-heading h1 {
+    font-size: 46px;
+    line-height: 1;
+  }
+  .main_div {
+    margin-right: 22px;
+    width: 60%;
+  }
+  .first_text h3 {
+    font-size: 20px;
+  }
+  .d-flex .main_div:nth-child(2) {
+    margin-right: 0;
+  }
+  #Trends .small-button li {
+    padding: 2px 5px;
   }
 }

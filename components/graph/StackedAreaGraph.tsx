@@ -6,6 +6,8 @@ import {
   Area,
   ResponsiveContainer,
   Legend,
+  Line,
+  LineChart,
 } from "recharts";
 import { useQuery } from "@apollo/client";
 
@@ -14,6 +16,7 @@ import { GET_CRITERIA } from "../../graphql/Query";
 
 import styles from "./AreaGraph.module.scss";
 import COLORS from "../../data/Colors";
+import useWindowSize from "../../hooks/useWindowSize";
 
 export type IType = "disease" | "sex" | "race" | "age";
 interface StackedAreaGraphProps {
@@ -22,7 +25,8 @@ interface StackedAreaGraphProps {
 }
 
 const StackedAreaGraph = (props: StackedAreaGraphProps) => {
-  const { type, trends } = props;
+  const { trends } = props;
+  const width = useWindowSize();
 
   const changeYearHandler = (year: any) => {
     const criteria = criteriaVar();
@@ -35,11 +39,26 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
       : [];
   }, [trends]);
 
+  let height: string | number = "100%";
+  if (width < 1600) {
+    height = 380;
+  }
+  if (width < 1200) {
+    height = 350;
+  }
+  if (width < 900) {
+    height = 280;
+  }
+  if (width < 600) {
+    height = 300;
+  }
+  if (width < 600) {
+    height = 350;
+  }
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <AreaChart
+    <ResponsiveContainer width="100%" height={height}>
+      <LineChart
         width={500}
-        height={400}
         data={trends}
         margin={{
           top: 10,
@@ -72,55 +91,38 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
         />
         <Legend
           verticalAlign="bottom"
+          align="center"
           iconType="square"
           height={16}
           fontSize={16}
           formatter={CustomLegend}
         />
         {categories?.map((category, idx) => (
-          <Area
+          <Line
             key={category}
             type="monotone"
             dataKey={category}
             stroke={`#${COLORS[idx]}`}
             strokeWidth={4}
-            fillOpacity={1}
-            fill={`url(#${COLORS[idx]})`}
             activeDot={<CustomActiveDot />}
           />
         ))}
-      </AreaChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
 
 const CustomLegend = (value: string, entry: any) => {
-  const { color } = entry;
-
-  return (
-    <span
-      style={{
-        color: "#333",
-        transform: "translateY(1px)",
-        display: "inline-block",
-      }}
-    >
-      {value}
-    </span>
-  );
+  return <span className={styles.legends}>{value}</span>;
 };
 
 const CustomActiveDot = (props: any) => {
-  const { cx, cy } = props;
+  const { cx, cy, fill } = props;
   return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={10}
-      stroke="#FFA27E"
-      stroke-width={5}
-      fill="#FE5717"
-    />
+    <Fragment>
+      <circle cx={cx} cy={cy} r={8} fill={fill} />
+      <circle cx={cx} cy={cy} r={15} fill={fill} opacity={0.2} />
+    </Fragment>
   );
 };
 const CustomYears = (props: any) => {

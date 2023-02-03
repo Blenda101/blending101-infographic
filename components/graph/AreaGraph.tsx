@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { Fragment } from "react";
-import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer } from "recharts";
+import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer, YAxis } from "recharts";
 import { criteriaVar } from "../../graphql/Infograph";
 import { GET_CRITERIA } from "../../graphql/Query";
 import styles from "./AreaGraph.module.scss";
@@ -41,6 +41,14 @@ const AreaGraph = ({ trends }: any) => {
           onClick={changeYearHandler}
           tick={<CustomYears />}
         />
+        <YAxis
+          dataKey="peoples"
+          tickLine={false}
+          axisLine={false}
+          onClick={changeYearHandler}
+          tick={<CustomYears />}
+        />
+
         <Tooltip
           cursor={{ stroke: "#fe5d1f", strokeWidth: 1 }}
           formatter={(value, name) => [

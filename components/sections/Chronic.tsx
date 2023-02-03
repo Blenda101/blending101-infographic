@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useRef } from "react";
+import React, { Fragment, useCallback, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Specs, { ICategory } from "../shared/Specs";
 import { criteriaVar } from "../../graphql/Infograph";
+import useSliderButton from "../../hooks/useSliderButton";
 
 interface ChronicProps {
   active: string;
@@ -18,6 +19,11 @@ interface ChronicProps {
 
 const Chronic = (props: ChronicProps) => {
   const { active, diseases } = props;
+
+  const showArrow = useSliderButton(diseases);
+  const [isBegin, setIsBegin] = useState(false);
+  const [isEnd, setIsEnd] = useState(false);
+
   const sliderRef = useRef<any>(null);
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -37,6 +43,7 @@ const Chronic = (props: ChronicProps) => {
     });
   };
 
+  const swiper = sliderRef?.current?.swiper;
   return (
     <Fragment>
       <div className="row">
@@ -49,13 +56,22 @@ const Chronic = (props: ChronicProps) => {
       <div className="slider-main bg-clr">
         {diseases.length !== 0 && (
           <Fragment>
-            <div className="prev" onClick={handlePrev}>
-              <FontAwesomeIcon icon={faChevronLeft} />
-            </div>
+            {!isBegin && showArrow && (
+              <div className="prev" onClick={handlePrev}>
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </div>
+            )}
             <Swiper
               ref={sliderRef}
               spaceBetween={10}
-              slidesPerView={7}
+              onInit={(e) => {
+                setIsBegin(e.isBeginning);
+                setIsEnd(e.isEnd);
+              }}
+              onSlideChange={(e) => {
+                setIsBegin(e.isBeginning);
+                setIsEnd(e.isEnd);
+              }}
               breakpoints={{
                 300: {
                   slidesPerView: 2,
@@ -74,7 +90,7 @@ const Chronic = (props: ChronicProps) => {
                   spaceBetween: 10,
                 },
                 1400: {
-                  slidesPerView: 7,
+                  slidesPerView: diseases.length > 7 ? 7 : diseases.length,
                   spaceBetween: 10,
                 },
               }}
@@ -119,9 +135,11 @@ const Chronic = (props: ChronicProps) => {
             <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
           </SwiperSlide>*/}
             </Swiper>
-            <div className="next" onClick={handleNext}>
-              <FontAwesomeIcon icon={faChevronRight} />
-            </div>
+            {!isEnd && showArrow && (
+              <div className="next" onClick={handleNext}>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+            )}
           </Fragment>
         )}
       </div>

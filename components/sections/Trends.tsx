@@ -33,6 +33,9 @@ const Trends = (props: CriteriaState) => {
   const { data: compareData } = useQuery(GET_COMPARE_TRENDS, {
     variables: {
       type: compare,
+      state,
+      disease,
+      category: param,
     },
     skip: compare === "",
   });
@@ -111,13 +114,15 @@ const Trends = (props: CriteriaState) => {
                     </li>
                   </ul>
                 </div>
-                <div className={styles.graph__wrapper}>
-                  {compare === "" ? (
+                {compare === "" ? (
+                  <div className={styles.graph__wrapper}>
                     <AreaGraph trends={trends} />
-                  ) : (
+                  </div>
+                ) : (
+                  <div className={styles.graph__wrapper_stacked}>
                     <StackedAreaGraph type={compare} trends={compareTrends} />
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

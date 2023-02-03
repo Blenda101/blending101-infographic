@@ -1,8 +1,80 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == xsm {
+    @media (max-width: 22.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: 36em) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (max-width: 48em) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: 62em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xxl {
+    @media (max-width: 87.5em) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
 .graph {
   display: flex;
   margin-top: 2rem;
-  &__wrapper {
+  @include respond(900px) {
+    flex-direction: column;
+    & > * {
+      width: 100% !important;
+    }
+  }
+  &__wrapper,
+  &__wrapper_stacked {
     width: calc(100% - 19.5rem);
+    @include respond(1200px) {
+      width: calc(100% - 15.5rem);
+    }
+  }
+  &__wrapper {
+    @include respond(750px) {
+      height: 20rem;
+    }
+    @include respond(600px) {
+      height: 18rem;
+    }
+    &_stacked {
+      @include respond(1600px) {
+        height: 420px;
+      }
+      @include respond(1200px) {
+        height: 400px;
+      }
+      @include respond(900px) {
+        height: 20rem;
+      }
+      @include respond(600px) {
+        height: 26rem;
+      }
+      @include respond(400px) {
+        height: 30rem;
+      }
+    }
   }
   &__panel {
     width: 18rem;
@@ -10,6 +82,12 @@
     padding: 40px 40px 60px;
     border-radius: 20px;
     margin-right: 1.5rem;
+    @include respond(1200px) {
+      width: 14rem;
+    }
+    @include respond(1200px) {
+      padding: 20px 20px 10px;
+    }
   }
   &__title {
     font-size: 24px;
@@ -21,11 +99,15 @@
     list-style: none;
     font-family: "Circe";
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
+    @include respond(900px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
     li {
       width: 11rem;
       padding: 10px 20px;
@@ -36,6 +118,9 @@
       cursor: pointer;
       border: 1px solid transparent;
       transition: all 0.3s ease-out;
+      @include respond(900px) {
+        width: 8rem;
+      }
       svg {
         height: 24px;
         margin-right: 10px;

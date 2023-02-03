@@ -17,6 +17,33 @@ a {
   text-decoration: none;
 }
 
+.separator {
+  position: relative;
+}
+.separator::before {
+  content: " ";
+  height: 90%;
+  width: 2px;
+  border: 1px dashed #7ebd3b;
+  /* background-color: #bbbbbb; */
+  display: block;
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.honeycomb {
+  max-width: 996px;
+}
+.distributor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.distributor-b {
+  border-right: 2px solid #aaa;
+  width: calc();
+}
 .swiper-wrapper {
   align-items: center !important;
   /* margin: 0 10px; */
@@ -120,7 +147,8 @@ section#Chronic-Diseases .small-icon:last-child {
 
 #banner-sec {
   background: url(/images/banner-bg.png) no-repeat;
-  height: 100vh;
+  background-size: cover;
+  height: 92vh;
 }
 
 .banner-heading img {
@@ -152,6 +180,7 @@ section#Chronic-Diseases .small-icon:last-child {
 
 #prevalence .d-flex .small-button ul {
   margin: 0;
+  padding: 0;
 }
 
 /* Chronic Diseases section starts here */
@@ -162,6 +191,7 @@ section#Chronic-Diseases .small-icon:last-child {
 }
 .small-icon {
   border: 1px solid #fff;
+  /* width: 200px !important; */
 }
 .small-icon-active {
   border: 1px solid #fe5717;
@@ -292,6 +322,7 @@ section#Chronic-Diseases .small-icon:last-child {
 
 #prevalence .small-button ul {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
 }
 
@@ -393,6 +424,7 @@ footer li {
   gap: 32px;
   align-items: center;
   margin: 1rem 0;
+  padding: 0;
 }
 .main_for_min {
   display: none;
@@ -535,6 +567,9 @@ footer li {
   .chart-img img {
     width: 100%;
   }
+  #prevalence .main_div {
+    margin: 20px 0;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -563,11 +598,21 @@ footer li {
     flex-wrap: wrap;
     row-gap: 20px;
   }
+  #prevalence .d-flex .small-button {
+    padding: 1rem;
+  }
 }
 @media only screen and (max-width: 576px) {
+  .social-icon ul img {
+    height: 20px;
+    width: 20px;
+  }
+  #prevalence .d-flex .small-button {
+    padding: 10px;
+    background-color: #fff;
+  }
   .main_div {
     margin-right: 17px;
-    width: 45%;
   }
   .first_text h3 {
     font-size: 28px;
@@ -613,7 +658,7 @@ footer li {
     line-height: 1.1 !important;
   }
   .footer-logo img {
-    width: 50%;
+    width: 35%;
   }
   #location-sec {
     padding: 0 0;
@@ -630,6 +675,9 @@ footer li {
     border-radius: 18px;
     /* padding: 20px 10px 10px !important; */
   }
+  .w-90 {
+    width: 96%;
+  }
 }
 
 @media only screen and (max-width: 420px) {
@@ -639,7 +687,7 @@ footer li {
   }
   .main_div {
     margin-right: 22px;
-    width: 40%;
+    width: 60%;
   }
   .first_text h3 {
     font-size: 20px;

@@ -59,8 +59,18 @@ export const GET_TRENDS = gql`
 `;
 
 export const GET_COMPARE_TRENDS = gql`
-  query GetCompareTrends($type: String!) {
-    getCompareData(type: $type) {
+  query GetCompareTrends(
+    $type: String!
+    $category: String
+    $state: String
+    $disease: String
+  ) {
+    getCompareData(
+      type: $type
+      state: $state
+      disease: $disease
+      category: $category
+    ) {
       year
       fotmatedData {
         category: _id
@@ -77,7 +87,9 @@ export const GET_CRITERIA = gql`
     criteria @client {
       year
       param
+      paramImage
       disease
+      diseaseImage
       state
       variant
     }
@@ -85,7 +97,7 @@ export const GET_CRITERIA = gql`
 `;
 
 export const GET_STATE_DATA = gql`
-  query GetStateData {
-    getStateData
+  query GetStateData($category: String, $disease: String, $year: String) {
+    getStateData(category: $category, disease: $disease, year: $year)
   }
 `;

@@ -12,7 +12,7 @@ const Honeycomb = (props: HoneycombProps) => {
   useEffect(() => {
     const states = maps.current?.querySelectorAll("g");
     states?.forEach((state) => {
-      const value = dictionary ? (dictionary as any)[state.id]?.prevalence : 0;
+      const value = dictionary ? (dictionary as any)[state.id]?.quartile : 0;
       const text: SVGPathElement = state.children[1] as any;
       const polygon: SVGPathElement = state.children[0] as any;
       if (!polygon) return;
@@ -20,16 +20,16 @@ const Honeycomb = (props: HoneycombProps) => {
       state.style.cursor = "pointer";
       polygon.style.opacity = "1";
 
-      if (value >= 1.6 && value < 2.1) {
+      if (value === 1) {
         polygon.style.fill = "#E5F2D7";
         text.style.fill = "black";
-      } else if (value >= 2.1 && value < 2.7) {
+      } else if (value === 2) {
         polygon.style.fill = "#B0D788";
         text.style.fill = "black";
-      } else if (value >= 2.7 && value < 3.2) {
+      } else if (value === 3) {
         polygon.style.fill = "#7CBC39";
         text.style.fill = "white";
-      } else if (value >= 3.2 && value < 3.8) {
+      } else if (value === 4) {
         polygon.style.fill = "#FE5717";
         text.style.fill = "white";
       } else {
@@ -53,12 +53,11 @@ const Honeycomb = (props: HoneycombProps) => {
         criteriaVar({ ...criteria, state: state.id });
       });
     });
-  }, []);
+  }, [dictionary]);
 
   return (
     <svg
-      width="996"
-      height="676"
+      className="honeycomb"
       viewBox="0 0 996 676"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

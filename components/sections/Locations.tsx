@@ -5,9 +5,20 @@ import React, { useMemo } from "react";
 import Honeycomb from "../Honeycomb";
 
 import { GET_STATE_DATA } from "../../graphql/Query";
+import { CriteriaState } from "../../graphql/Infograph";
 
-const Locations = () => {
-  const { data } = useQuery(GET_STATE_DATA);
+import styles from "./Locations.module.scss";
+
+const Locations = (props: CriteriaState) => {
+  const { year, disease, param } = props;
+
+  const { data } = useQuery(GET_STATE_DATA, {
+    variables: {
+      category: param,
+      disease,
+      year,
+    },
+  });
 
   const states = useMemo(() => {
     if (data?.getStateData) return JSON.parse(data?.getStateData);
@@ -24,15 +35,49 @@ const Locations = () => {
               <span></span>
               <h3>location</h3>
             </div>
-            <div className="Prevalence-img text-center">
-              <img
-                src="/images/location_prevalence.svg"
-                className="img-fluid "
-                alt=" "
-              />
+            <div className={styles.range}>
+              <div className={styles.wrapper}>
+                <h5>Prevalence</h5>
+                <div className={styles.stacked}>
+                  <div>
+                    <span
+                      className={`${styles.stacked__total} ${styles.stacked__total__initial}`}
+                    >
+                      <i>&nbsp;</i>
+                      120
+                    </span>
+                    <span className={styles.stacked__total}>
+                      <i>&nbsp;</i>
+                      90
+                    </span>
+                  </div>
+                  <div id="quality">
+                    <span className={styles.stacked__total}>
+                      <i>&nbsp;</i>
+                      90
+                    </span>
+                  </div>
+                  <div id="quantity">
+                    <span className={styles.stacked__total}>
+                      <i>&nbsp;</i>
+                      90
+                    </span>
+                  </div>
+                  <div id="quantity">
+                    <span className={styles.stacked__total}>
+                      <i>&nbsp;</i>
+                      90
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.unavailable}>
+                <div />
+                Data unavailable
+              </div>
             </div>
             <div className="chart-img text-center">
-              <Honeycomb dictionary={states} />
+              <Honeycomb dictionary={states?.data} />
             </div>
           </div>
         </div>
