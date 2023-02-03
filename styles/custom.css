@@ -1,0 +1,20 @@
+/* .swiper {
+  overflow-y: visible;
+  overflow-x: hidden;
+} */
+
+svg,
+svg *,
+svg:focus,
+svg *:focus {
+  /* outline: none;
+  border: none; */
+}
+
+path:focus {
+  outline: none;
+}
+
+path:focus {
+  outline: none;
+}

@@ -1,4 +1,5 @@
 @import url(/css/font-info.css);
+@import url(/custom.css);
 
 h1,
 h2,
@@ -15,6 +16,13 @@ a {
   font-family: "Circe";
   margin-bottom: 0;
   text-decoration: none;
+}
+
+g:active,
+g:focus,
+path:focus,
+path:active {
+  outline: none;
 }
 
 .separator {
@@ -340,11 +348,11 @@ section#Chronic-Diseases .small-icon:last-child {
   position: relative;
 }
 
-#prevalence .small-button li:hover svg {
+#prevalence .small-button li:hover > svg {
   transform: scale(1);
 }
 
-#prevalence .small-button li svg {
+#prevalence .small-button li > svg {
   height: 15px;
   width: 15px;
   padding: 3px;
@@ -358,7 +366,7 @@ section#Chronic-Diseases .small-icon:last-child {
   transition: transform 0.3s ease-out;
 }
 
-#prevalence .small-button li svg:hover {
+#prevalence .small-button li > svg:hover {
   background-color: #fe5717;
   color: white;
 }
@@ -369,9 +377,14 @@ section#Chronic-Diseases .small-icon:last-child {
   color: #000000;
 }
 
-#prevalence .small-button li img {
-  margin-top: -2px;
-  margin-right: 3px;
+#prevalence .small-button li div > svg {
+  stroke: #fe5717;
+  margin-right: 5px;
+  transform: translateY(1px);
+}
+
+#prevalence .small-button li div > svg > * {
+  stroke: #fe5717;
 }
 
 #prevalence .small-button li a {
@@ -380,6 +393,8 @@ section#Chronic-Diseases .small-icon:last-child {
   line-height: 1.2;
   letter-spacing: -0.03em;
   color: #000000;
+  display: flex;
+  align-items: center;
 }
 
 /**********location section**********/
@@ -466,6 +481,10 @@ footer li {
   }
 }
 @media only screen and (max-width: 1400px) {
+  #banner-sec {
+    height: 70vh;
+  }
+
   .banner-heading h1:after {
     right: 10%;
   }
@@ -515,6 +534,10 @@ footer li {
 }
 
 @media only screen and (max-width: 1199px) {
+  #banner-sec {
+    height: 75vh;
+  }
+
   .banner-img {
     margin-top: 2em;
   }

@@ -41,7 +41,7 @@ const Trends = (props: CriteriaState) => {
   });
 
   const compareTrends = useMemo(() => {
-    console.log(compareData?.getCompareData);
+    // console.log(compareData?.getCompareData);
 
     return compareData?.getCompareData?.map((compareYear: any) => {
       const year: any = { year: compareYear.year };

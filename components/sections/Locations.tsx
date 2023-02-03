@@ -25,6 +25,8 @@ const Locations = (props: CriteriaState) => {
     else return null;
   }, [data?.getStateData]);
 
+  // console.log(states);
+
   return (
     <section id="location-sec">
       <div className="container-fluid w-90">
@@ -44,29 +46,29 @@ const Locations = (props: CriteriaState) => {
                       className={`${styles.stacked__total} ${styles.stacked__total__initial}`}
                     >
                       <i>&nbsp;</i>
-                      120
+                      {Math.round(states?.quartile[0]) || 0}
                     </span>
                     <span className={styles.stacked__total}>
                       <i>&nbsp;</i>
-                      90
+                      {Math.round(states?.quartile[25]) || 0}
                     </span>
                   </div>
                   <div id="quality">
                     <span className={styles.stacked__total}>
                       <i>&nbsp;</i>
-                      90
+                      {Math.round(states?.quartile[50]) || 0}
                     </span>
                   </div>
                   <div id="quantity">
                     <span className={styles.stacked__total}>
                       <i>&nbsp;</i>
-                      90
+                      {Math.round(states?.quartile[75]) || 0}
                     </span>
                   </div>
                   <div id="quantity">
                     <span className={styles.stacked__total}>
                       <i>&nbsp;</i>
-                      90
+                      {Math.round(states?.quartile[100]) || 0}
                     </span>
                   </div>
                 </div>

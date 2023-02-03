@@ -3,6 +3,7 @@ import { useApolloClient } from "@apollo/client";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useMemo } from "react";
+import { ReactSVG } from "react-svg";
 import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import { GET_SUMMARY } from "../../graphql/Query";
 
@@ -33,7 +34,7 @@ const Summary = (props: CriteriaState) => {
     const chronic = infoData?.showInfoData?.diseases?.find(
       (sick: any) => sick._id === disease,
     );
-    console.log(disease, chronic);
+    // console.log(disease, chronic);
     return chronic ? Math.round((chronic.percentage * 1000) / 100) : 0;
   }, [disease, infoData?.showInfoData?.diseases]);
 
@@ -61,9 +62,8 @@ const Summary = (props: CriteriaState) => {
                 {param && (
                   <li>
                     <a href="">
-                      <img
+                      <ReactSVG
                         src={paramImage || "/images/fa_heartbeat.svg"}
-                        alt=""
                       />
                       {param}
                     </a>

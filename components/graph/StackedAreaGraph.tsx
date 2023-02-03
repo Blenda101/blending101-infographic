@@ -82,12 +82,16 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           onClick={changeYearHandler}
           tick={<CustomYears />}
         />
-        <Tooltip
+        {/* <Tooltip
           cursor={{ stroke: "#fe5d1f", strokeWidth: 1 }}
           formatter={(value, name) => [
             `${Number(value).toFixed(2)}%`,
             name.toString().toUpperCase(),
           ]}
+        /> */}
+        <Tooltip
+          wrapperStyle={{ outline: "none" }}
+          content={<CustomTooltip />}
         />
         <Legend
           verticalAlign="bottom"
@@ -148,4 +152,24 @@ const CustomYears = (props: any) => {
   );
 };
 
+const CustomTooltip = (props: any) => {
+  const { active, payload, label } = props;
+  if (active && payload && payload.length) {
+    return (
+      <div className={styles.linetip}>
+        <p>{label}</p>
+        <ul>
+          {payload?.map((item: any) => (
+            <li key={item.name}>
+              <span>{item.name}</span>
+              <h6 style={{ color: item.stroke }}>{item.value.toFixed(1)}%</h6>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  return null;
+};
 export default StackedAreaGraph;

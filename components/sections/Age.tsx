@@ -10,6 +10,7 @@ import Specs, { ICategory } from "../shared/Specs";
 import { criteriaVar, IVariant } from "../../graphql/Infograph";
 import getBreakpoints from "../../utils/getBreakpoint";
 import useSliderButton from "../../hooks/useSliderButton";
+import Tooltip from "../shared/Tooltip";
 
 interface AgeProps {
   active: string;

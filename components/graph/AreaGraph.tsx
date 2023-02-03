@@ -1,6 +1,13 @@
 import { useQuery } from "@apollo/client";
 import React, { Fragment } from "react";
-import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer, YAxis } from "recharts";
+import {
+  AreaChart,
+  XAxis,
+  Tooltip,
+  Area,
+  ResponsiveContainer,
+  YAxis,
+} from "recharts";
 import { criteriaVar } from "../../graphql/Infograph";
 import { GET_CRITERIA } from "../../graphql/Query";
 import styles from "./AreaGraph.module.scss";
@@ -50,11 +57,8 @@ const AreaGraph = ({ trends }: any) => {
         />
 
         <Tooltip
-          cursor={{ stroke: "#fe5d1f", strokeWidth: 1 }}
-          formatter={(value, name) => [
-            `${Number(value).toFixed(2)}%`,
-            name.toString().toUpperCase(),
-          ]}
+          wrapperStyle={{ outline: "none" }}
+          content={<CustomTooltip />}
         />
         <Area
           type="monotone"
@@ -83,6 +87,7 @@ const CustomActiveDot = (props: any) => {
     />
   );
 };
+
 const CustomYears = (props: any) => {
   const { x, y, payload } = props;
   const { data } = useQuery(GET_CRITERIA);
@@ -104,6 +109,27 @@ const CustomYears = (props: any) => {
       </text>
     </Fragment>
   );
+};
+
+const CustomTooltip = (props: any) => {
+  const { active, payload, label } = props;
+  const { data } = useQuery(GET_CRITERIA);
+
+  if (active && payload && payload.length) {
+    return (
+      <div className={styles.areatip}>
+        <p>{label}</p>
+        <span>
+          {data?.criteria?.disease}
+          {data?.criteria?.param ? `, ${data?.criteria?.param}` : ""}
+          {data?.criteria?.state ? `, ${data?.criteria?.state}` : ""}
+        </span>
+        <h6>{payload[0].value.toFixed(1)}%</h6>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default AreaGraph;

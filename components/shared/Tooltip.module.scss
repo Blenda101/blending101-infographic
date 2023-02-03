@@ -1,0 +1,48 @@
+.tooltip {
+  background-color: #fff;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  min-width: 100px;
+  outline: none;
+  padding: 0;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+  &:hover {
+    border: none;
+  }
+  p {
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 20px 4px;
+    background-color: #ededed;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: 600;
+    color: #333;
+  }
+  span {
+    display: block;
+    color: #929aa0;
+    font-size: 15px;
+    padding: 10px 10px;
+    text-align: center;
+  }
+  h6 {
+    font-weight: 600;
+    font-family: "Circe";
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      margin-right: 5px;
+      transform: translateY(-2px);
+    }
+  }
+}

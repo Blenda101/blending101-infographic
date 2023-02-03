@@ -43,6 +43,13 @@ const Chronic = (props: ChronicProps) => {
     });
   };
 
+  const diseasePercentage = (type: string) => {
+    const race = diseases.find((s) => s._id === type)?.percentage;
+    if (race === 0) return "0.0";
+    const roundedRace = Math.round(race || 0);
+    return +(race && roundedRace === 0 ? race.toFixed(1) : roundedRace);
+  };
+
   const swiper = sliderRef?.current?.swiper;
   return (
     <Fragment>
@@ -54,48 +61,127 @@ const Chronic = (props: ChronicProps) => {
         </div>
       </div>
       <div className="slider-main bg-clr">
-        {diseases.length !== 0 && (
-          <Fragment>
-            {!isBegin && showArrow && (
-              <div className="prev" onClick={handlePrev}>
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </div>
-            )}
-            <Swiper
-              ref={sliderRef}
-              spaceBetween={10}
-              onInit={(e) => {
-                setIsBegin(e.isBeginning);
-                setIsEnd(e.isEnd);
-              }}
-              onSlideChange={(e) => {
-                setIsBegin(e.isBeginning);
-                setIsEnd(e.isEnd);
-              }}
-              breakpoints={{
-                300: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-                760: {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-                1000: {
-                  slidesPerView: 5,
-                  spaceBetween: 10,
-                },
-                1200: {
-                  slidesPerView: 6,
-                  spaceBetween: 10,
-                },
-                1400: {
-                  slidesPerView: diseases.length > 7 ? 7 : diseases.length,
-                  spaceBetween: 10,
-                },
-              }}
-            >
-              {diseases.map((disease) => (
+        <Fragment>
+          {!isBegin && showArrow && (
+            <div className="prev" onClick={handlePrev}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+          )}
+          <Swiper
+            ref={sliderRef}
+            spaceBetween={10}
+            onInit={(e) => {
+              setIsBegin(e.isBeginning);
+              setIsEnd(e.isEnd);
+            }}
+            onSlideChange={(e) => {
+              setIsBegin(e.isBeginning);
+              setIsEnd(e.isEnd);
+            }}
+            breakpoints={{
+              300: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              760: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              1000: {
+                slidesPerView: 5,
+                spaceBetween: 10,
+              },
+              1200: {
+                slidesPerView: 6,
+                spaceBetween: 10,
+              },
+              1400: {
+                slidesPerView: 7,
+                spaceBetween: 10,
+              },
+            }}
+          >
+            <SwiperSlide onClick={() => diseaseClickHandler("Arthritis")}>
+              <Specs
+                active={active}
+                caption={"Arthritis"}
+                value={diseasePercentage("Arthritis")}
+                image="/images/Cancer.svg"
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Asthma")}>
+              <Specs
+                active={active}
+                caption={"Asthma"}
+                value={diseasePercentage("Asthma")}
+                image="/images/Cancer.svg"
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("COPD")}>
+              <Specs
+                active={active}
+                caption={"COPD"}
+                value={diseasePercentage("COPD")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Cardiovascular")}>
+              <Specs
+                active={active}
+                caption={"Cardiovascular"}
+                value={diseasePercentage("Cardiovascular")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Depression")}>
+              <Specs
+                active={active}
+                caption={"Depression "}
+                value={diseasePercentage("Depression ")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Diabetes")}>
+              <Specs
+                active={active}
+                caption={"Diabetes"}
+                value={diseasePercentage("Diabetes")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Kidney Disease")}>
+              <Specs
+                active={active}
+                caption={"Kidney Disease"}
+                value={diseasePercentage("Kidney Disease")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Other Cancer")}>
+              <Specs
+                active={active}
+                caption={"Other Cancer"}
+                value={diseasePercentage("Other Cancer")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Skin Cancer")}>
+              <Specs
+                active={active}
+                caption={"Skin Cancer"}
+                value={diseasePercentage("Skin Cancer")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            <SwiperSlide onClick={() => diseaseClickHandler("Stroke")}>
+              <Specs
+                active={active}
+                caption={"Stroke"}
+                value={diseasePercentage("Stroke")}
+                icon={faLungs}
+              />
+            </SwiperSlide>
+            {/* {diseases.map((disease) => (
                 <SwiperSlide
                   key={disease?._id}
                   onClick={() => diseaseClickHandler(disease?._id)}
@@ -108,7 +194,8 @@ const Chronic = (props: ChronicProps) => {
                   />
                 </SwiperSlide>
               ))}
-              {/* <SwiperSlide>
+ */}
+            {/* <SwiperSlide>
             <Specs caption="Cancer" value={60} image="/images/Cancer.svg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -134,14 +221,13 @@ const Chronic = (props: ChronicProps) => {
           <SwiperSlide>
             <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
           </SwiperSlide>*/}
-            </Swiper>
-            {!isEnd && showArrow && (
-              <div className="next" onClick={handleNext}>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </div>
-            )}
-          </Fragment>
-        )}
+          </Swiper>
+          {!isEnd && showArrow && (
+            <div className="next" onClick={handleNext}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          )}
+        </Fragment>
       </div>
     </Fragment>
   );

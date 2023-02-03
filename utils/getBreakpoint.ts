@@ -26,7 +26,7 @@ function getBreakpoints(items: any[]) {
     },
   };
 
-  console.log(items, breakpoints);
+  // console.log(items, breakpoints);
   return breakpoints;
 }
 
