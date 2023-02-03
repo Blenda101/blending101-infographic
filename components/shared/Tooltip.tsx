@@ -15,13 +15,13 @@ interface TooltipProps extends ITooltip {
 const Tooltip = (props: TooltipProps) => {
   const { anchor, title, value, dot, ...tooltip } = props;
   const { data } = useQuery(GET_CRITERIA);
-  const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
+  // const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
 
-  return isMounted ? (
+  return (
     <Popover
       anchorId={anchor}
       delayShow={2000}
@@ -46,8 +46,6 @@ const Tooltip = (props: TooltipProps) => {
         %
       </h6>
     </Popover>
-  ) : (
-    <Fragment />
   );
 };
 
