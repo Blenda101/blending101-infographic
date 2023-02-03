@@ -21,7 +21,7 @@ const AreaGraph = ({ trends }: any) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        width={500}
+        // width={500}
         height={400}
         data={trends}
         margin={{
@@ -48,14 +48,7 @@ const AreaGraph = ({ trends }: any) => {
           onClick={changeYearHandler}
           tick={<CustomYears />}
         />
-        <YAxis
-          dataKey="peoples"
-          tickLine={false}
-          axisLine={false}
-          onClick={changeYearHandler}
-          tick={<CustomYears />}
-        />
-
+        {/* <YAxis dataKey="peoples" /> */}
         <Tooltip
           wrapperStyle={{ outline: "none" }}
           content={<CustomTooltip />}

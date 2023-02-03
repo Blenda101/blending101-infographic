@@ -18,9 +18,9 @@ const Tooltip = (props: TooltipProps) => {
   return (
     <Popover
       anchorId={anchor}
-      place="top"
       delayShow={2000}
       className={styles.tooltip}
+      classNameArrow={styles.tooltip__arrow}
       {...tooltip}
     >
       <p>{title}</p>
@@ -30,7 +30,7 @@ const Tooltip = (props: TooltipProps) => {
         {data?.criteria?.param ? `, ${data?.criteria?.param}` : ""}
         {!dot && data?.criteria?.state ? `, ${data?.criteria?.state}` : ""}
       </span>
-      <h6 style={{ color: dot ? "black" : "#7bba38" }}>
+      <h6 style={{ color: dot ? "#ededed" : "#7bba38" }}>
         <span style={{ backgroundColor: dot }}></span>
         {value
           ? typeof value === "string"

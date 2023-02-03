@@ -1,9 +1,55 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == xsm {
+    @media (max-width: 22.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: 36em) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (max-width: 48em) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: 62em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xxl {
+    @media (max-width: 87.5em) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
 .range {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 50px 0 120px;
   position: relative;
+  @include respond(900px) {
+    flex-direction: column;
+    margin: 50px 0 50px;
+
+    & > * {
+      width: 100% !important;
+    }
+  }
+
   h5 {
     font-family: "Circe";
   }
@@ -12,9 +58,15 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  @include respond(900px) {
+    margin-bottom: 50px;
+  }
 }
 
 .stacked {
+  @include respond(900px) {
+    width: 100%;
+  }
   width: 500px;
   height: 11px;
   border-radius: 20px;

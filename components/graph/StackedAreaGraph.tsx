@@ -82,13 +82,6 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           onClick={changeYearHandler}
           tick={<CustomYears />}
         />
-        {/* <Tooltip
-          cursor={{ stroke: "#fe5d1f", strokeWidth: 1 }}
-          formatter={(value, name) => [
-            `${Number(value).toFixed(2)}%`,
-            name.toString().toUpperCase(),
-          ]}
-        /> */}
         <Tooltip
           wrapperStyle={{ outline: "none" }}
           content={<CustomTooltip />}

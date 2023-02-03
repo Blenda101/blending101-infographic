@@ -81,7 +81,7 @@ const Honeycomb = (props: HoneycombProps) => {
         setState({
           name: stateName,
           value,
-          color: "",
+          color,
         });
         if (!isOpen) {
           setIsOpen(true);
@@ -806,6 +806,7 @@ const Honeycomb = (props: HoneycombProps) => {
         delayHide={2000}
         events={["hover"]}
         clickable={false}
+        place="bottom"
       />
     </Fragment>
   );

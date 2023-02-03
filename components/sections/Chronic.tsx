@@ -19,6 +19,7 @@ interface ChronicProps {
 
 const Chronic = (props: ChronicProps) => {
   const { active, diseases } = props;
+  console.log(diseases);
 
   const showArrow = useSliderButton(diseases);
   const [isBegin, setIsBegin] = useState(false);
@@ -44,10 +45,9 @@ const Chronic = (props: ChronicProps) => {
   };
 
   const diseasePercentage = (type: string) => {
-    const race = diseases.find((s) => s._id === type)?.percentage;
-    if (race === 0) return "0.0";
-    const roundedRace = Math.round(race || 0);
-    return +(race && roundedRace === 0 ? race.toFixed(1) : roundedRace);
+    const disease = diseases.find((s) => s._id === type)?.percentage;
+    if (!disease) return "0.0";
+    else return disease.toFixed(1);
   };
 
   const swiper = sliderRef?.current?.swiper;
@@ -106,7 +106,7 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Arthritis"}
                 value={diseasePercentage("Arthritis")}
-                image="/images/Cancer.svg"
+                image="/images/Arthritis.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Asthma")}>
@@ -114,7 +114,7 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Asthma"}
                 value={diseasePercentage("Asthma")}
-                image="/images/Cancer.svg"
+                image="/images/Asthma.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("COPD")}>
@@ -122,23 +122,23 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"COPD"}
                 value={diseasePercentage("COPD")}
-                icon={faLungs}
+                image="/images/Lung_Disease.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Cardiovascular")}>
               <Specs
                 active={active}
-                caption={"Cardiovascular"}
+                caption={"Cardiovascular Disease"}
                 value={diseasePercentage("Cardiovascular")}
-                icon={faLungs}
+                image="/images/Hear_ Disease.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Depression")}>
               <Specs
                 active={active}
-                caption={"Depression "}
-                value={diseasePercentage("Depression ")}
-                icon={faLungs}
+                caption={"Depression"}
+                value={diseasePercentage("Depression")}
+                image="/images/Depression.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Diabetes")}>
@@ -146,15 +146,15 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Diabetes"}
                 value={diseasePercentage("Diabetes")}
-                icon={faLungs}
+                image="/images/Diabetes.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Kidney Disease")}>
+            <SwiperSlide onClick={() => diseaseClickHandler("Kidney")}>
               <Specs
                 active={active}
                 caption={"Kidney Disease"}
-                value={diseasePercentage("Kidney Disease")}
-                icon={faLungs}
+                value={diseasePercentage("Kidney")}
+                image="/images/Kidney_Disease.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Other Cancer")}>
@@ -162,7 +162,7 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Other Cancer"}
                 value={diseasePercentage("Other Cancer")}
-                icon={faLungs}
+                image="/images/Cancer.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Skin Cancer")}>
@@ -170,7 +170,7 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Skin Cancer"}
                 value={diseasePercentage("Skin Cancer")}
-                icon={faLungs}
+                image="/images/Skin Cancer.svg"
               />
             </SwiperSlide>
             <SwiperSlide onClick={() => diseaseClickHandler("Stroke")}>
@@ -178,49 +178,9 @@ const Chronic = (props: ChronicProps) => {
                 active={active}
                 caption={"Stroke"}
                 value={diseasePercentage("Stroke")}
-                icon={faLungs}
+                image="/images/Stroke.svg"
               />
             </SwiperSlide>
-            {/* {diseases.map((disease) => (
-                <SwiperSlide
-                  key={disease?._id}
-                  onClick={() => diseaseClickHandler(disease?._id)}
-                >
-                  <Specs
-                    active={active}
-                    caption={disease?._id}
-                    value={Math.round(disease?.percentage)}
-                    icon={faHeartPulse}
-                  />
-                </SwiperSlide>
-              ))}
- */}
-            {/* <SwiperSlide>
-            <Specs caption="Cancer" value={60} image="/images/Cancer.svg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs caption="Lung Disease" value={45} icon={faLungs} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs
-              caption="Kidney Disease"
-              value={34}
-              image="/images/Kidney_Disease.svg"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs caption="Diabetes" value={34} image="/images/Diabetes.svg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs
-              caption="Alzheimer & Dementia"
-              value={45}
-              image="/images/Alzheime.svg"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Specs caption="Stroke" value={45} image="/images/Stroke.svg" />
-          </SwiperSlide>*/}
           </Swiper>
           {!isEnd && showArrow && (
             <div className="next" onClick={handleNext}>

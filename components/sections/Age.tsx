@@ -35,9 +35,8 @@ const Age = ({ active, ages }: AgeProps) => {
 
   const agePercentage = (type: string) => {
     const age = ages.find((s) => s._id === type)?.percentage;
-    if (age === 0) return "0.0";
-    const roundedAge = Math.round(age || 0);
-    return age && roundedAge === 0 ? age.toFixed(1) : roundedAge;
+    if (!age) return "0.0";
+    else return age.toFixed(1);
   };
 
   const ageClickHandler = (name: string, img: string) => {

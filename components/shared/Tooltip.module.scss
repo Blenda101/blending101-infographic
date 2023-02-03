@@ -1,10 +1,11 @@
 .tooltip {
-  background-color: #fff;
-  border: 1px solid #ededed;
+  background-color: #000;
+  border: 1px solid #333;
   border-radius: 10px;
-  min-width: 100px;
+  min-width: 150px;
   outline: none;
   padding: 0;
+  opacity: 1 !important;
   &:focus {
     outline: none;
     border: none;
@@ -12,20 +13,23 @@
   &:hover {
     border: none;
   }
+  &__arrow {
+    background-color: #333;
+  }
   p {
     font-size: 16px;
     text-align: center;
     padding: 10px 20px 4px;
-    background-color: #ededed;
+    background-color: #333;
     overflow: hidden;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     font-weight: 600;
-    color: #333;
+    color: #fff;
   }
   span {
     display: block;
-    color: #929aa0;
+    color: #ededed;
     font-size: 15px;
     padding: 10px 10px;
     text-align: center;
@@ -41,7 +45,7 @@
       height: 25px;
       width: 25px;
       border-radius: 50%;
-      margin-right: 5px;
+      margin-right: 10px;
       transform: translateY(-2px);
     }
   }

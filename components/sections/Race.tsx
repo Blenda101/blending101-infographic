@@ -33,27 +33,30 @@ const Race = (props: RaceProps) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  const raceSexClickHandler = (name: string, variant: IVariant) => {
+  const raceSexClickHandler = (
+    name: string,
+    img: string,
+    variant: IVariant,
+  ) => {
     const criteria = criteriaVar();
     criteriaVar({
       ...criteria,
       param: name,
+      paramImage: img,
       variant,
     });
   };
 
   const racePercentage = (type: string) => {
     const race = races.find((s) => s._id === type)?.percentage;
-    if (race === 0) return "0.0";
-    const roundedRace = Math.round(race || 0);
-    return +(race && roundedRace === 0 ? race.toFixed(1) : roundedRace);
+    if (!race) return "0.0";
+    else return race.toFixed(1);
   };
 
   const sexPercentage = (type: string) => {
     const varSex = sex.find((s) => s._id === type)?.percentage;
-    if (varSex === 0) return "0.0";
-    const roundedSex = Math.round(varSex || 0);
-    return +(varSex && roundedSex === 0 ? varSex.toFixed(1) : roundedSex);
+    if (!varSex) return "0.0";
+    else return varSex.toFixed(1);
   };
 
   const swiper = sliderRef?.current?.swiper;
@@ -106,7 +109,11 @@ const Race = (props: RaceProps) => {
             },
           }}
         >
-          <SwiperSlide onClick={() => raceSexClickHandler("White", "RACE")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("White", "/images/White.svg", "RACE")
+            }
+          >
             <Specs
               active={active}
               caption={"White"}
@@ -114,7 +121,11 @@ const Race = (props: RaceProps) => {
               image="/images/White.svg"
             />
           </SwiperSlide>
-          <SwiperSlide onClick={() => raceSexClickHandler("Black", "RACE")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("Black", "/images/Black.svg", "RACE")
+            }
+          >
             <Specs
               active={active}
               caption={"Black"}
@@ -122,7 +133,11 @@ const Race = (props: RaceProps) => {
               image="/images/Black.svg"
             />
           </SwiperSlide>
-          <SwiperSlide onClick={() => raceSexClickHandler("Hispanic", "RACE")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("Hispanic", "/images/hispanic.svg", "RACE")
+            }
+          >
             <Specs
               active={active}
               caption={"Hispanic"}
@@ -130,7 +145,11 @@ const Race = (props: RaceProps) => {
               image="/images/hispanic.svg"
             />
           </SwiperSlide>
-          <SwiperSlide onClick={() => raceSexClickHandler("Asian", "RACE")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("Asian", "/images/Asian.svg", "RACE")
+            }
+          >
             <Specs
               active={active}
               caption={"Asian"}
@@ -138,7 +157,11 @@ const Race = (props: RaceProps) => {
               image="/images/Asian.svg"
             />
           </SwiperSlide>
-          <SwiperSlide onClick={() => raceSexClickHandler("Other", "RACE")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("Other", "/images/other.svg", "RACE")
+            }
+          >
             <Specs
               active={active}
               caption={"Other"}
@@ -147,7 +170,9 @@ const Race = (props: RaceProps) => {
             />
           </SwiperSlide>
           <SwiperSlide
-            onClick={() => raceSexClickHandler("Male", "SEX")}
+            onClick={() =>
+              raceSexClickHandler("Male", "/images/Male.svg", "SEX")
+            }
             className="separator"
           >
             <Specs
@@ -157,7 +182,11 @@ const Race = (props: RaceProps) => {
               image="/images/Male.svg"
             />
           </SwiperSlide>
-          <SwiperSlide onClick={() => raceSexClickHandler("Female", "SEX")}>
+          <SwiperSlide
+            onClick={() =>
+              raceSexClickHandler("Female", "/images/Female.svg", "SEX")
+            }
+          >
             <Specs
               active={active}
               caption="Female"

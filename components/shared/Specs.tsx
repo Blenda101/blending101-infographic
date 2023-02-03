@@ -70,7 +70,6 @@ const Specs = (props: SpecsProps) => {
             <circle cx="34" cy="34" r="34" stroke="url(#outline)" />
           </svg>
           <div className={styles.progress__icon}>
-            {icon ? <FontAwesomeIcon icon={icon} /> : null}
             {image ? <img src={image} alt={caption} /> : null}
           </div>
         </div>
@@ -79,7 +78,7 @@ const Specs = (props: SpecsProps) => {
           <p className="numbers">{value}%</p>
         </div>
       </div>
-      <Tooltip anchor={caption} value={value} />
+      <Tooltip anchor={caption} title={caption} value={value} />
     </>
   );
 };
