@@ -40,9 +40,6 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <a id="props-basic"> ◕‿‿◕ </a>
-
-        <Tooltip anchorId="props-basic" content="hello world!" />
         <Hero />
         <Summary {...criteriaState?.criteria!} />
         <Trends {...criteriaState?.criteria!} />

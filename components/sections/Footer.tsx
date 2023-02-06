@@ -1,8 +1,13 @@
 import React from "react";
+import { Tooltip } from "react-tooltip";
 
 const Footer = () => {
   return (
     <footer>
+      <a id="props-basic"> ◕‿‿◕ </a>
+
+      <Tooltip anchorId="props-basic" content="hello world!" />
+
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">
