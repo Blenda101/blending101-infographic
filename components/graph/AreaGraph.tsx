@@ -10,16 +10,19 @@ import {
 } from "recharts";
 import { criteriaVar } from "../../graphql/Infograph";
 import { GET_CRITERIA } from "../../graphql/Query";
+import useWindowSize from "../../hooks/useWindowSize";
 import styles from "./AreaGraph.module.scss";
 
 const AreaGraph = ({ trends }: any) => {
+  const width = useWindowSize();
+
   const changeYearHandler = (year: any) => {
     const criteria = criteriaVar();
     criteriaVar({ ...criteria, year: year.value });
   };
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width={width < 600 ? "150%" : "100%"} height="100%">
       <AreaChart
         // width={500}
         height={400}

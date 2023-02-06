@@ -38,22 +38,37 @@
 .graph {
   display: flex;
   margin-top: 2rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   @include respond(900px) {
     flex-direction: column;
   }
-  &__chart {
-    @include respond(600px) {
-      overflow: scroll;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-  }
+  // &__chart {
+  //   height: 100%;
+  //   width: calc(100% - 19.5rem);
+  //   @include respond(1200px) {
+  //     width: calc(100% - 15.5rem);
+  //   }
+  //   @include respond(900px) {
+  //     width: 100%;
+  //   }
+  //   @include respond(600px) {
+  //     overflow: scroll;
+  //     -ms-overflow-style: none; /* IE and Edge */
+  //     scrollbar-width: none; /* Firefox */
+  //     &::-webkit-scrollbar {
+  //       display: none;
+  //     }
+  //   }
+  // }
   &__wrapper,
   &__wrapper_stacked {
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
     width: calc(100% - 19.5rem);
     @include respond(1200px) {
       width: calc(100% - 15.5rem);
@@ -61,12 +76,15 @@
     @include respond(900px) {
       width: 100%;
     }
-    @include respond(600px) {
-      width: 150%;
-      overflow-x: scroll;
-    }
+    // @include respond(600px) {
+    //   width: 150%;
+    //   overflow-x: scroll;
+    // }
   }
   &__wrapper {
+    @include respond(900px) {
+      height: 400px;
+    }
     @include respond(750px) {
       height: 20rem;
     }
