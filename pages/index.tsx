@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import { Fragment, useMemo } from "react";
+import { Tooltip } from "react-tooltip";
 
 import Age from "../components/sections/Age";
 import Chronic from "../components/sections/Chronic";
@@ -39,6 +40,9 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <a id="props-basic"> ◕‿‿◕ </a>
+
+        <Tooltip anchorId="props-basic" content="hello world!" />
         <Hero />
         <Summary {...criteriaState?.criteria!} />
         <Trends {...criteriaState?.criteria!} />
