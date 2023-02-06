@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tooltip } from "react-tooltip";
 
 const Footer = () => {
+  const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <footer>
       <a id="props-basic"> ◕‿‿◕ </a>
 
-      <Tooltip anchorId="props-basic" content="hello world!" />
+      {isMounted && <Tooltip anchorId="props-basic" content="hello world!" />}
 
       <div className="container">
         <div className="row">

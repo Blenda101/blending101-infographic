@@ -23,6 +23,9 @@ const Honeycomb = (props: HoneycombProps) => {
     const states = maps.current?.querySelectorAll("g");
     states?.forEach((state) => {
       const stateName = state.id;
+      const stateFullName = dictionary
+        ? (dictionary as any)[stateName]?.fullForm
+        : 0;
       const value = dictionary ? (dictionary as any)[stateName]?.quartile : 0;
       const text: SVGPathElement = state.children[1] as any;
       const polygon: SVGPathElement = state.children[0] as any;
@@ -79,7 +82,7 @@ const Honeycomb = (props: HoneycombProps) => {
       state.addEventListener("mouseenter", (e) => {
         setAnchorId(stateName);
         setState({
-          name: stateName,
+          name: stateFullName,
           value,
           color,
         });
