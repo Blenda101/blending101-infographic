@@ -8,7 +8,8 @@ import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import { GET_SUMMARY } from "../../graphql/Query";
 
 const Summary = (props: CriteriaState) => {
-  const { year, variant, param, paramImage, disease, state } = props;
+  const { year, variant, param, paramImage, disease, diseaseImage, state } =
+    props;
   const criteriaRmvHandler = (key: keyof CriteriaState) => {
     const criteria = criteriaVar();
     criteriaVar({
@@ -48,24 +49,21 @@ const Summary = (props: CriteriaState) => {
                 {year && (
                   <li>
                     <a href="">
-                      <img src="/images/fa_heartbeat.svg" alt="" /> {year}
+                      <img src="/images/calender.svg" alt="" /> {year}
                     </a>
                   </li>
                 )}
                 {disease && (
                   <li>
                     <a href="">
-                      <img src="/images/fa_heartbeat.svg" alt="" /> {disease}
+                      <img src={`/filters${diseaseImage}`} alt="" /> {disease}
                     </a>
                   </li>
                 )}
                 {param && (
-                  <li>
+                  <li className="params">
                     <a href="">
-                      <ReactSVG
-                        src={paramImage || "/images/fa_heartbeat.svg"}
-                      />
-                      {param}
+                      <img src={paramImage} alt="" /> {param}
                     </a>
                     <FontAwesomeIcon
                       icon={faTimes}
@@ -74,7 +72,7 @@ const Summary = (props: CriteriaState) => {
                   </li>
                 )}
                 {state && (
-                  <li>
+                  <li className="params">
                     <a href="">
                       <img src="/images/fa_heartbeat.svg" alt="" /> {state}
                     </a>
@@ -91,7 +89,10 @@ const Summary = (props: CriteriaState) => {
             <div className="main_div">
               <div className="first_text">
                 <h3>
-                  {prevalence} <sub>IN</sub> 1000
+                  {prevalence}
+                  <span>
+                    <sub>IN</sub> 1000
+                  </span>
                 </h3>
               </div>
               <div className="inner_bg">

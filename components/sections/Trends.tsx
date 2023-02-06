@@ -114,15 +114,17 @@ const Trends = (props: CriteriaState) => {
                     </li>
                   </ul>
                 </div>
-                {compare === "" ? (
-                  <div className={styles.graph__wrapper}>
-                    <AreaGraph trends={trends} />
-                  </div>
-                ) : (
-                  <div className={styles.graph__wrapper_stacked}>
-                    <StackedAreaGraph type={compare} trends={compareTrends} />
-                  </div>
-                )}
+                <div className={styles.graph__chart}>
+                  {compare === "" ? (
+                    <div className={styles.graph__wrapper}>
+                      <AreaGraph trends={trends} />
+                    </div>
+                  ) : (
+                    <div className={styles.graph__wrapper_stacked}>
+                      <StackedAreaGraph type={compare} trends={compareTrends} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

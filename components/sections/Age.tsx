@@ -41,12 +41,22 @@ const Age = ({ active, ages }: AgeProps) => {
 
   const ageClickHandler = (name: string, img: string) => {
     const criteria = criteriaVar();
-    criteriaVar({
-      ...criteria,
-      param: name,
-      paramImage: img,
-      variant: "AGE",
-    });
+    const isSelected = name === criteria.param;
+    if (isSelected) {
+      criteriaVar({
+        ...criteria,
+        param: "",
+        paramImage: "",
+        variant: "",
+      });
+    } else {
+      criteriaVar({
+        ...criteria,
+        param: name,
+        paramImage: img,
+        variant: "AGE",
+      });
+    }
   };
 
   return (

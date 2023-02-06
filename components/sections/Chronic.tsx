@@ -36,11 +36,12 @@ const Chronic = (props: ChronicProps) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  const diseaseClickHandler = (name: string) => {
+  const diseaseClickHandler = (name: string, image: string) => {
     const criteria = criteriaVar();
     criteriaVar({
       ...criteria,
       disease: name,
+      diseaseImage: image,
     });
   };
 
@@ -101,7 +102,11 @@ const Chronic = (props: ChronicProps) => {
               },
             }}
           >
-            <SwiperSlide onClick={() => diseaseClickHandler("Arthritis")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Arthritis", "/images/Arthritis.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Arthritis"}
@@ -109,7 +114,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Arthritis.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Asthma")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Asthma", "/images/Asthma.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Asthma"}
@@ -117,7 +126,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Asthma.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("COPD")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("COPD", "/images/Lung_Disease.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"COPD"}
@@ -125,7 +138,14 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Lung_Disease.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Cardiovascular")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler(
+                  "Cardiovascular",
+                  "/images/Hear_ Disease.svg",
+                )
+              }
+            >
               <Specs
                 active={active}
                 caption={"Cardiovascular Disease"}
@@ -133,7 +153,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Hear_ Disease.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Depression")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Depression", "/images/Depression.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Depression"}
@@ -141,7 +165,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Depression.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Diabetes")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Diabetes", "/images/Diabetes.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Diabetes"}
@@ -149,7 +177,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Diabetes.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Kidney")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Kidney", "/images/Kidney_Disease.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Kidney Disease"}
@@ -157,7 +189,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Kidney_Disease.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Other Cancer")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Other Cancer", "/images/Cancer.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Other Cancer"}
@@ -165,7 +201,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Cancer.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Skin Cancer")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Skin Cancer", "/images/Skin Cancer.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Skin Cancer"}
@@ -173,7 +213,11 @@ const Chronic = (props: ChronicProps) => {
                 image="/images/Skin Cancer.svg"
               />
             </SwiperSlide>
-            <SwiperSlide onClick={() => diseaseClickHandler("Stroke")}>
+            <SwiperSlide
+              onClick={() =>
+                diseaseClickHandler("Stroke", "/images/Stroke.svg")
+              }
+            >
               <Specs
                 active={active}
                 caption={"Stroke"}

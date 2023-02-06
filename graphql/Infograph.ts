@@ -13,7 +13,7 @@ export interface CriteriaState {
 
 const initialState: CriteriaState = {
   disease: "Arthritis",
-  diseaseImage: "/images/Cancer.svg",
+  diseaseImage: "/images/Arthritis.svg",
   param: "",
   paramImage: "",
   variant: "",

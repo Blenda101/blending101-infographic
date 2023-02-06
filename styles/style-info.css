@@ -212,8 +212,13 @@ section#Chronic-Diseases .small-icon:last-child {
   cursor: pointer;
 }
 .first_text {
-  border: 1px solid #fff;
+  border: 1px solid #7ebd3b;
   border-radius: 9px;
+}
+.first_text span {
+  display: block;
+  font-size: 24px;
+  line-height: 20px;
 }
 #Chronic-Diseases .small-icon {
   display: flex;
@@ -234,7 +239,7 @@ section#Chronic-Diseases .small-icon:last-child {
 }
 .first_text h3 {
   font-weight: 700;
-  font-size: 39.2569px;
+  font-size: 45px;
   line-height: 57px;
   text-align: center;
 
@@ -250,6 +255,7 @@ section#Chronic-Diseases .small-icon:last-child {
   border-radius: 9px;
   padding: 0 5px;
   margin-right: 3em;
+  min-width: 200px;
 }
 .main_div:last-child {
   margin-right: 0;
@@ -339,9 +345,14 @@ section#Chronic-Diseases .small-icon:last-child {
   background: #fff6f2;
   border: 1px solid #fe5717;
   border-radius: 42px;
-  padding: 4px 14px;
+  padding: 8px 20px;
   text-decoration: none;
   cursor: pointer;
+}
+
+#prevalence .small-button li.params {
+  border: 1px solid #7ebd3b;
+  background-color: #f8faf5;
 }
 
 #prevalence .small-button li {
@@ -383,18 +394,20 @@ section#Chronic-Diseases .small-icon:last-child {
   transform: translateY(1px);
 }
 
-#prevalence .small-button li div > svg > * {
-  stroke: #fe5717;
-}
-
 #prevalence .small-button li a {
   font-weight: 700;
   font-size: 14px;
-  line-height: 1.2;
   letter-spacing: -0.03em;
+  transform: translateY(1.5px);
   color: #000000;
   display: flex;
   align-items: center;
+}
+
+#prevalence .small-button li a > img {
+  height: 25px;
+  margin-right: 10px;
+  transform: translateY(-1.5px);
 }
 
 /**********location section**********/

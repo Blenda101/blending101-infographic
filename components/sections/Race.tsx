@@ -39,12 +39,22 @@ const Race = (props: RaceProps) => {
     variant: IVariant,
   ) => {
     const criteria = criteriaVar();
-    criteriaVar({
-      ...criteria,
-      param: name,
-      paramImage: img,
-      variant,
-    });
+    const isSelected = name === criteria.param;
+    if (isSelected) {
+      criteriaVar({
+        ...criteria,
+        param: "",
+        paramImage: "",
+        variant: "",
+      });
+    } else {
+      criteriaVar({
+        ...criteria,
+        param: name,
+        paramImage: img,
+        variant,
+      });
+    }
   };
 
   const racePercentage = (type: string) => {
@@ -59,7 +69,6 @@ const Race = (props: RaceProps) => {
     else return varSex.toFixed(1);
   };
 
-  const swiper = sliderRef?.current?.swiper;
   return (
     <div className=" m-top-20">
       <div className="row ">
