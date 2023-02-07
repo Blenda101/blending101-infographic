@@ -50,7 +50,16 @@ const State = (props: StateProps) => {
     polygon.style.fill = color;
     polygon.style.outline = "none";
     text.style.fill = textColor;
-  }, [color, textColor]);
+
+    if (id === criteria.state) {
+      // IF THAT STATE IS ALREADY SELECTED -> UNSELECT
+      polygon.style.stroke = "#333";
+      polygon.style.strokeWidth = "3";
+      text.style.stroke = "none";
+    } else {
+      polygon.style.stroke = "none";
+    }
+  }, [color, criteria.state, id, textColor]);
 
   const stateSelectHandler = () => {
     if (id !== criteria.state) {
