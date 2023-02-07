@@ -22,7 +22,7 @@ const AreaGraph = ({ trends }: any) => {
   };
 
   return (
-    <ResponsiveContainer width={width < 600 ? "150%" : "100%"} height="100%">
+    <ResponsiveContainer width={width < 600 ? "180%" : "100%"} height="100%">
       <AreaChart
         // width={500}
         height={400}
@@ -85,15 +85,16 @@ const CustomActiveDot = (props: any) => {
 };
 
 const CustomYears = (props: any) => {
-  const { x, y, payload } = props;
+  const { x, y, payload, width } = props;
   const { data } = useQuery(GET_CRITERIA);
   const isSelectedYear = payload.value === data?.criteria?.year;
+  const isPhone = width < 600;
   return (
     <Fragment>
       <rect
-        width="56"
+        width={isPhone ? "50" : "56"}
         height="30"
-        x={x - 29}
+        x={isPhone ? x - 26 : x - 29}
         y={y - 20}
         rx={15}
         className={`${styles.year__button} ${
