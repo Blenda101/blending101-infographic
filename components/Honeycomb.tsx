@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Tippy from "@tippyjs/react";
+import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import { criteriaVar } from "../graphql/Infograph";
 import Tooltip from "./shared/Tooltip";
@@ -79,29 +80,8 @@ const Honeycomb = (props: HoneycombProps) => {
           });
         }
       });
-
-      state.addEventListener("mouseenter", (e) => {
-        setAnchorId(stateName);
-        setState({
-          name: stateFullName,
-          value,
-          color,
-        });
-        if (!isOpen) {
-          setIsOpen(true);
-        }
-      });
-
-      state.addEventListener("mouseleave", (e) => {
-        setAnchorId("");
-        setState({
-          name: "",
-          value: 0,
-          color: "",
-        });
-        if (isOpen) {
-          setIsOpen(false);
-        }
+      tippy(`#${stateName}`, {
+        content: stateFullName,
       });
     });
   }, [criteria, dictionary, isOpen]);
@@ -115,20 +95,18 @@ const Honeycomb = (props: HoneycombProps) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="Maps" ref={maps}>
-          <Tippy content="Hello">
-            <g id="ID">
-              <path
-                id="Polygon 1"
-                d="M210.994 200.752L248.249 222.261V265.279L210.994 286.788L173.739 265.279V222.261L210.994 200.752Z"
-                fill="#FE5717"
-              />
-              <path
-                id="ID_2"
-                d="M203.141 249.527H204.767V236.144H203.141V249.527ZM208.59 249.527H208.8C209.928 249.527 211.19 249.565 212.088 249.565C217.193 249.565 219.755 246.468 219.755 242.663C219.755 239.165 217.595 236.086 212.241 236.086C211.152 236.086 209.699 236.144 208.819 236.144H208.59V249.527ZM212.203 237.616C216.084 237.616 218.035 239.757 218.035 242.663C218.035 245.78 215.97 248.036 212.146 248.036C211.916 248.036 211.094 248.017 210.215 247.998V237.673C210.884 237.654 211.4 237.616 212.203 237.616Z"
-                fill="white"
-              />
-            </g>
-          </Tippy>
+          <g id="ID">
+            <path
+              id="Polygon 1"
+              d="M210.994 200.752L248.249 222.261V265.279L210.994 286.788L173.739 265.279V222.261L210.994 200.752Z"
+              fill="#FE5717"
+            />
+            <path
+              id="ID_2"
+              d="M203.141 249.527H204.767V236.144H203.141V249.527ZM208.59 249.527H208.8C209.928 249.527 211.19 249.565 212.088 249.565C217.193 249.565 219.755 246.468 219.755 242.663C219.755 239.165 217.595 236.086 212.241 236.086C211.152 236.086 209.699 236.144 208.819 236.144H208.59V249.527ZM212.203 237.616C216.084 237.616 218.035 239.757 218.035 242.663C218.035 245.78 215.97 248.036 212.146 248.036C211.916 248.036 211.094 248.017 210.215 247.998V237.673C210.884 237.654 211.4 237.616 212.203 237.616Z"
+              fill="white"
+            />
+          </g>
           <g id="WA">
             <path
               id="Polygon 39"
