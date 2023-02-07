@@ -3,9 +3,9 @@ import { useApolloClient } from "@apollo/client";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useMemo } from "react";
-import { ReactSVG } from "react-svg";
 import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import { GET_SUMMARY } from "../../graphql/Query";
+import Dropdown from "../shared/Dropdown";
 
 const Summary = (props: CriteriaState) => {
   const { year, variant, param, paramImage, disease, diseaseImage, state } =
@@ -47,40 +47,24 @@ const Summary = (props: CriteriaState) => {
             <div className="small-button">
               <ul>
                 {year && (
-                  <li>
-                    <a href="">
-                      <img src="/images/calender.svg" alt="" /> {year}
-                    </a>
-                  </li>
+                  <Dropdown image={"/images/calender.svg"} value={year} />
                 )}
                 {disease && (
-                  <li>
-                    <a href="">
-                      <img src={`/filters${diseaseImage}`} alt="" /> {disease}
-                    </a>
-                  </li>
+                  <Dropdown image={`/filters${diseaseImage}`} value={disease} />
                 )}
                 {param && (
-                  <li className="params">
-                    <a href="">
-                      <img src={paramImage} alt="" /> {param}
-                    </a>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      onClick={() => criteriaRmvHandler("param")}
-                    />
-                  </li>
+                  <Dropdown
+                    image={paramImage}
+                    value={param}
+                    onRemove={() => criteriaRmvHandler("param")}
+                  />
                 )}
                 {state && (
-                  <li className="params">
-                    <a href="">
-                      <img src="/images/fa_heartbeat.svg" alt="" /> {state}
-                    </a>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      onClick={() => criteriaRmvHandler("state")}
-                    />
-                  </li>
+                  <Dropdown
+                    image={"/images/location.svg"}
+                    value={state}
+                    onRemove={() => criteriaRmvHandler("state")}
+                  />
                 )}
               </ul>
             </div>

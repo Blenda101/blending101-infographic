@@ -25,7 +25,7 @@ interface StackedAreaGraphProps {
 }
 
 const StackedAreaGraph = (props: StackedAreaGraphProps) => {
-  const { trends } = props;
+  const { trends, type } = props;
   const width = useWindowSize();
 
   const changeYearHandler = (year: any) => {
@@ -84,7 +84,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
         />
         <Tooltip
           wrapperStyle={{ outline: "none" }}
-          content={<CustomTooltip />}
+          content={<CustomTooltip type={type} />}
         />
         <Legend
           verticalAlign="bottom"
@@ -145,12 +145,20 @@ const CustomYears = (props: any) => {
   );
 };
 
-const CustomTooltip = (props: any) => {
-  const { active, payload, label } = props;
+const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
+  const { active, payload, label, type } = props;
+  const { data } = useQuery(GET_CRITERIA);
   if (active && payload && payload.length) {
+    let criteria = [];
+    if (type !== "disease") criteria.push(data?.criteria?.disease);
+    if (type === "disease") criteria.push(data?.criteria?.param);
+    if (data?.criteria?.state) criteria.push(data?.criteria?.state);
     return (
       <div className={styles.linetip}>
-        <p>{label}</p>
+        <p>
+          {label}
+          <br /> <span>{criteria.join(", ")}</span>
+        </p>
         <ul>
           {payload?.map((item: any) => (
             <li key={item.name}>

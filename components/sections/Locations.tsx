@@ -39,7 +39,7 @@ const Locations = (props: CriteriaState) => {
             </div>
             <div className={styles.range}>
               <div className={styles.wrapper}>
-                <h5>Prevalence</h5>
+                <h5>Prevalence ( % )</h5>
                 <div className={styles.stacked}>
                   <div>
                     <span
