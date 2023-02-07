@@ -94,7 +94,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           fontSize={16}
           formatter={CustomLegend}
           wrapperStyle={{
-            top: "100%",
+            top: "94.5%",
           }}
         />
         {categories?.map((category, idx) => (
