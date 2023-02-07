@@ -56,7 +56,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
     height = 400;
   }
   return (
-    <ResponsiveContainer width={width < 600 ? "160%" : "100%"} height={height}>
+    <ResponsiveContainer width={width < 600 ? "170%" : "100%"} height={height}>
       <LineChart
         width={500}
         data={trends}
