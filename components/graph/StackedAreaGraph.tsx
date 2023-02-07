@@ -39,7 +39,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
       : [];
   }, [trends]);
 
-  let height: string | number = 400;
+  let height: string | number = 420;
   if (width < 1600) {
     height = 380;
   }
@@ -64,7 +64,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           top: 0,
           right: 30,
           left: 0,
-          bottom: 10,
+          bottom: 50,
         }}
       >
         <defs>
@@ -80,7 +80,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           tickLine={false}
           axisLine={false}
           onClick={changeYearHandler}
-          tick={<CustomYears />}
+          tick={<CustomYears width={width} />}
         />
         <Tooltip
           wrapperStyle={{ outline: "none" }}
@@ -94,7 +94,7 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           fontSize={16}
           formatter={CustomLegend}
           wrapperStyle={{
-            top: "95%",
+            top: "100%",
           }}
         />
         {categories?.map((category, idx) => (
@@ -126,15 +126,16 @@ const CustomActiveDot = (props: any) => {
   );
 };
 const CustomYears = (props: any) => {
-  const { x, y, payload } = props;
+  const { x, y, payload, width } = props;
   const { data } = useQuery(GET_CRITERIA);
   const isSelectedYear = payload.value === data?.criteria?.year;
+  const isPhone = width < 600;
   return (
     <Fragment>
       <rect
-        width="56"
+        width={isPhone ? "50" : "56"}
         height="30"
-        x={x - 29}
+        x={isPhone ? x - 26 : x - 29}
         y={y - 3}
         rx={15}
         className={`${styles.year__button} ${
