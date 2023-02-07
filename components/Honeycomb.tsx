@@ -5,6 +5,9 @@ import "tippy.js/dist/tippy.css";
 import { criteriaVar } from "../graphql/Infograph";
 import Tooltip from "./shared/Tooltip";
 
+import styles from "./shared/Tooltip.module.scss";
+import State from "./shared/State";
+
 interface HoneycombProps {
   dictionary: any;
 }
@@ -21,70 +24,82 @@ const Honeycomb = (props: HoneycombProps) => {
     color: "",
   });
 
-  useEffect(() => {
-    const states = maps.current?.querySelectorAll("g");
-    states?.forEach((state) => {
-      const stateName = state.id;
-      const stateFullName = dictionary
-        ? (dictionary as any)[stateName]?.fullForm
-        : 0;
-      const value = dictionary ? (dictionary as any)[stateName]?.quartile : 0;
-      const text: SVGPathElement = state.children[1] as any;
-      const polygon: SVGPathElement = state.children[0] as any;
-      if (!polygon) return;
+  // useEffect(() => {
+  //   const states = maps.current?.querySelectorAll("g");
+  //   states?.forEach((state) => {
+  //     const stateName = state.id;
+  //     const stateFullName = dictionary
+  //       ? (dictionary as any)[stateName]?.fullForm
+  //       : 0;
+  //     const value = dictionary ? (dictionary as any)[stateName]?.quartile : 0;
+  //     const text: SVGPathElement = state.children[1] as any;
+  //     const polygon: SVGPathElement = state.children[0] as any;
+  //     if (!polygon) return;
 
-      let color = "#E5E5E5";
-      if (value === 1) {
-        color = "#E5F2D7";
-        text.style.fill = "black";
-      } else if (value === 2) {
-        color = "#B0D788";
-        text.style.fill = "black";
-      } else if (value === 3) {
-        color = "#7CBC39";
-        text.style.fill = "white";
-      } else if (value === 4) {
-        color = "#FE5717";
-        text.style.fill = "white";
-      } else {
-        color = "#E5E5E5";
-        text.style.fill = "black";
-      }
+  //     let color = "#E5E5E5";
+  //     if (value === 1) {
+  //       color = "#E5F2D7";
+  //       text.style.fill = "black";
+  //     } else if (value === 2) {
+  //       color = "#B0D788";
+  //       text.style.fill = "black";
+  //     } else if (value === 3) {
+  //       color = "#7CBC39";
+  //       text.style.fill = "white";
+  //     } else if (value === 4) {
+  //       color = "#FE5717";
+  //       text.style.fill = "white";
+  //     } else {
+  //       color = "#E5E5E5";
+  //       text.style.fill = "black";
+  //     }
 
-      state.style.cursor = "pointer";
-      polygon.style.opacity = "1";
-      polygon.style.fill = color;
-      polygon.style.outline = "none";
+  //     state.style.cursor = "pointer";
+  //     polygon.style.opacity = "1";
+  //     polygon.style.fill = color;
+  //     polygon.style.outline = "none";
 
-      if (state.id === criteria.state) {
-        // IF THAT STATE IS ALREADY SELECTED -> UNSELECT
-        polygon.style.stroke = "#333";
-        polygon.style.strokeWidth = "3";
-        text.style.stroke = "none";
-      }
-      state.addEventListener("click", (e) => {
-        // Resetting all the polygons stroke to none
-        states?.forEach((state) => {
-          const polygon: SVGPathElement = state.children[0] as any;
-          polygon.style.stroke = "none";
-        });
-        if (state.id !== criteria.state) {
-          criteriaVar({
-            ...criteria,
-            state: state.id,
-          });
-        } else {
-          criteriaVar({
-            ...criteria,
-            state: "",
-          });
-        }
-      });
-      tippy(`#${stateName}`, {
-        content: stateFullName,
-      });
-    });
-  }, [criteria, dictionary, isOpen]);
+  //     if (state.id === criteria.state) {
+  //       // IF THAT STATE IS ALREADY SELECTED -> UNSELECT
+  //       polygon.style.stroke = "#333";
+  //       polygon.style.strokeWidth = "3";
+  //       text.style.stroke = "none";
+  //     }
+  //     state.addEventListener("click", (e) => {
+  //       // Resetting all the polygons stroke to none
+  //       states?.forEach((state) => {
+  //         const polygon: SVGPathElement = state.children[0] as any;
+  //         polygon.style.stroke = "none";
+  //       });
+  //       if (state.id !== criteria.state) {
+  //         criteriaVar({
+  //           ...criteria,
+  //           state: state.id,
+  //         });
+  //       } else {
+  //         criteriaVar({
+  //           ...criteria,
+  //           state: "",
+  //         });
+  //       }
+  //     });
+  //     // tippy(`#${stateName}`, {
+  //     //   content: () => {
+  //     //     const tooltip = document.getElementById("tooltip");
+  //     //     if (tooltip) {
+  //     //       const title = tooltip.querySelector("#tooltip-title");
+  //     //       if (title) {
+  //     //         title.innerHTML = stateFullName;
+  //     //       }
+  //     //     }
+
+  //     //     return tooltip?.innerHTML || "Hello";
+  //     //   },
+  //     //   allowHTML: true,
+  //     //   placement: "bottom",
+  //     // });
+  //   });
+  // }, [criteria, dictionary, isOpen]);
 
   return (
     <Fragment>
@@ -95,7 +110,7 @@ const Honeycomb = (props: HoneycombProps) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="Maps" ref={maps}>
-          <g id="ID">
+          <State maps={dictionary} id="ID">
             <path
               id="Polygon 1"
               d="M210.994 200.752L248.249 222.261V265.279L210.994 286.788L173.739 265.279V222.261L210.994 200.752Z"
@@ -106,8 +121,8 @@ const Honeycomb = (props: HoneycombProps) => {
               d="M203.141 249.527H204.767V236.144H203.141V249.527ZM208.59 249.527H208.8C209.928 249.527 211.19 249.565 212.088 249.565C217.193 249.565 219.755 246.468 219.755 242.663C219.755 239.165 217.595 236.086 212.241 236.086C211.152 236.086 209.699 236.144 208.819 236.144H208.59V249.527ZM212.203 237.616C216.084 237.616 218.035 239.757 218.035 242.663C218.035 245.78 215.97 248.036 212.146 248.036C211.916 248.036 211.094 248.017 210.215 247.998V237.673C210.884 237.654 211.4 237.616 212.203 237.616Z"
               fill="white"
             />
-          </g>
-          <g id="WA">
+          </State>
+          <State maps={dictionary} id="WA">
             <path
               id="Polygon 39"
               opacity="0.6"
@@ -119,7 +134,7 @@ const Honeycomb = (props: HoneycombProps) => {
               d="M178.136 169.227H176.549L173.509 179.876L169.953 169.227H168.385L164.925 179.876L161.808 169.227H159.973L164.026 182.61H165.518L169.112 171.846L172.783 182.61H174.274L178.136 169.227ZM177.121 182.61H178.765L180.466 178.557H186.565L188.286 182.61H190.026L184.271 169.15H182.875L177.121 182.61ZM183.525 171.311L185.934 177.027H181.116L183.525 171.311Z"
               fill="black"
             />
-          </g>
+          </State>
           <g id="OR">
             <path
               id="Polygon 11"
@@ -775,25 +790,12 @@ const Honeycomb = (props: HoneycombProps) => {
           </g>
         </g>
       </svg>
-      {/* <Tooltip
-        anchorId="TX"
-        content={state.name}
-        // value={state.value}
-        // dot={state.color}
-      /> */}
-      <Tooltip
-        anchor={anchorId}
-        title={state.name}
-        value={state.value}
-        dot={state.color}
-        isOpen={isOpen}
-        delayHide={2000}
-        events={["hover"]}
-        clickable={false}
-        place="bottom"
-      />
     </Fragment>
   );
 };
 
 export default Honeycomb;
+
+// const CustomEl = () => {
+//   return <div>Hello</div>;
+// };

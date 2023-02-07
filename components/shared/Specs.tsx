@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./Specs.module.scss";
-import Tooltip from "./Tooltip";
 
 export type ICategory = { _id: string; percentage: number };
 
@@ -78,7 +76,6 @@ const Specs = (props: SpecsProps) => {
           <p className="numbers">{value}%</p>
         </div>
       </div>
-      <Tooltip anchor={caption} title={caption} value={value} />
     </>
   );
 };

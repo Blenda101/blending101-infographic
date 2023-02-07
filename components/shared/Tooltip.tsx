@@ -1,35 +1,24 @@
-import { useQuery } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import React, { Fragment, useEffect, useState } from "react";
 import { Tooltip as Popover, ITooltip } from "react-tooltip";
-import { GET_CRITERIA } from "../../graphql/Query";
+import { GET_CRITERIA, GET_STATE_DATA } from "../../graphql/Query";
 
 import styles from "./Tooltip.module.scss";
 
 interface TooltipProps extends ITooltip {
-  anchor: string;
-  title: string;
-  value: string | number;
+  title?: string;
+  value?: string | number;
   dot?: string;
 }
 
 const Tooltip = (props: TooltipProps) => {
-  const { anchor, title, value, dot, ...tooltip } = props;
+  const { title, value, dot } = props;
   const { data } = useQuery(GET_CRITERIA);
-  // const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
-
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
+  const client = useApolloClient();
 
   return (
-    <Popover
-      anchorId={anchor}
-      delayShow={2000}
-      className={styles.tooltip}
-      classNameArrow={styles.tooltip__arrow}
-      {...tooltip}
-    >
-      <p>{title}</p>
+    <div id="tooltip" className={styles.tooltip}>
+      <p id="tooltip-title">{title}</p>
       <span>
         {data?.criteria?.year ? `${data?.criteria?.year}, ` : ""}
         {data?.criteria?.disease}
@@ -45,7 +34,7 @@ const Tooltip = (props: TooltipProps) => {
           : 0}
         %
       </h6>
-    </Popover>
+    </div>
   );
 };
 
