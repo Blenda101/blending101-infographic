@@ -93,6 +93,9 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           height={16}
           fontSize={16}
           formatter={CustomLegend}
+          wrapperStyle={{
+            top: "95%",
+          }}
         />
         {categories?.map((category, idx) => (
           <Line
@@ -132,13 +135,13 @@ const CustomYears = (props: any) => {
         width="56"
         height="30"
         x={x - 29}
-        y={y - 20}
+        y={y - 3}
         rx={15}
         className={`${styles.year__button} ${
           isSelectedYear ? styles["year__button--active"] : ""
         }`}
       />
-      <text x={x} y={y} className={styles.year__text}>
+      <text x={x} y={y + 18} className={styles.year__text}>
         {payload.value}
       </text>
     </Fragment>
