@@ -18,6 +18,9 @@ a {
   text-decoration: none;
 }
 
+.tippy-content {
+  padding: 0 !important;
+}
 g:active,
 g:focus,
 path:focus,

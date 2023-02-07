@@ -85,6 +85,11 @@ const State = (props: StateProps) => {
         />
       }
       placement="bottom"
+      delay={[2000, 200]}
+      // TO DEBUG THE TOOLTIP
+      // hideOnClick={false}
+      // trigger={"click"}
+      // interactive
     >
       <g
         id={id}
