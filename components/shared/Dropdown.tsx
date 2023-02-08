@@ -8,18 +8,22 @@ interface DropdownProps {
   image: string;
   value: string;
   onRemove?: any;
+  isEffectingChart?: boolean;
 }
 
 const Dropdown = (props: DropdownProps) => {
-  const { image, value, onRemove } = props;
+  const { image, value, onRemove, isEffectingChart } = props;
   const [showDropdown, setShowDropdown] = useState(false);
   return (
     <li
-      className={styles.element}
+      className={`${styles.element} ${
+        isEffectingChart ? styles["element--active"] : ""
+      }`}
       onClick={() => setShowDropdown((prev) => !prev)}
     >
       <span>
-        <img src={image} alt="" /> {value}
+        <img src={isEffectingChart ? image : `/filters${image}`} alt="" />
+        {value}
       </span>
       {onRemove && <FontAwesomeIcon icon={faTimes} onClick={onRemove} />}
       {showDropdown && (
@@ -42,3 +46,7 @@ const Dropdown = (props: DropdownProps) => {
 };
 
 export default Dropdown;
+
+Dropdown.defaultProps = {
+  isEffectingChart: true,
+};

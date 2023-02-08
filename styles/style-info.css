@@ -196,7 +196,7 @@ section#Chronic-Diseases .small-icon:last-child {
 
 /* Chronic Diseases section starts here */
 .small-icon:hover {
-  border: 1px solid #fe5717;
+  border: 2px solid #7ebd3b;
   filter: drop-shadow(0px 9px 14px rgba(0, 0, 0, 0.12));
   cursor: pointer;
 }
@@ -205,7 +205,7 @@ section#Chronic-Diseases .small-icon:last-child {
   /* width: 200px !important; */
 }
 .small-icon-active {
-  border: 1px solid #fe5717;
+  border: 2px solid #7ebd3b;
   filter: drop-shadow(0px 9px 14px rgba(0, 0, 0, 0.12));
   cursor: pointer;
 }

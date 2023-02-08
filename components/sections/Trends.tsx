@@ -17,8 +17,9 @@ import AreaGraph from "../graph/AreaGraph";
 import StackedAreaGraph, { IType } from "../graph/StackedAreaGraph";
 
 const Trends = (props: CriteriaState) => {
-  const { param, disease, state, variant } = props;
-  const [compare, setCompare] = useState<IType | "">("");
+  const { compare, param, disease, state, variant } = props;
+  const criteria = criteriaVar();
+  // const [compare, setCompare] = useState<IType | "">("");
 
   const { data } = useQuery(GET_TRENDS, {
     variables: {
@@ -54,9 +55,16 @@ const Trends = (props: CriteriaState) => {
   }, [compareData]);
 
   const handleCompare = async (key: IType) => {
-    if (compare === key) setCompare("");
+    if (compare === key)
+      criteriaVar({
+        ...criteria,
+        compare: "",
+      });
     else {
-      setCompare(key);
+      criteriaVar({
+        ...criteria,
+        compare: key,
+      });
     }
   };
 

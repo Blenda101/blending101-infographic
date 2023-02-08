@@ -8,8 +8,16 @@ import { GET_SUMMARY } from "../../graphql/Query";
 import Dropdown from "../shared/Dropdown";
 
 const Summary = (props: CriteriaState) => {
-  const { year, variant, param, paramImage, disease, diseaseImage, state } =
-    props;
+  const {
+    year,
+    variant,
+    param,
+    paramImage,
+    disease,
+    diseaseImage,
+    state,
+    compare,
+  } = props;
   const criteriaRmvHandler = (key: keyof CriteriaState) => {
     const criteria = criteriaVar();
     criteriaVar({
@@ -47,16 +55,25 @@ const Summary = (props: CriteriaState) => {
             <div className="small-button">
               <ul>
                 {year && (
-                  <Dropdown image={"/images/calender.svg"} value={year} />
+                  <Dropdown
+                    image={"/images/calender.svg"}
+                    value={year}
+                    isEffectingChart={false}
+                  />
                 )}
                 {disease && (
-                  <Dropdown image={`/filters${diseaseImage}`} value={disease} />
+                  <Dropdown
+                    image={diseaseImage}
+                    value={disease}
+                    isEffectingChart={compare !== "disease"}
+                  />
                 )}
                 {param && (
                   <Dropdown
                     image={paramImage}
                     value={param}
                     onRemove={() => criteriaRmvHandler("param")}
+                    isEffectingChart={compare === "disease"}
                   />
                 )}
                 {state && (
@@ -64,6 +81,7 @@ const Summary = (props: CriteriaState) => {
                     image={"/images/location.svg"}
                     value={state}
                     onRemove={() => criteriaRmvHandler("state")}
+                    isEffectingChart
                   />
                 )}
               </ul>

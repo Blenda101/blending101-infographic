@@ -92,6 +92,7 @@ export const GET_CRITERIA = gql`
       diseaseImage
       state
       variant
+      compare
     }
   }
 `;

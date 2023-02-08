@@ -9,6 +9,7 @@ export interface CriteriaState {
   variant: IVariant;
   year: string;
   state: string;
+  compare: "disease" | "race" | "sex" | "age" | "";
 }
 
 const initialState: CriteriaState = {
@@ -19,6 +20,7 @@ const initialState: CriteriaState = {
   variant: "",
   year: "2021",
   state: "",
+  compare: "",
 };
 
 export const criteriaVar: ReactiveVar<CriteriaState> =
