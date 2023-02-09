@@ -20,12 +20,13 @@ import useWindowSize from "../../hooks/useWindowSize";
 
 export type IType = "disease" | "sex" | "race" | "age";
 interface StackedAreaGraphProps {
+  loading: boolean;
   trends: any[];
   type: IType;
 }
 
 const StackedAreaGraph = (props: StackedAreaGraphProps) => {
-  const { trends, type } = props;
+  const { loading, trends, type } = props;
   const width = useWindowSize();
 
   const changeYearHandler = (year: any) => {
@@ -82,27 +83,31 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
           onClick={changeYearHandler}
           tick={<CustomYears width={width} />}
         />
-        <Tooltip
-          wrapperStyle={{ outline: "none" }}
-          content={<CustomTooltip type={type} />}
-        />
-        <Legend
-          verticalAlign="bottom"
-          align="center"
-          iconType="square"
-          height={16}
-          fontSize={16}
-          formatter={CustomLegend}
-          wrapperStyle={{
-            top: "94.5%",
-          }}
-        />
+        {!loading && (
+          <Tooltip
+            wrapperStyle={{ outline: "none" }}
+            content={<CustomTooltip type={type} />}
+          />
+        )}
+        {!loading && (
+          <Legend
+            verticalAlign="bottom"
+            align="center"
+            iconType="square"
+            height={16}
+            fontSize={16}
+            formatter={CustomLegend}
+            wrapperStyle={{
+              top: "94.5%",
+            }}
+          />
+        )}
         {categories?.map((category, idx) => (
           <Line
             key={category}
             type="monotone"
             dataKey={category}
-            stroke={`#${COLORS[idx]}`}
+            stroke={loading ? "#eee" : `#${COLORS[idx]}`}
             strokeWidth={4}
             activeDot={<CustomActiveDot />}
           />
@@ -167,7 +172,7 @@ const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
           {payload?.map((item: any) => (
             <li key={item.name}>
               <span>{item.name}</span>
-              <h6 style={{ color: item.stroke }}>{item.value.toFixed(1)}%</h6>
+              <h6 style={{ color: item.stroke }}>{item?.value?.toFixed(1)}%</h6>
             </li>
           ))}
         </ul>

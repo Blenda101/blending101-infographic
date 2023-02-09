@@ -13,7 +13,7 @@ import { GET_CRITERIA } from "../../graphql/Query";
 import useWindowSize from "../../hooks/useWindowSize";
 import styles from "./AreaGraph.module.scss";
 
-const AreaGraph = ({ trends }: any) => {
+const AreaGraph = ({ trends, loading }: any) => {
   const width = useWindowSize();
 
   const changeYearHandler = (year: any) => {
@@ -52,17 +52,19 @@ const AreaGraph = ({ trends }: any) => {
           tick={<CustomYears />}
         />
         {/* <YAxis dataKey="peoples" /> */}
-        <Tooltip
-          wrapperStyle={{ outline: "none" }}
-          content={<CustomTooltip />}
-        />
+        {!loading && (
+          <Tooltip
+            wrapperStyle={{ outline: "none" }}
+            content={<CustomTooltip />}
+          />
+        )}
         <Area
           type="monotone"
           dataKey="peoples"
-          stroke="#fe5e21"
+          stroke={loading ? "none" : "#fe5e21"}
           strokeWidth={4}
           fillOpacity={1}
-          fill="url(#colorUv)"
+          fill={"url(#colorUv)"}
           activeDot={<CustomActiveDot />}
         />
       </AreaChart>

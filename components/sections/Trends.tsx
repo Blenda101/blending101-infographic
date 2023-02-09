@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useMemo, useState } from "react";
 import { ResponsiveContainer } from "recharts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartPulse } from "@fortawesome/free-solid-svg-icons";
 import { useLazyQuery, useQuery } from "@apollo/client";
 
-import staticData from "../../data/Trends";
+import { AREAGRAPH, LINEGRAPH } from "../../data/Trends";
 
 import styles from "./Trends.module.scss";
 import {
@@ -15,13 +16,14 @@ import {
 import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import AreaGraph from "../graph/AreaGraph";
 import StackedAreaGraph, { IType } from "../graph/StackedAreaGraph";
+import { AGE, DISEASES, RACE, SEX } from "../../data/Category";
 
 const Trends = (props: CriteriaState) => {
   const { compare, param, disease, state, variant } = props;
   const criteria = criteriaVar();
   // const [compare, setCompare] = useState<IType | "">("");
 
-  const { data } = useQuery(GET_TRENDS, {
+  const { data, loading: trendLoading } = useQuery(GET_TRENDS, {
     variables: {
       state,
       disease,
@@ -31,7 +33,7 @@ const Trends = (props: CriteriaState) => {
     },
   });
 
-  const { data: compareData } = useQuery(GET_COMPARE_TRENDS, {
+  const { data: compareData, loading } = useQuery(GET_COMPARE_TRENDS, {
     variables: {
       type: compare,
       state,
@@ -42,17 +44,24 @@ const Trends = (props: CriteriaState) => {
   });
 
   const compareTrends = useMemo(() => {
-    // console.log(compareData?.getCompareData);
+    let categories: any[] = [];
+    if (criteria.compare === "disease") categories = DISEASES;
+    else if (criteria.compare === "age") categories = AGE;
+    else if (criteria.compare === "race") categories = RACE;
+    else if (criteria.compare === "sex") categories = SEX;
 
     return compareData?.getCompareData?.map((compareYear: any) => {
-      const year: any = { year: compareYear.year };
-      compareYear?.fotmatedData.forEach((category: any) => {
-        if (!category?.category) return;
-        year[category?.category] = category?.percentage;
+      const trend: any = { year: compareYear.year };
+      categories.forEach((category) => {
+        trend[category] = 0;
       });
-      return year;
+      compareYear?.fotmatedData.forEach((type: any) => {
+        if (!type?.category) return;
+        trend[type?.category] = type?.percentage;
+      });
+      return trend;
     });
-  }, [compareData]);
+  }, [compareData?.getCompareData, criteria.compare]);
 
   const handleCompare = async (key: IType) => {
     if (compare === key)
@@ -68,7 +77,12 @@ const Trends = (props: CriteriaState) => {
     }
   };
 
-  const trends = data?.yearBasedAggregation || [];
+  const getImageUrl = (path: string, type: string) => {
+    return `${compare === type ? "filters" : ""}${path}`;
+  };
+
+  const trends = trendLoading ? AREAGRAPH : data?.yearBasedAggregation;
+
   return (
     <section id="Trends">
       <div className="continer-fluid w-90">
@@ -90,7 +104,10 @@ const Trends = (props: CriteriaState) => {
                       }
                       onClick={() => handleCompare("disease")}
                     >
-                      <FontAwesomeIcon icon={faHeartPulse} />
+                      <img
+                        src={getImageUrl("/images/disease.svg", "disease")}
+                        alt="Disease Icon"
+                      />
                       Disease
                     </li>
                     <li
@@ -99,7 +116,10 @@ const Trends = (props: CriteriaState) => {
                       }
                       onClick={() => handleCompare("race")}
                     >
-                      <FontAwesomeIcon icon={faHeartPulse} />
+                      <img
+                        src={getImageUrl("/images/race.svg", "race")}
+                        alt="Race Icon"
+                      />
                       Race
                     </li>
                     <li
@@ -108,7 +128,10 @@ const Trends = (props: CriteriaState) => {
                       }
                       onClick={() => handleCompare("sex")}
                     >
-                      <FontAwesomeIcon icon={faHeartPulse} />
+                      <img
+                        src={getImageUrl("/images/sex.svg", "sex")}
+                        alt="Sex Icon"
+                      />
                       Sex
                     </li>
                     <li
@@ -117,7 +140,10 @@ const Trends = (props: CriteriaState) => {
                       }
                       onClick={() => handleCompare("age")}
                     >
-                      <FontAwesomeIcon icon={faHeartPulse} />
+                      <img
+                        src={getImageUrl("/images/age.svg", "age")}
+                        alt="Age Icon"
+                      />
                       Age
                     </li>
                   </ul>
@@ -125,14 +151,17 @@ const Trends = (props: CriteriaState) => {
                 {/* <div className={styles.graph__chart}> */}
                 {compare === "" ? (
                   <div className={styles.graph__wrapper}>
-                    <AreaGraph trends={trends} />
+                    <AreaGraph loading={trendLoading} trends={trends} />
                   </div>
                 ) : (
                   <div className={styles.graph__wrapper_stacked}>
-                    <StackedAreaGraph type={compare} trends={compareTrends} />
+                    <StackedAreaGraph
+                      loading={loading}
+                      type={compare}
+                      trends={loading ? LINEGRAPH : compareTrends}
+                    />
                   </div>
                 )}
-                {/* </div> */}
               </div>
             </div>
           </div>
