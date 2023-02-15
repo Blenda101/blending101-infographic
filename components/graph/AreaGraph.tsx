@@ -11,10 +11,12 @@ import {
 import { criteriaVar } from "../../graphql/Infograph";
 import { GET_CRITERIA } from "../../graphql/Query";
 import useWindowSize from "../../hooks/useWindowSize";
+import { useVariant } from "../context/VariantProvider";
 import styles from "./AreaGraph.module.scss";
 
 const AreaGraph = ({ trends, loading }: any) => {
   const width = useWindowSize();
+  const isDeath = useVariant();
 
   const changeYearHandler = (year: any) => {
     const criteria = criteriaVar();
@@ -34,16 +36,29 @@ const AreaGraph = ({ trends, loading }: any) => {
           bottom: 0,
         }}
       >
-        <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#ffece6" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#ffece6" stopOpacity={0} />
-          </linearGradient>
-          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-          </linearGradient>
-        </defs>
+        {isDeath ? (
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#525252" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#525252" stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#313130" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#313130" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+        ) : (
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#ffece6" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#ffece6" stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+        )}
         <XAxis
           dataKey="name"
           tickLine={false}
@@ -88,6 +103,7 @@ const CustomActiveDot = (props: any) => {
 
 const CustomYears = (props: any) => {
   const { x, y, payload, width } = props;
+  const isDeath = useVariant();
   const { data } = useQuery(GET_CRITERIA);
   const isSelectedYear = payload.value === data?.criteria?.year;
   const isPhone = width < 600;
@@ -102,8 +118,20 @@ const CustomYears = (props: any) => {
         className={`${styles.year__button} ${
           isSelectedYear ? styles["year__button--active"] : ""
         }`}
+        style={{
+          filter:
+            isSelectedYear && isDeath
+              ? "none"
+              : "drop-shadow(0px 3px 3px #ccc)",
+        }}
       />
-      <text x={x} y={y} className={styles.year__text}>
+      <text
+        x={x}
+        y={y}
+        className={`${styles.year__text}  ${
+          isSelectedYear ? styles["year__text--active"] : ""
+        }`}
+      >
         {payload.value}
       </text>
     </Fragment>

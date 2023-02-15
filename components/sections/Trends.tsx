@@ -17,12 +17,14 @@ import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import AreaGraph from "../graph/AreaGraph";
 import StackedAreaGraph, { IType } from "../graph/StackedAreaGraph";
 import { AGE, DISEASES, RACE, SEX } from "../../data/Category";
+import { useVariant } from "../context/VariantProvider";
 
 const Trends = (props: CriteriaState) => {
   const { compare, param, disease, state, variant } = props;
   const criteria = criteriaVar();
   // const [compare, setCompare] = useState<IType | "">("");
 
+  const isDeath = useVariant();
   const { data, loading: trendLoading } = useQuery(GET_TRENDS, {
     variables: {
       state,
@@ -78,7 +80,7 @@ const Trends = (props: CriteriaState) => {
   };
 
   const getImageUrl = (path: string, type: string) => {
-    return `${compare === type ? "filters" : ""}${path}`;
+    return `${compare === type ? "filters" : isDeath ? "dark" : ""}${path}`;
   };
 
   const trends = trendLoading ? AREAGRAPH : data?.yearBasedAggregation;

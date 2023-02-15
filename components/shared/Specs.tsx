@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import { useVariant } from "../context/VariantProvider";
 import styles from "./Specs.module.scss";
 
 export type ICategory = { _id: string; percentage: number };
@@ -16,6 +17,7 @@ interface SpecsProps {
 
 const Specs = (props: SpecsProps) => {
   const { active, caption, value, icon, image, onClick } = props;
+  const isDeath = useVariant();
   return (
     <>
       <div
@@ -27,36 +29,69 @@ const Specs = (props: SpecsProps) => {
       >
         <div className={styles.progress}>
           <svg className={styles.progress__svg} viewBox="0 0 75 75">
-            <defs>
-              <linearGradient id="outline" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop
-                  offset="0%"
-                  style={{ stopColor: "#fff", stopOpacity: 1 }}
-                />
-                <stop
-                  offset="20%"
-                  style={{ stopColor: "#fff", stopOpacity: 1 }}
-                />
-                <stop
-                  offset="60%"
-                  style={{ stopColor: "#eee", stopOpacity: 1 }}
-                />
-                <stop
-                  offset="100%"
-                  style={{ stopColor: "#eee", stopOpacity: 1 }}
-                />
-              </linearGradient>
-              <linearGradient id="inside" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop
-                  offset="0%"
-                  style={{ stopColor: "#fff", stopOpacity: 1 }}
-                />
-                <stop
-                  offset="100%"
-                  style={{ stopColor: "#ddd", stopOpacity: 1 }}
-                />
-              </linearGradient>
-            </defs>
+            {isDeath ? (
+              <defs>
+                <linearGradient id="outline" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#2F2A29", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="20%"
+                    style={{ stopColor: "#2F2A29", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="60%"
+                    style={{ stopColor: "#4E4746", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#4E4746", stopOpacity: 1 }}
+                  />
+                </linearGradient>
+                <linearGradient id="inside" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#2E2928", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#4E4C4C", stopOpacity: 1 }}
+                  />
+                </linearGradient>
+              </defs>
+            ) : (
+              <defs>
+                <linearGradient id="outline" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#fff", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="20%"
+                    style={{ stopColor: "#fff", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="60%"
+                    style={{ stopColor: "#eee", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#eee", stopOpacity: 1 }}
+                  />
+                </linearGradient>
+                <linearGradient id="inside" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#fff", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#ddd", stopOpacity: 1 }}
+                  />
+                </linearGradient>
+              </defs>
+            )}
 
             <circle cx="34" cy="34" r="28" />
             <circle

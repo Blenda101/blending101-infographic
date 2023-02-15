@@ -1,6 +1,37 @@
 @import url(/css/font-info.css);
 @import url(/custom.css);
 
+:root {
+  --header: #fff;
+  --body: #fff;
+  --title: #000;
+  --disease: #e8f8d2;
+  --params: #f4f4f4;
+  --card: #fff;
+  --primary: #7bba38;
+  --line: #7cbc39;
+
+  --state-range-1: #e5f2d7;
+  --state-range-2: #b0d788;
+  --state-range-3: #7cbc39;
+  --state-range-4: #fe5717;
+  --state-range-unavailable: #e5e5e5;
+  --state-range-label: #444;
+
+  --trends-bg: #fff;
+  --trends-panel: #f2f9ec;
+
+  --filter-inactive: #fff6f2;
+  --filter-active: #f8faf5;
+
+  --prevalence: #f4f4f4;
+}
+
+main,
+footer {
+  background-color: var(--body);
+}
+
 h1,
 h2,
 h3,
@@ -184,7 +215,7 @@ section#Chronic-Diseases .small-icon:last-child {
   justify-content: center;
 }
 #prevalence .d-flex .small-button {
-  background-color: #f4f4f4;
+  background-color: var(--params);
   padding: 2rem;
   border-radius: 5rem;
 }
@@ -201,7 +232,7 @@ section#Chronic-Diseases .small-icon:last-child {
   cursor: pointer;
 }
 .small-icon {
-  border: 1px solid #fff;
+  border: 2px solid transparent;
   /* width: 200px !important; */
 }
 .small-icon-active {
@@ -235,7 +266,7 @@ section#Chronic-Diseases .small-icon:last-child {
   display: flex;
   align-items: center;
   gap: 7px;
-  background: white;
+  background: var(--card);
   border-radius: 50px;
   width: 100%;
   padding: 5px 0;
@@ -244,7 +275,7 @@ section#Chronic-Diseases .small-icon:last-child {
   padding-top: 26px;
 }
 .bg-clr-scnd {
-  background: #f4f4f4;
+  background: var(--params);
   border-radius: 18px;
   padding: 15px 10px;
 }
@@ -254,7 +285,7 @@ section#Chronic-Diseases .small-icon:last-child {
   border-radius: 20px;
 }
 .main_div {
-  background: #f4f4f4;
+  background: var(--prevalence);
   border-radius: 9px;
   padding: 0 5px;
   margin-right: 3em;
@@ -264,7 +295,7 @@ section#Chronic-Diseases .small-icon:last-child {
   margin-right: 0;
 }
 .first_text {
-  background: #fff;
+  background: var(--card);
   padding: 10px 20px;
 }
 
@@ -273,7 +304,7 @@ section#Chronic-Diseases .small-icon:last-child {
   font-size: 16px;
   line-height: 16px;
   letter-spacing: -0.03em;
-  color: #000000;
+  color: var(--title);
   font-family: "Circe";
   text-align: center;
   padding-top: 10px;
@@ -287,7 +318,7 @@ section#Chronic-Diseases .small-icon:last-child {
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.03em;
-  color: #000000;
+  color: var(--title);
 }
 
 #Chronic-Diseases .desc .numbers {
@@ -304,12 +335,13 @@ section#Chronic-Diseases .small-icon:last-child {
   font-size: 24px;
   line-height: 1.2;
   letter-spacing: -0.03em;
-  color: #000000;
+  color: var(--title);
   margin-bottom: 1.5rem;
+  font-family: "Circe";
 }
 
 #Chronic-Diseases .bg-clr {
-  background: #e8f8d2;
+  background: var(--disease);
   border-radius: 18px;
   padding: 15px 10px;
 }
@@ -325,12 +357,15 @@ section#Chronic-Diseases .small-icon:last-child {
   border: 1px solid #7cbc39;
   border-radius: 18px;
   padding: 14px;
-  background-color: white;
+  background-color: var(--trends-bg);
   filter: drop-shadow(0px 4px 60px rgba(0, 0, 0, 0.05));
 }
 
 #Trends .tabs-heading {
   margin-bottom: 1rem;
+  margin-top: 1rem;
+  color: var(--title);
+  margin-left: 20px;
 }
 
 #prevalence .small-button {
@@ -354,7 +389,7 @@ section#Chronic-Diseases .small-icon:last-child {
 #location-sec .heading h3 {
   font-size: 32px;
   line-height: 1.2;
-  color: #000000;
+  color: var(--title);
   text-transform: capitalize;
 }
 
@@ -373,12 +408,13 @@ section#Chronic-Diseases .small-icon:last-child {
 }
 
 /*******footer*********/
-
 footer {
-  padding: 64px 0;
-  background: url(/images/footer-bg.svg) no-repeat;
-  background-position: bottom;
-  background-size: cover;
+  padding: 94px 0;
+  background-color: var(--body);
+  background-image: url(/images/footer-bg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
 }
 
 footer li {
@@ -649,7 +685,7 @@ footer li {
     background-size: contain;
   }
   .bg-clr-scnd {
-    background: #f4f4f4;
+    background: var(--params);
     border-radius: 18px;
     /* padding: 20px 10px 10px !important; */
   }

@@ -1,11 +1,5 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import Tippy from "@tippyjs/react";
-import tippy from "tippy.js";
+import React, { Fragment } from "react";
 import "tippy.js/dist/tippy.css";
-import { criteriaVar } from "../graphql/Infograph";
-import Tooltip from "./shared/Tooltip";
-
-import styles from "./shared/Tooltip.module.scss";
 import State from "./shared/State";
 
 interface HoneycombProps {
@@ -14,92 +8,6 @@ interface HoneycombProps {
 
 const Honeycomb = (props: HoneycombProps) => {
   const { dictionary } = props;
-  const criteria = criteriaVar();
-  const maps = useRef<SVGGElement>(null);
-  const [anchorId, setAnchorId] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [state, setState] = useState({
-    name: "",
-    value: 0,
-    color: "",
-  });
-
-  // useEffect(() => {
-  //   const states = maps.current?.querySelectorAll("g");
-  //   states?.forEach((state) => {
-  //     const stateName = state.id;
-  //     const stateFullName = dictionary
-  //       ? (dictionary as any)[stateName]?.fullForm
-  //       : 0;
-  //     const value = dictionary ? (dictionary as any)[stateName]?.quartile : 0;
-  //     const text: SVGPathElement = state.children[1] as any;
-  //     const polygon: SVGPathElement = state.children[0] as any;
-  //     if (!polygon) return;
-
-  //     let color = "#E5E5E5";
-  //     if (value === 1) {
-  //       color = "#E5F2D7";
-  //       text.style.fill = "black";
-  //     } else if (value === 2) {
-  //       color = "#B0D788";
-  //       text.style.fill = "black";
-  //     } else if (value === 3) {
-  //       color = "#7CBC39";
-  //       text.style.fill = "white";
-  //     } else if (value === 4) {
-  //       color = "#FE5717";
-  //       text.style.fill = "white";
-  //     } else {
-  //       color = "#E5E5E5";
-  //       text.style.fill = "black";
-  //     }
-
-  //     state.style.cursor = "pointer";
-  //     polygon.style.opacity = "1";
-  //     polygon.style.fill = color;
-  //     polygon.style.outline = "none";
-
-  //     if (state.id === criteria.state) {
-  //       // IF THAT STATE IS ALREADY SELECTED -> UNSELECT
-  //       polygon.style.stroke = "#333";
-  //       polygon.style.strokeWidth = "3";
-  //       text.style.stroke = "none";
-  //     }
-  //     state.addEventListener("click", (e) => {
-  //       // Resetting all the polygons stroke to none
-  //       states?.forEach((state) => {
-  //         const polygon: SVGPathElement = state.children[0] as any;
-  //         polygon.style.stroke = "none";
-  //       });
-  //       if (state.id !== criteria.state) {
-  //         criteriaVar({
-  //           ...criteria,
-  //           state: state.id,
-  //         });
-  //       } else {
-  //         criteriaVar({
-  //           ...criteria,
-  //           state: "",
-  //         });
-  //       }
-  //     });
-  //     // tippy(`#${stateName}`, {
-  //     //   content: () => {
-  //     //     const tooltip = document.getElementById("tooltip");
-  //     //     if (tooltip) {
-  //     //       const title = tooltip.querySelector("#tooltip-title");
-  //     //       if (title) {
-  //     //         title.innerHTML = stateFullName;
-  //     //       }
-  //     //     }
-
-  //     //     return tooltip?.innerHTML || "Hello";
-  //     //   },
-  //     //   allowHTML: true,
-  //     //   placement: "bottom",
-  //     // });
-  //   });
-  // }, [criteria, dictionary, isOpen]);
 
   return (
     <Fragment>
@@ -109,7 +17,7 @@ const Honeycomb = (props: HoneycombProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Maps" ref={maps}>
+        <g id="Maps">
           <State maps={dictionary} id="ID">
             <path
               id="Polygon 1"

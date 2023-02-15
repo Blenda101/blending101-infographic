@@ -1,6 +1,6 @@
 .element {
   list-style: none;
-  background: #fff6f2;
+  background: var(--filter-inactive);
   border: 1px solid #fe5717;
   border-radius: 42px;
   padding: 10px 30px;
@@ -9,7 +9,7 @@
   position: relative;
   &--active {
     border: 1px solid #7ebd3b;
-    background-color: #f8faf5;
+    background: var(--filter-active);
   }
   > svg {
     height: 15px;
@@ -41,7 +41,7 @@
     font-size: 14px;
     letter-spacing: -0.03em;
     // transform: translateY(1.5px);
-    color: #000000;
+    color: var(--title);
     display: flex;
     align-items: center;
   }

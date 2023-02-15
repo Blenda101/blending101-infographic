@@ -111,7 +111,7 @@
   }
   &__panel {
     width: 18rem;
-    background-color: #f2f9ec;
+    background-color: var(--trends-panel);
     padding: 40px 40px 60px;
     border-radius: 20px;
     margin-right: 1.5rem;
@@ -138,6 +138,7 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    color: var(--title);
     @include respond(900px) {
       flex-direction: row;
       flex-wrap: wrap;
@@ -165,7 +166,7 @@
         margin-bottom: 10px;
       }
       &:hover {
-        background-color: #fff;
+        background-color: var(--card);
         border: 1px solid #b0d688;
         & svg {
           color: #7ebd3b;
@@ -173,7 +174,7 @@
       }
     }
     &--active {
-      background-color: #fff;
+      background-color: var(--card);
       border: 1px solid #b0d688;
       & svg {
         color: #7ebd3b !important;

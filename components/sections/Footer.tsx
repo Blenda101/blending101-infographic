@@ -1,8 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { useVariant } from "../context/VariantProvider";
 
 const Footer = () => {
+  const isDeath = useVariant();
   return (
-    <footer>
+    <footer
+      style={{
+        backgroundImage: isDeath
+          ? "url(/images/footer-dark-bg.svg)"
+          : "url(/images/footer-bg.svg)",
+      }}
+    >
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">
@@ -13,32 +22,74 @@ const Footer = () => {
               <ul>
                 <li>
                   <a href=" ">
-                    <img src="/images/facebook-logo.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/facebook-logo-dark.svg"
+                          : "/images/facebook-logo.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
                 <li>
                   <a href=" ">
-                    <img src="/images/instagram.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/instagram-dark.svg"
+                          : "/images/instagram.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
                 <li>
                   <a href=" ">
-                    <img src="/images/twitter.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/twitter-dark.svg"
+                          : "/images/twitter.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
                 <li>
                   <a href=" ">
-                    <img src="/images/youtube.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/youtube-dark.svg"
+                          : "/images/youtube.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
                 <li>
                   <a href=" ">
-                    <img src="/images/Pinterest_black.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/Pinterest_black-dark.svg"
+                          : "/images/Pinterest_black.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
                 <li>
                   <a href=" ">
-                    <img src="/images/tiktok.svg " alt=" " />
+                    <img
+                      src={
+                        isDeath
+                          ? "/images/tiktok-dark.svg"
+                          : "/images/tiktok.svg"
+                      }
+                      alt=" "
+                    />
                   </a>
                 </li>
               </ul>

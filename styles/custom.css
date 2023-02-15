@@ -1,3 +1,7 @@
+:root {
+  --header: #000;
+}
+
 /* .swiper {
   overflow-y: visible;
   overflow-x: hidden;

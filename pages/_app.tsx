@@ -8,13 +8,14 @@ import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
 import client from "../graphql/Apollo";
 import NoSsr from "../components/shared/NoSSR";
+import VariantProvider from "../components/context/VariantProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <NoSsr>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <VariantProvider>
         <Component {...pageProps} />{" "}
-      </ApolloProvider>
-    </NoSsr>
+      </VariantProvider>
+    </ApolloProvider>
   );
 }

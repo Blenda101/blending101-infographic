@@ -32,11 +32,11 @@
       }
       &:nth-child(2) {
         stroke-dashoffset: 0;
-        stroke: #f3f3f3;
+        stroke: var(--body);
         fill: url(#inside);
       }
       &:nth-child(3) {
-        stroke: #7bba38;
+        stroke: var(--primary);
         opacity: 10;
         animation: animate-circle 1s cubic-bezier(0, 0.23, 1, 0.1);
       }
