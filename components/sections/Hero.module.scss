@@ -1,7 +1,53 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == xsm {
+    @media (max-width: 22.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: 36em) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (max-width: 48em) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: 62em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xxl {
+    @media (max-width: 87.5em) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
 .header {
   height: 675px;
   position: relative;
   overflow: hidden;
+  @include respond(1300px) {
+    height: 550px;
+  }
+  @include respond(1160px) {
+    height: 500px;
+  }
+  @include respond(1000px) {
+    height: auto;
+  }
   &__title {
     font-size: 75px;
     font-weight: bold;
@@ -11,6 +57,31 @@
     top: 50%;
     left: 15%;
     transform: translateY(-50%);
+    @include respond(1600px) {
+      left: 8%;
+    }
+    @include respond(1360px) {
+      font-size: 60px;
+    }
+    @include respond(1080px) {
+      font-size: 50px;
+    }
+    @include respond(1000px) {
+      position: static;
+      font-size: 62px;
+      transform: none;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 0 0;
+    }
+    @include respond(768px) {
+      font-size: 48px;
+    }
+    @include respond(600px) {
+      font-size: 36px;
+    }
     div:nth-child(1) {
       color: var(--title);
     }
@@ -28,12 +99,39 @@
       }
     }
   }
-  &__bg {
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 100%;
-  }
   &__circle {
+    @include respond(1450px) {
+      height: 400px;
+      width: 400px;
+    }
+    @include respond(1300px) {
+      height: 500px;
+      width: 500px;
+      right: 100px;
+    }
+    @include respond(1160px) {
+      height: 400px;
+      width: 400px;
+    }
+    @include respond(1000px) {
+      position: static;
+      height: 500px;
+      width: 500px;
+      transform: translateY(20px);
+      margin: 0px auto;
+    }
+    @include respond(768px) {
+      height: 450px;
+      width: 450px;
+    }
+    @include respond(600px) {
+      height: 350px;
+      width: 350px;
+    }
+    @include respond(380px) {
+      height: 300px;
+      width: 300px;
+    }
     height: 500px;
     width: 500px;
     border-radius: 50%;
@@ -46,6 +144,18 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
+      @include respond(1300px) {
+        height: auto;
+        width: 120%;
+      }
+      @include respond(1160px) {
+        width: 135%;
+      }
+      @include respond(1000px) {
+        // position: static;
+        height: auto;
+        width: 110%;
+      }
     }
   }
 }

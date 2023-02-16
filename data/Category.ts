@@ -1,3 +1,15 @@
+const YEAR_DICTIONARY = {
+  2012: "/images/calender.svg",
+  2013: "/images/calender.svg",
+  2014: "/images/calender.svg",
+  2015: "/images/calender.svg",
+  2016: "/images/calender.svg",
+  2017: "/images/calender.svg",
+  2018: "/images/calender.svg",
+  2019: "/images/calender.svg",
+  2020: "/images/calender.svg",
+  2021: "/images/calender.svg",
+};
 const DISEASES = [
   "Arthritis",
   "Asthma",
@@ -10,11 +22,109 @@ const DISEASES = [
   "Skin Cancer",
   "Stroke",
 ];
+const DISEASES_DICTIONARY = {
+  Arthritis: "/images/Arthritis.svg",
+  Asthma: "/images/Asthma.svg",
+  COPD: "/images/Lung_Disease.svg",
+  Cardiovascular: "/images/Hear_ Disease.svg",
+  Depression: "/images/Depression.svg",
+  Diabetes: "/images/Diabetes.svg",
+  Kidney: "/images/Kidney_Disease.svg",
+  "Other Cancer": "/images/Cancer.svg",
+  "Skin Cancer": "/images/Skin Cancer.svg",
+  Stroke: "/images/Stroke.svg",
+};
 
 const RACE = ["White", "Black", "Hispanic", "Asian", "Other"];
+const RACES_DICTIONARY = {
+  White: "/images/White.svg",
+  Black: "/images/Black.svg",
+  Hispanic: "/images/hispanic.svg",
+  Asian: "/images/Asian.svg",
+  Other: "/images/other.svg",
+};
 
 const SEX = ["Male", "Female"];
+const SEX_DICTIONARY = {
+  Male: "/images/Male.svg",
+  Female: "/images/Female.svg",
+};
 
 const AGE = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"];
+const AGE_DICTIONARY = {
+  "18-24": "/images/age20-29.svg",
+  "25-34": "/images/age30-39.svg",
+  "35-44": "/images/age40-49.svg",
+  "45-54": "/images/age50-59.svg",
+  "55-64": "/images/age60-69.svg",
+  "65+": "/images/age80+.svg",
+};
 
-export { DISEASES, RACE, SEX, AGE };
+const STATE_DICTIONARIES = {
+  DC: "/images/location.svg",
+  CA: "/images/location.svg",
+  TX: "/images/location.svg",
+  GU: "/images/location.svg",
+  PR: "/images/location.svg",
+  UT: "/images/location.svg",
+  HI: "/images/location.svg",
+  AK: "/images/location.svg",
+  MN: "/images/location.svg",
+  NV: "/images/location.svg",
+  IL: "/images/location.svg",
+  NJ: "/images/location.svg",
+  MD: "/images/location.svg",
+  NY: "/images/location.svg",
+  ND: "/images/location.svg",
+  VA: "/images/location.svg",
+  AZ: "/images/location.svg",
+  MA: "/images/location.svg",
+  NE: "/images/location.svg",
+  CO: "/images/location.svg",
+  GA: "/images/location.svg",
+  WA: "/images/location.svg",
+  WI: "/images/location.svg",
+  CT: "/images/location.svg",
+  SD: "/images/location.svg",
+  KS: "/images/location.svg",
+  FL: "/images/location.svg",
+  ID: "/images/location.svg",
+  IA: "/images/location.svg",
+  OR: "/images/location.svg",
+  NM: "/images/location.svg",
+  WY: "/images/location.svg",
+  RI: "/images/location.svg",
+  OK: "/images/location.svg",
+  LA: "/images/location.svg",
+  NC: "/images/location.svg",
+  DE: "/images/location.svg",
+  VT: "/images/location.svg",
+  NH: "/images/location.svg",
+  OH: "/images/location.svg",
+  MT: "/images/location.svg",
+  IN: "/images/location.svg",
+  PA: "/images/location.svg",
+  MS: "/images/location.svg",
+  MO: "/images/location.svg",
+  MI: "/images/location.svg",
+  SC: "/images/location.svg",
+  AR: "/images/location.svg",
+  ME: "/images/location.svg",
+  KY: "/images/location.svg",
+  TN: "/images/location.svg",
+  AL: "/images/location.svg",
+  WV: "/images/location.svg",
+};
+
+export {
+  YEAR_DICTIONARY,
+  DISEASES,
+  DISEASES_DICTIONARY,
+  RACE,
+  RACES_DICTIONARY,
+  SEX,
+  SEX_DICTIONARY,
+  AGE,
+  AGE_DICTIONARY,
+  STATE_DICTIONARIES,
+};

@@ -2,43 +2,81 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { DISEASES_DICTIONARY } from "../../data/Category";
+import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 import styles from "./Dropdown.module.scss";
 
 interface DropdownProps {
+  items: any;
   image: string;
   value: string;
   onRemove?: any;
   isEffectingChart?: boolean;
+  keyName: keyof CriteriaState;
+  keyImage: string;
+  showDropdownState: any;
 }
 
 const Dropdown = (props: DropdownProps) => {
-  const { image, value, onRemove, isEffectingChart } = props;
-  const [showDropdown, setShowDropdown] = useState(false);
+  const {
+    items,
+    image,
+    value,
+    onRemove,
+    isEffectingChart,
+    keyName,
+    keyImage,
+    showDropdownState,
+  } = props;
+  const criteria = criteriaVar();
+
+  const [showDropdown, setShowDropdown] = showDropdownState;
+  const criteriaChangeHandler = (iName: string, iImage: string) => {
+    criteriaVar({
+      ...criteria,
+      [keyName]: iName,
+      [keyImage]: iImage,
+    });
+  };
+
   return (
     <li
       className={`${styles.element} ${
         isEffectingChart ? styles["element--active"] : ""
       }`}
-      onClick={() => setShowDropdown((prev) => !prev)}
+      onClick={() => {
+        if (showDropdown === keyName) setShowDropdown("");
+        else setShowDropdown(keyName);
+      }}
     >
       <span>
         <img src={isEffectingChart ? image : `/filters${image}`} alt="" />
         {value}
+        <span>
+          <img src="/images/down.svg" alt="down" />
+        </span>
       </span>
+
       {onRemove && <FontAwesomeIcon icon={faTimes} onClick={onRemove} />}
-      {showDropdown && (
+      {showDropdown === keyName && (
         <ul className={styles.dropdown}>
-          <li>
-            <img src={image} alt="" /> Asthma
-          </li>
-          <li>
-            <img src={image} alt="" />
-            COPD
-          </li>
-          <li>
-            <img src={image} alt="" />
-            Diabetes
-          </li>
+          {Object.keys(items).map((item) => (
+            <li
+              key={item}
+              className={value === item ? styles.active : ""}
+              onClick={() => {
+                criteriaChangeHandler(item, (items as any)[item]);
+              }}
+            >
+              <img
+                src={`${isEffectingChart ? "" : "/filters"}${
+                  (items as any)[item]
+                }`}
+                alt={item}
+              />
+              {item}
+            </li>
+          ))}
         </ul>
       )}
     </li>

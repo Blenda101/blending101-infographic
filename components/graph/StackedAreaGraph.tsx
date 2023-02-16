@@ -17,6 +17,7 @@ import { GET_CRITERIA } from "../../graphql/Query";
 import styles from "./AreaGraph.module.scss";
 import COLORS from "../../data/Colors";
 import useWindowSize from "../../hooks/useWindowSize";
+import { useVariant } from "../context/VariantProvider";
 
 export type IType = "disease" | "sex" | "race" | "age";
 interface StackedAreaGraphProps {
@@ -133,6 +134,7 @@ const CustomActiveDot = (props: any) => {
 const CustomYears = (props: any) => {
   const { x, y, payload, width } = props;
   const { data } = useQuery(GET_CRITERIA);
+  const isDeath = useVariant();
   const isSelectedYear = payload.value === data?.criteria?.year;
   const isPhone = width < 600;
   return (
@@ -146,8 +148,20 @@ const CustomYears = (props: any) => {
         className={`${styles.year__button} ${
           isSelectedYear ? styles["year__button--active"] : ""
         }`}
+        style={{
+          filter:
+            isSelectedYear && isDeath
+              ? "none"
+              : "drop-shadow(0px 3px 3px #ccc)",
+        }}
       />
-      <text x={x} y={y + 18} className={styles.year__text}>
+      <text
+        x={x}
+        y={y + 18}
+        className={`${styles.year__text}  ${
+          isSelectedYear ? styles["year__text--active"] : ""
+        }`}
+      >
         {payload.value}
       </text>
     </Fragment>

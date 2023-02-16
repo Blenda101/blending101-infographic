@@ -25,6 +25,9 @@
   --filter-active: #f8faf5;
 
   --prevalence: #f4f4f4;
+
+  --dropdown-active: #eef8df;
+  --dropdown-inactive: #ffe0d4;
 }
 
 main,
@@ -218,6 +221,7 @@ section#Chronic-Diseases .small-icon:last-child {
   background-color: var(--params);
   padding: 2rem;
   border-radius: 5rem;
+  position: relative;
 }
 
 #prevalence .d-flex .small-button ul {
@@ -626,7 +630,7 @@ footer li {
   }
   #prevalence .d-flex .small-button {
     padding: 10px;
-    background-color: #fff;
+    background-color: transparent;
   }
   .main_div {
     margin-right: 17px;

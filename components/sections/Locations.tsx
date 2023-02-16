@@ -25,8 +25,6 @@ const Locations = (props: CriteriaState) => {
     else return null;
   }, [data?.getStateData]);
 
-  // console.log(states);
-
   return (
     <section id="location-sec">
       <div className="container-fluid w-90">

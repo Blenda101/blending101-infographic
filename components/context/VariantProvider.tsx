@@ -55,6 +55,9 @@ const VariantProvider: React.FC<VariantProviderProps> = (props) => {
 
     root.style.setProperty("--prevalence", "#f4f4f4");
     root.style.setProperty("--line", "#7CBC39");
+
+    root.style.setProperty("--dropdown-active", "#eef8df");
+    root.style.setProperty("--dropdown-inactive", "#ffe0d4");
   };
 
   const onDeathSelect = () => {
@@ -86,6 +89,9 @@ const VariantProvider: React.FC<VariantProviderProps> = (props) => {
 
     root.style.setProperty("--prevalence", "#1F1C1B");
     root.style.setProperty("--line", "#161616");
+
+    root.style.setProperty("--dropdown-active", "#28301c");
+    root.style.setProperty("--dropdown-inactive", "#59382B");
   };
 
   return (
@@ -100,9 +106,15 @@ const VariantProvider: React.FC<VariantProviderProps> = (props) => {
         >
           <a
             className={!death ? styles.active : ""}
+            style={{ color: death ? "#fff" : "#fe5209" }}
             onClick={onIncidenceSelect}
           >
-            <img src="/images/Ambulance.svg" alt="Icon" />
+            <img
+              src={
+                death ? "/images/Ambulance-White.svg" : "/images/Ambulance.svg"
+              }
+              alt="Icon"
+            />
             Incidence
           </a>
           <a className={death ? styles.active : ""} onClick={onDeathSelect}>

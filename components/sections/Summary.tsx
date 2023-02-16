@@ -2,9 +2,17 @@
 import { useApolloClient } from "@apollo/client";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import {
+  AGE_DICTIONARY,
+  DISEASES_DICTIONARY,
+  RACES_DICTIONARY,
+  SEX_DICTIONARY,
+  STATE_DICTIONARIES,
+  YEAR_DICTIONARY,
+} from "../../data/Category";
 import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
-import { GET_SUMMARY } from "../../graphql/Query";
+import { GET_STATE_DATA, GET_SUMMARY } from "../../graphql/Query";
 import Dropdown from "../shared/Dropdown";
 
 const Summary = (props: CriteriaState) => {
@@ -18,6 +26,7 @@ const Summary = (props: CriteriaState) => {
     state,
     compare,
   } = props;
+  const [showDropdown, setShowDropdown] = useState("");
   const criteriaRmvHandler = (key: keyof CriteriaState) => {
     const criteria = criteriaVar();
     criteriaVar({
@@ -43,10 +52,31 @@ const Summary = (props: CriteriaState) => {
     const chronic = infoData?.showInfoData?.diseases?.find(
       (sick: any) => sick._id === disease,
     );
-    // console.log(disease, chronic);
     return chronic ? Math.round((chronic.percentage * 1000) / 100) : 0;
   }, [disease, infoData?.showInfoData?.diseases]);
 
+  // const STATE_DICTIONARY = useMemo(() => {
+  //   const { getStateData } = client.readQuery({
+  //     query: GET_STATE_DATA,
+  //     // Provide any required variables in this object.
+  //     // Variables of mismatched types will return `null`.
+  //     variables: {
+  //       category: param,
+  //       disease,
+  //       year,
+  //     },
+  //   });
+  //   console.log(getStateData);
+  // }, [client, disease, param, year]);
+
+  let PARAM_DICTIONARY = {};
+  if (variant === "RACE") {
+    PARAM_DICTIONARY = RACES_DICTIONARY;
+  } else if (variant === "SEX") {
+    PARAM_DICTIONARY = SEX_DICTIONARY;
+  } else if (variant === "AGE") {
+    PARAM_DICTIONARY = AGE_DICTIONARY;
+  }
   return (
     <section id="prevalence">
       <div className="container-fluid w-90">
@@ -59,6 +89,10 @@ const Summary = (props: CriteriaState) => {
                     image={"/images/calender.svg"}
                     value={year}
                     isEffectingChart={false}
+                    items={YEAR_DICTIONARY}
+                    keyName="year"
+                    keyImage="icon"
+                    showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
                 {disease && (
@@ -66,14 +100,22 @@ const Summary = (props: CriteriaState) => {
                     image={diseaseImage}
                     value={disease}
                     isEffectingChart={compare !== "disease"}
+                    items={DISEASES_DICTIONARY}
+                    keyName="disease"
+                    keyImage="diseaseImage"
+                    showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
                 {param && (
                   <Dropdown
-                    image={paramImage}
                     value={param}
+                    image={paramImage}
                     onRemove={() => criteriaRmvHandler("param")}
                     isEffectingChart={compare === "disease"}
+                    items={PARAM_DICTIONARY}
+                    keyName="param"
+                    keyImage="paramImage"
+                    showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
                 {state && (
@@ -82,6 +124,10 @@ const Summary = (props: CriteriaState) => {
                     value={state}
                     onRemove={() => criteriaRmvHandler("state")}
                     isEffectingChart
+                    items={STATE_DICTIONARIES}
+                    keyName="state"
+                    keyImage="icons"
+                    showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
               </ul>
