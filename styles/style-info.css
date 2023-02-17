@@ -618,6 +618,14 @@ footer li {
   }
 }
 @media only screen and (max-width: 576px) {
+  *,
+  *::after,
+  *::before {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
   .first_text span {
     font-size: 20px;
   }
