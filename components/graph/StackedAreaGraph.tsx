@@ -100,7 +100,9 @@ const StackedAreaGraph = (props: StackedAreaGraphProps) => {
             formatter={CustomLegend}
             wrapperStyle={{
               top: "94.5%",
+              // position: "fixed",
             }}
+            className={styles.legendWrapper}
           />
         )}
         {categories?.map((category, idx) => (

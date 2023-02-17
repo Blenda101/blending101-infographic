@@ -529,7 +529,6 @@ footer li {
   #banner-sec {
     height: 75vh;
   }
-
   .banner-img {
     margin-top: 2em;
   }
@@ -615,6 +614,12 @@ footer li {
   }
   #prevalence .d-flex .small-button {
     padding: 1rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .recharts-default-legend {
+    width: 90vw;
+    position: fixed;
   }
 }
 @media only screen and (max-width: 576px) {
