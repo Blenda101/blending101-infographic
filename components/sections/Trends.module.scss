@@ -173,10 +173,19 @@
           color: #7ebd3b;
         }
       }
+      @include respond(900px) {
+        &:hover {
+          background-color: transparent;
+          border: none;
+          & svg {
+            color: #7ebd3b;
+          }
+        }
+      }
     }
     &--active {
-      background-color: var(--card);
-      border: 1px solid #b0d688;
+      background-color: var(--card) !important;
+      border: 1px solid #b0d688 !important;
       & svg {
         color: #7ebd3b !important;
       }
