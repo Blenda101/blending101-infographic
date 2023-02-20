@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useApolloClient } from "@apollo/client";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useMemo, useState } from "react";
 import {
   AGE_DICTIONARY,
@@ -12,7 +10,7 @@ import {
   YEAR_DICTIONARY,
 } from "../../data/Category";
 import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
-import { GET_STATE_DATA, GET_SUMMARY } from "../../graphql/Query";
+import { GET_SUMMARY } from "../../graphql/Query";
 import Dropdown from "../shared/Dropdown";
 
 const Summary = (props: CriteriaState) => {
@@ -111,7 +109,7 @@ const Summary = (props: CriteriaState) => {
                     value={param}
                     image={paramImage}
                     onRemove={() => criteriaRmvHandler("param")}
-                    isEffectingChart={compare === "disease"}
+                    isEffectingChart={compare === "disease" || compare === ""}
                     items={PARAM_DICTIONARY}
                     keyName="param"
                     keyImage="paramImage"
