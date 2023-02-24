@@ -1,37 +1,42 @@
 /* eslint-disable @next/next/no-img-element */
 import { useApolloClient } from "@apollo/client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   AGE_DICTIONARY,
+  DEATH_DISEASES_DICTIONARY,
+  DEATH_YEAR_DICTIONARY,
   DISEASES_DICTIONARY,
   RACES_DICTIONARY,
   SEX_DICTIONARY,
   STATE_DICTIONARIES,
   YEAR_DICTIONARY,
 } from "../../data/Category";
-import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
-import { GET_SUMMARY } from "../../graphql/Query";
+import {
+  CriteriaState,
+  criteriaVar,
+  VariantState,
+} from "../../graphql/Infograph";
+import { GET_SUMMARY } from "../../graphql/Incidence";
 import Dropdown from "../shared/Dropdown";
+import { useDataset, useVariant } from "../context/VariantProvider";
 
-const Summary = (props: CriteriaState) => {
+const Summary = (props: VariantState) => {
   const {
     year,
     variant,
     param,
     paramImage,
+    age,
+    sex,
+    race,
     disease,
     diseaseImage,
     state,
     compare,
   } = props;
+  const isDeath = useVariant();
+  const dataSet = useDataset();
   const [showDropdown, setShowDropdown] = useState("");
-  const criteriaRmvHandler = (key: keyof CriteriaState) => {
-    const criteria = criteriaVar();
-    criteriaVar({
-      ...criteria,
-      [key]: "",
-    });
-  };
 
   const client = useApolloClient();
   const infoData = client.readQuery({
@@ -40,11 +45,16 @@ const Summary = (props: CriteriaState) => {
       year,
       state,
       disease,
-      age: variant === "AGE" ? param : "",
-      sex: variant === "SEX" ? param : "",
-      race: variant === "RACE" ? param : "",
+      age,
+      sex,
+      race,
+      dataSet,
     },
   });
+
+  useEffect(() => {
+    setShowDropdown("");
+  }, [isDeath]);
 
   const prevalence = useMemo(() => {
     const chronic = infoData?.showInfoData?.diseases?.find(
@@ -53,19 +63,13 @@ const Summary = (props: CriteriaState) => {
     return chronic ? Math.round((chronic.percentage * 1000) / 100) : 0;
   }, [disease, infoData?.showInfoData?.diseases]);
 
-  // const STATE_DICTIONARY = useMemo(() => {
-  //   const { getStateData } = client.readQuery({
-  //     query: GET_STATE_DATA,
-  //     // Provide any required variables in this object.
-  //     // Variables of mismatched types will return `null`.
-  //     variables: {
-  //       category: param,
-  //       disease,
-  //       year,
-  //     },
-  //   });
-  //   console.log(getStateData);
-  // }, [client, disease, param, year]);
+  const criteriaRmvHandler = (key: keyof VariantState) => {
+    const criteria = criteriaVar();
+    criteriaVar({
+      ...criteria,
+      [key]: "",
+    });
+  };
 
   let PARAM_DICTIONARY = {};
   if (variant === "RACE") {
@@ -75,6 +79,7 @@ const Summary = (props: CriteriaState) => {
   } else if (variant === "AGE") {
     PARAM_DICTIONARY = AGE_DICTIONARY;
   }
+
   return (
     <section id="prevalence">
       <div className="container-fluid w-90">
@@ -87,7 +92,7 @@ const Summary = (props: CriteriaState) => {
                     image={"/images/calender.svg"}
                     value={year}
                     isEffectingChart={false}
-                    items={YEAR_DICTIONARY}
+                    items={isDeath ? DEATH_YEAR_DICTIONARY : YEAR_DICTIONARY}
                     keyName="year"
                     keyImage="icon"
                     showDropdownState={[showDropdown, setShowDropdown]}
@@ -98,13 +103,15 @@ const Summary = (props: CriteriaState) => {
                     image={diseaseImage}
                     value={disease}
                     isEffectingChart={compare !== "disease"}
-                    items={DISEASES_DICTIONARY}
+                    items={
+                      isDeath ? DEATH_DISEASES_DICTIONARY : DISEASES_DICTIONARY
+                    }
                     keyName="disease"
                     keyImage="diseaseImage"
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
-                {param && (
+                {/* {param && (
                   <Dropdown
                     value={param}
                     image={paramImage}
@@ -116,6 +123,19 @@ const Summary = (props: CriteriaState) => {
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
+                {age && (
+                  <Dropdown
+                    value={age}
+                    image={ageImage}
+                    onRemove={() => criteriaRmvHandler("age")}
+                    isEffectingChart={compare === "disease" || compare === ""}
+                    items={PARAM_DICTIONARY}
+                    keyName="age"
+                    keyImage="ageImage"
+                    showDropdownState={[showDropdown, setShowDropdown]}
+                  />
+                )} */}
+
                 {state && (
                   <Dropdown
                     image={"/images/location.svg"}

@@ -1,12 +1,8 @@
-import { useApolloClient, useQuery } from "@apollo/client";
 import Tippy from "@tippyjs/react";
-import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { criteriaVar } from "../../graphql/Infograph";
-import { GET_CRITERIA, GET_STATE_DATA } from "../../graphql/Query";
-import { useVariant } from "../context/VariantProvider";
+import { useDataset, useVariant } from "../context/VariantProvider";
 import Tooltip from "./Tooltip";
-
-import styles from "./Tooltip.module.scss";
 
 interface StateProps {
   id: string;
@@ -15,9 +11,12 @@ interface StateProps {
 }
 const State = (props: StateProps) => {
   const { id, maps, children } = props;
-  const criteria = criteriaVar();
-  const stateRef = useRef<SVGGElement>(null);
+
+  const type = useDataset();
   const isDeath = useVariant();
+  const criteria = criteriaVar();
+
+  const stateRef = useRef<SVGGElement>(null);
   const [color, textColor] = useMemo(() => {
     const value = maps ? (maps as any)[id]?.quartile : 0;
     let color = "",
@@ -71,7 +70,7 @@ const State = (props: StateProps) => {
     polygon.style.outline = "none";
     text.style.fill = textColor;
 
-    if (id === criteria.state) {
+    if (id === criteria[type].state) {
       // IF THAT STATE IS ALREADY SELECTED -> UNSELECT
       polygon.style.stroke = isDeath ? "#fff" : "#333";
       polygon.style.strokeWidth = "3";
@@ -79,18 +78,24 @@ const State = (props: StateProps) => {
     } else {
       polygon.style.stroke = "none";
     }
-  }, [color, criteria.state, id, isDeath, textColor]);
+  }, [color, criteria, id, isDeath, textColor, type]);
 
   const stateSelectHandler = () => {
-    if (id !== criteria.state) {
+    if (id !== criteria[type]?.state) {
       criteriaVar({
         ...criteria,
-        state: id,
+        [type]: {
+          ...criteria[type],
+          state: id,
+        },
       });
     } else {
       criteriaVar({
         ...criteria,
-        state: "",
+        [type]: {
+          ...criteria[type],
+          state: "",
+        },
       });
     }
   };

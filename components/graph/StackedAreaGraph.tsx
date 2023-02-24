@@ -12,7 +12,7 @@ import {
 import { useQuery } from "@apollo/client";
 
 import { criteriaVar } from "../../graphql/Infograph";
-import { GET_CRITERIA } from "../../graphql/Query";
+import { GET_CRITERIA } from "../../graphql/Incidence";
 
 import styles from "./AreaGraph.module.scss";
 import COLORS from "../../data/Colors";

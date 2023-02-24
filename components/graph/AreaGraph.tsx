@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import { criteriaVar } from "../../graphql/Infograph";
-import { GET_CRITERIA } from "../../graphql/Query";
+import { GET_CRITERIA } from "../../graphql/Incidence";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useVariant } from "../context/VariantProvider";
 import styles from "./AreaGraph.module.scss";

@@ -1,22 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_SUMMARY = gql`
-  query Summary(
-    $year: String
-    $state: String
-    $disease: String
-    $age: String
-    $sex: String
-    $race: String
-  ) {
-    showInfoData(
-      state: $state
-      year: $year
-      sex: $sex
-      age: $age
-      race: $race
-      disease: $disease
-    ) {
+  query Summary($year: String, $state: String) {
+    showInfoData2(state: $state, year: $year) {
       diseases {
         _id
         percentage
@@ -45,7 +31,7 @@ export const GET_TRENDS = gql`
     $age: String
     $sex: String
   ) {
-    yearBasedAggregation(
+    yearBasedAggregation2(
       race: $race
       state: $state
       disease: $disease
@@ -61,15 +47,19 @@ export const GET_TRENDS = gql`
 export const GET_COMPARE_TRENDS = gql`
   query GetCompareTrends(
     $type: String!
-    $category: String
+    $sex: String
+    $age: String
     $state: String
     $disease: String
+    $race: String
   ) {
-    getCompareData(
+    getCompareData2(
       type: $type
       state: $state
       disease: $disease
-      category: $category
+      sex: $sex
+      age: $age
+      race: $race
     ) {
       year
       fotmatedData {
@@ -98,7 +88,19 @@ export const GET_CRITERIA = gql`
 `;
 
 export const GET_STATE_DATA = gql`
-  query GetStateData($category: String, $disease: String, $year: String) {
-    getStateData(category: $category, disease: $disease, year: $year)
+  query GetStateData(
+    $sex: String
+    $year: String
+    $age: String
+    $disease: String
+    $race: String
+  ) {
+    getStateData2(
+      sex: $sex
+      disease: $disease
+      year: $year
+      age: $age
+      race: $race
+    )
   }
 `;

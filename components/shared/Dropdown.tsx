@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import { DISEASES_DICTIONARY } from "../../data/Category";
-import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
+import React from "react";
+import { criteriaVar, VariantState } from "../../graphql/Infograph";
 import styles from "./Dropdown.module.scss";
 
 interface DropdownProps {
@@ -12,7 +11,7 @@ interface DropdownProps {
   value: string;
   onRemove?: any;
   isEffectingChart?: boolean;
-  keyName: keyof CriteriaState;
+  keyName: keyof VariantState;
   keyImage: string;
   showDropdownState: any;
 }

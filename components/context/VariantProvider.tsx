@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useQuery } from "@apollo/client";
 import React, {
   useEffect,
   useState,
@@ -6,6 +7,8 @@ import React, {
   createContext,
   useRef,
 } from "react";
+import { GET_CRITERIA } from "../../graphql/Incidence";
+import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
 
 import styles from "./VariantProvider.module.scss";
 
@@ -25,12 +28,14 @@ interface VariantProviderProps {
 
 const VariantProvider: React.FC<VariantProviderProps> = (props) => {
   const { children } = props;
+  // const criteria = criteriaVar();
   const [death, setDeath] = useState<any>(false);
 
   const onIncidenceSelect = () => {
     setDeath(false);
     const root: any = document.querySelector(":root");
     if (!root) return;
+    // criteriaVar({ ...criteria, {disease: "Arthritis"} });
 
     root.style.setProperty("--header", "#fff");
     root.style.setProperty("--body", "#fff");
@@ -65,6 +70,8 @@ const VariantProvider: React.FC<VariantProviderProps> = (props) => {
 
     const root: any = document.querySelector(":root");
     if (!root) return;
+
+    // criteriaVar({ ...criteria, disease: "", year: "2020" });
 
     root.style.setProperty("--header", "#161616");
     root.style.setProperty("--body", "#282220");
@@ -133,4 +140,20 @@ export default VariantProvider;
 export const useVariant = () => {
   const { isDeath } = useContext(VariantContext);
   return isDeath;
+};
+
+export const useDataset = () => {
+  const { isDeath } = useContext(VariantContext);
+  return isDeath ? "death" : "incidence";
+};
+
+export const useCriteria = () => {
+  const { isDeath } = useContext(VariantContext);
+  const { data: criteriaState, loading } = useQuery<{
+    criteria: CriteriaState;
+  }>(GET_CRITERIA);
+  console.log(criteriaState);
+  return isDeath
+    ? criteriaState?.criteria?.death
+    : criteriaState?.criteria?.incidence;
 };

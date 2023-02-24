@@ -1,30 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useMemo, useState } from "react";
-import { ResponsiveContainer } from "recharts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeartPulse } from "@fortawesome/free-solid-svg-icons";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import React, { useMemo } from "react";
+import { useQuery } from "@apollo/client";
 
 import { AREAGRAPH, LINEGRAPH } from "../../data/Trends";
 
 import styles from "./Trends.module.scss";
-import {
-  GET_COMPARE_TRENDS,
-  GET_CRITERIA,
-  GET_TRENDS,
-} from "../../graphql/Query";
-import { CriteriaState, criteriaVar } from "../../graphql/Infograph";
+import { GET_COMPARE_TRENDS, GET_TRENDS } from "../../graphql/Incidence";
+import { criteriaVar, VariantState } from "../../graphql/Infograph";
 import AreaGraph from "../graph/AreaGraph";
 import StackedAreaGraph, { IType } from "../graph/StackedAreaGraph";
 import { AGE, DISEASES, RACE, SEX } from "../../data/Category";
-import { useVariant } from "../context/VariantProvider";
+import { useDataset, useVariant } from "../context/VariantProvider";
 
-const Trends = (props: CriteriaState) => {
-  const { compare, param, disease, state, variant } = props;
+const Trends = (props: VariantState) => {
+  const { compare, param, disease, state, variant, race, sex, age } = props;
   const criteria = criteriaVar();
-  // const [compare, setCompare] = useState<IType | "">("");
-
+  const type = useDataset();
   const isDeath = useVariant();
+
   const { data, loading: trendLoading } = useQuery(GET_TRENDS, {
     variables: {
       state,
@@ -32,6 +25,7 @@ const Trends = (props: CriteriaState) => {
       age: variant === "AGE" ? param : "",
       sex: variant === "SEX" ? param : "",
       race: variant === "RACE" ? param : "",
+      dataSet: type,
     },
   });
 
@@ -40,17 +34,20 @@ const Trends = (props: CriteriaState) => {
       type: compare,
       state,
       disease,
-      category: param,
+      race,
+      sex,
+      age,
+      dataSet: type,
     },
     skip: compare === "",
   });
 
   const compareTrends = useMemo(() => {
     let categories: any[] = [];
-    if (criteria.compare === "disease") categories = DISEASES;
-    else if (criteria.compare === "age") categories = AGE;
-    else if (criteria.compare === "race") categories = RACE;
-    else if (criteria.compare === "sex") categories = SEX;
+    if (criteria[type]?.compare === "disease") categories = DISEASES;
+    else if (criteria[type]?.compare === "age") categories = AGE;
+    else if (criteria[type]?.compare === "race") categories = RACE;
+    else if (criteria[type]?.compare === "sex") categories = SEX;
 
     return compareData?.getCompareData?.map((compareYear: any) => {
       const trend: any = { year: compareYear.year };
@@ -63,18 +60,24 @@ const Trends = (props: CriteriaState) => {
       });
       return trend;
     });
-  }, [compareData?.getCompareData, criteria.compare]);
+  }, [compareData?.getCompareData, criteria, type]);
 
   const handleCompare = async (key: IType) => {
     if (compare === key)
       criteriaVar({
         ...criteria,
-        compare: "",
+        [type]: {
+          ...criteria[type],
+          compare: "",
+        },
       });
     else {
       criteriaVar({
         ...criteria,
-        compare: key,
+        [type]: {
+          ...criteria[type],
+          compare: key,
+        },
       });
     }
   };

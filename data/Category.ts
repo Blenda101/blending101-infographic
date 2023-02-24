@@ -10,6 +10,18 @@ const YEAR_DICTIONARY = {
   2020: "/images/calender.svg",
   2021: "/images/calender.svg",
 };
+const DEATH_YEAR_DICTIONARY = {
+  2012: "/images/calender.svg",
+  2013: "/images/calender.svg",
+  2014: "/images/calender.svg",
+  2015: "/images/calender.svg",
+  2016: "/images/calender.svg",
+  2017: "/images/calender.svg",
+  2018: "/images/calender.svg",
+  2019: "/images/calender.svg",
+  2020: "/images/calender.svg",
+};
+
 const DISEASES = [
   "Arthritis",
   "Asthma",
@@ -32,6 +44,15 @@ const DISEASES_DICTIONARY = {
   Kidney: "/images/Kidney_Disease.svg",
   "Other Cancer": "/images/Cancer.svg",
   "Skin Cancer": "/images/Skin Cancer.svg",
+  Stroke: "/images/Stroke.svg",
+};
+const DEATH_DISEASES_DICTIONARY = {
+  "Alzheimer & Dementia": "/images/Arthritis.svg",
+  "Ischaemic heart diseases": "/images/Hear_ Disease.svg",
+  "Lung Disease": "/images/Lung_Disease.svg",
+  Hypertension: "/images/Depression.svg",
+  "Diabetes mellitus": "/images/Diabetes.svg",
+  "Kidney Disease": "/images/Kidney_Disease.svg",
   Stroke: "/images/Stroke.svg",
 };
 
@@ -118,8 +139,10 @@ const STATE_DICTIONARIES = {
 
 export {
   YEAR_DICTIONARY,
+  DEATH_YEAR_DICTIONARY,
   DISEASES,
   DISEASES_DICTIONARY,
+  DEATH_DISEASES_DICTIONARY,
   RACE,
   RACES_DICTIONARY,
   SEX,

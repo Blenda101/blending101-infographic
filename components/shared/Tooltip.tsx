@@ -1,7 +1,7 @@
 import { useApolloClient, useQuery } from "@apollo/client";
 import React, { Fragment, useEffect, useState } from "react";
 import { Tooltip as Popover, ITooltip } from "react-tooltip";
-import { GET_CRITERIA, GET_STATE_DATA } from "../../graphql/Query";
+import { GET_CRITERIA, GET_STATE_DATA } from "../../graphql/Incidence";
 
 import styles from "./Tooltip.module.scss";
 

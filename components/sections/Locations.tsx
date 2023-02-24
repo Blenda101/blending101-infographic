@@ -4,19 +4,25 @@ import React, { useMemo } from "react";
 
 import Honeycomb from "../Honeycomb";
 
-import { GET_STATE_DATA } from "../../graphql/Query";
-import { CriteriaState } from "../../graphql/Infograph";
+import { GET_STATE_DATA } from "../../graphql/Incidence";
+import { VariantState } from "../../graphql/Infograph";
 
 import styles from "./Locations.module.scss";
+import { useDataset } from "../context/VariantProvider";
 
-const Locations = (props: CriteriaState) => {
-  const { year, disease, param } = props;
+const Locations = (props: VariantState) => {
+  const { year, disease, sex, age, race } = props;
+
+  const dataSet = useDataset();
 
   const { data } = useQuery(GET_STATE_DATA, {
     variables: {
-      category: param,
+      sex,
       disease,
       year,
+      age,
+      race,
+      dataSet,
     },
   });
 

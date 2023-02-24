@@ -11,6 +11,7 @@ import {
 import Specs, { ICategory } from "../shared/Specs";
 import { criteriaVar } from "../../graphql/Infograph";
 import useSliderButton from "../../hooks/useSliderButton";
+import { useDataset, useVariant } from "../context/VariantProvider";
 
 interface ChronicProps {
   active: string;
@@ -19,7 +20,8 @@ interface ChronicProps {
 
 const Chronic = (props: ChronicProps) => {
   const { active, diseases } = props;
-  console.log(diseases);
+  const isDeath = useVariant();
+  const type = useDataset();
 
   const showArrow = useSliderButton(diseases);
   const [isBegin, setIsBegin] = useState(false);
@@ -40,8 +42,11 @@ const Chronic = (props: ChronicProps) => {
     const criteria = criteriaVar();
     criteriaVar({
       ...criteria,
-      disease: name,
-      diseaseImage: image,
+      [type]: {
+        ...criteria[type],
+        disease: name,
+        diseaseImage: image,
+      },
     });
   };
 
@@ -51,7 +56,7 @@ const Chronic = (props: ChronicProps) => {
     else return disease.toFixed(1);
   };
 
-  const swiper = sliderRef?.current?.swiper;
+  const DISEASES = isDeath ? DEATH_DISEASES : INCIDENCE_DISEASES;
   return (
     <Fragment>
       <div className="row">
@@ -102,129 +107,19 @@ const Chronic = (props: ChronicProps) => {
               },
             }}
           >
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Arthritis", "/images/Arthritis.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Arthritis"}
-                value={diseasePercentage("Arthritis")}
-                image="/images/Arthritis.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Asthma", "/images/Asthma.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Asthma"}
-                value={diseasePercentage("Asthma")}
-                image="/images/Asthma.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("COPD", "/images/Lung_Disease.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"COPD"}
-                value={diseasePercentage("COPD")}
-                image="/images/Lung_Disease.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler(
-                  "Cardiovascular",
-                  "/images/Hear_ Disease.svg",
-                )
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Cardiovascular Disease"}
-                value={diseasePercentage("Cardiovascular")}
-                image="/images/Hear_ Disease.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Depression", "/images/Depression.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Depression"}
-                value={diseasePercentage("Depression")}
-                image="/images/Depression.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Diabetes", "/images/Diabetes.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Diabetes"}
-                value={diseasePercentage("Diabetes")}
-                image="/images/Diabetes.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Kidney", "/images/Kidney_Disease.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Kidney Disease"}
-                value={diseasePercentage("Kidney")}
-                image="/images/Kidney_Disease.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Other Cancer", "/images/Cancer.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Other Cancer"}
-                value={diseasePercentage("Other Cancer")}
-                image="/images/Cancer.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Skin Cancer", "/images/Skin Cancer.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Skin Cancer"}
-                value={diseasePercentage("Skin Cancer")}
-                image="/images/Skin Cancer.svg"
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                diseaseClickHandler("Stroke", "/images/Stroke.svg")
-              }
-            >
-              <Specs
-                active={active}
-                caption={"Stroke"}
-                value={diseasePercentage("Stroke")}
-                image="/images/Stroke.svg"
-              />
-            </SwiperSlide>
+            {DISEASES.map((disease) => (
+              <SwiperSlide
+                key={disease.name}
+                onClick={() => diseaseClickHandler(disease.name, disease.image)}
+              >
+                <Specs
+                  active={active}
+                  caption={disease.name}
+                  value={diseasePercentage(disease.name)}
+                  image={disease.image}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
           {!isEnd && showArrow && (
             <div className="next" onClick={handleNext}>
@@ -238,3 +133,25 @@ const Chronic = (props: ChronicProps) => {
 };
 
 export default Chronic;
+
+const INCIDENCE_DISEASES = [
+  { name: "Arthritis", image: "/images/Arthritis.svg" },
+  { name: "Asthma", image: "/images/Asthma.svg" },
+  { name: "COPD", image: "/images/Lung_Disease.svg" },
+  { name: "Cardiovascular", image: "/images/Hear_ Disease.svg" },
+  { name: "Depression", image: "/images/Depression.svg" },
+  { name: "Diabetes", image: "/images/Diabetes.svg" },
+  { name: "Kidney", image: "/images/Kidney_Disease.svg" },
+  { name: "Other Cancer", image: "/images/Cancer.svg" },
+  { name: "Skin Cancer", image: "/images/Skin Cancer.svg" },
+];
+
+const DEATH_DISEASES = [
+  { name: "Alzheimer & Dementia", image: "/images/Arthritis.svg" },
+  { name: "Diabetes mellitus", image: "/images/Diabetes.svg" },
+  { name: "Hypertension", image: "/images/Asthma.svg" },
+  { name: "Ischaemic heart diseases", image: "/images/Lung_Disease.svg" },
+  { name: "Kidney Disease", image: "/images/Kidney_Disease.svg" },
+  { name: "Stroke", image: "/images/Hear_ Disease.svg" },
+  { name: "Lung Disease", image: "/images/Depression.svg" },
+];

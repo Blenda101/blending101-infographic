@@ -13,21 +13,21 @@ import Summary from "../components/sections/Summary";
 import Trends from "../components/sections/Trends";
 import { CriteriaState } from "../graphql/Infograph";
 
-import { GET_CRITERIA, GET_SUMMARY } from "../graphql/Query";
+import { GET_CRITERIA, GET_SUMMARY } from "../graphql/Incidence";
+import { useCriteria, useDataset } from "../components/context/VariantProvider";
 
 function Home() {
-  const { data: criteriaState } = useQuery<{ criteria: CriteriaState }>(
-    GET_CRITERIA,
-  );
-  const criteria = criteriaState?.criteria;
+  const dataSet = useDataset();
+  const criteria = useCriteria();
   const { data } = useQuery(GET_SUMMARY, {
     variables: {
       year: criteria?.year,
       state: criteria?.state,
       disease: criteria?.disease,
-      age: criteria?.variant === "AGE" ? criteria?.param : "",
-      sex: criteria?.variant === "SEX" ? criteria?.param : "",
-      race: criteria?.variant === "RACE" ? criteria?.param : "",
+      age: criteria?.age,
+      sex: criteria?.sex,
+      race: criteria?.race,
+      dataSet,
     },
   });
 
@@ -41,26 +41,26 @@ function Home() {
       </Head>
       <main>
         <Hero />
-        <Summary {...criteriaState?.criteria!} />
-        <Trends {...criteriaState?.criteria!} />
+        <Summary {...criteria!} />
+        <Trends {...criteria!} />
         <section id="Chronic-Diseases">
           <div className="container-fluid w-90">
             <Chronic
-              active={criteriaState?.criteria.disease || ""}
+              active={criteria?.disease || ""}
               diseases={data?.showInfoData?.diseases || []}
             />
             <Race
-              active={criteriaState?.criteria.param || ""}
+              active={criteria?.race || ""}
               races={data?.showInfoData?.race || []}
               sex={data?.showInfoData?.sex || []}
             />
             <Age
-              active={criteriaState?.criteria.param || ""}
+              active={criteria?.age || ""}
               ages={data?.showInfoData?.age || []}
             />
           </div>
         </section>
-        <Locations {...criteriaState?.criteria!} />
+        <Locations {...criteria!} />
       </main>
       <Footer />
     </Fragment>

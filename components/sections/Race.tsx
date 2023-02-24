@@ -8,6 +8,7 @@ import {
 import Specs, { ICategory } from "../shared/Specs";
 import { criteriaVar, IVariant } from "../../graphql/Infograph";
 import useSliderButton from "../../hooks/useSliderButton";
+import { useDataset } from "../context/VariantProvider";
 
 interface RaceProps {
   active: string;
@@ -17,6 +18,7 @@ interface RaceProps {
 
 const Race = (props: RaceProps) => {
   const { active, races, sex } = props;
+  const type = useDataset();
   const sliderRef = useRef<any>(null);
   const showArrow = useSliderButton([...races, ...sex]);
 
@@ -39,20 +41,24 @@ const Race = (props: RaceProps) => {
     variant: IVariant,
   ) => {
     const criteria = criteriaVar();
-    const isSelected = name === criteria.param;
+    const isSelected = name === criteria[type].race;
     if (isSelected) {
       criteriaVar({
         ...criteria,
-        param: "",
-        paramImage: "",
-        variant: "",
+        [type]: {
+          ...criteria[type],
+          [variant === "SEX" ? "sex" : "race"]: "",
+          [variant === "SEX" ? "sexImage" : "raceImage"]: "",
+        },
       });
     } else {
       criteriaVar({
         ...criteria,
-        param: name,
-        paramImage: img,
-        variant,
+        [type]: {
+          ...criteria[type],
+          [variant === "SEX" ? "sex" : "race"]: name,
+          [variant === "SEX" ? "sexImage" : "raceImage"]: img,
+        },
       });
     }
   };
