@@ -17,7 +17,11 @@ import { GET_CRITERIA } from "../../graphql/Incidence";
 import styles from "./AreaGraph.module.scss";
 import COLORS from "../../data/Colors";
 import useWindowSize from "../../hooks/useWindowSize";
-import { useVariant } from "../context/VariantProvider";
+import {
+  useCriteria,
+  useDataset,
+  useVariant,
+} from "../context/VariantProvider";
 
 export type IType = "disease" | "sex" | "race" | "age";
 interface StackedAreaGraphProps {
@@ -29,10 +33,14 @@ interface StackedAreaGraphProps {
 const StackedAreaGraph = (props: StackedAreaGraphProps) => {
   const { loading, trends, type } = props;
   const width = useWindowSize();
+  const variant = useDataset();
 
   const changeYearHandler = (year: any) => {
     const criteria = criteriaVar();
-    criteriaVar({ ...criteria, year: year.value });
+    criteriaVar({
+      ...criteria,
+      [variant]: { ...criteria[variant], year: year.value },
+    });
   };
 
   const categories = useMemo(() => {
@@ -135,9 +143,9 @@ const CustomActiveDot = (props: any) => {
 };
 const CustomYears = (props: any) => {
   const { x, y, payload, width } = props;
-  const { data } = useQuery(GET_CRITERIA);
   const isDeath = useVariant();
-  const isSelectedYear = payload.value === data?.criteria?.year;
+  const criteria = useCriteria();
+  const isSelectedYear = payload.value === criteria?.year;
   const isPhone = width < 600;
   return (
     <Fragment>
@@ -172,12 +180,13 @@ const CustomYears = (props: any) => {
 
 const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
   const { active, payload, label, type } = props;
-  const { data } = useQuery(GET_CRITERIA);
+  const data = useCriteria();
+  const isDeath = useVariant();
   if (active && payload && payload.length) {
     let criteria = [];
-    if (type !== "disease") criteria.push(data?.criteria?.disease);
-    if (type === "disease") criteria.push(data?.criteria?.param);
-    if (data?.criteria?.state) criteria.push(data?.criteria?.state);
+    if (type !== "disease") criteria.push(data?.disease);
+    if (type === "disease") criteria.push(data?.param);
+    if (data?.state) criteria.push(data?.state);
     return (
       <div className={styles.linetip}>
         <p>
@@ -188,7 +197,9 @@ const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
           {payload?.map((item: any) => (
             <li key={item.name}>
               <span>{item.name}</span>
-              <h6 style={{ color: item.stroke }}>{item?.value?.toFixed(1)}%</h6>
+              <h6 style={{ color: item.stroke }}>
+                {item?.value?.toFixed(1)} {isDeath ? "" : "%"}
+              </h6>
             </li>
           ))}
         </ul>

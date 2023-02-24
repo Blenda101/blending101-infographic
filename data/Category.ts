@@ -34,6 +34,15 @@ const DISEASES = [
   "Skin Cancer",
   "Stroke",
 ];
+const DEATH_DISEASES = [
+  "Alzheimer & Dementia",
+  "Ischaemic heart diseases",
+  "Lung Disease",
+  "Hypertension",
+  "Diabetes mellitus",
+  "Kidney Disease",
+  "Stroke",
+];
 const DISEASES_DICTIONARY = {
   Arthritis: "/images/Arthritis.svg",
   Asthma: "/images/Asthma.svg",
@@ -72,6 +81,7 @@ const SEX_DICTIONARY = {
 };
 
 const AGE = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"];
+const DEATH_AGE = ["25-34", "35-44", "45-54", "55-64", "65-74", "75-84", "85+"];
 const AGE_DICTIONARY = {
   "18-24": "/images/age20-29.svg",
   "25-34": "/images/age30-39.svg",
@@ -141,6 +151,7 @@ export {
   YEAR_DICTIONARY,
   DEATH_YEAR_DICTIONARY,
   DISEASES,
+  DEATH_DISEASES,
   DISEASES_DICTIONARY,
   DEATH_DISEASES_DICTIONARY,
   RACE,
@@ -148,6 +159,7 @@ export {
   SEX,
   SEX_DICTIONARY,
   AGE,
+  DEATH_AGE,
   AGE_DICTIONARY,
   STATE_DICTIONARIES,
 };

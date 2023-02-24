@@ -98,7 +98,10 @@ const Specs = (props: SpecsProps) => {
               cx="34"
               cy="34"
               r="28"
-              style={{ strokeDashoffset: 176 - (176 * +value) / 100 }}
+              style={{
+                stroke: isDeath ? "transparent" : "#7bba38",
+                strokeDashoffset: 176 - (176 * +value) / 100,
+              }}
             />
             <circle cx="34" cy="34" r="34" stroke="url(#outline)" />
           </svg>
@@ -108,7 +111,10 @@ const Specs = (props: SpecsProps) => {
         </div>
         <div className="desc">
           <p>{caption}</p>
-          <p className="numbers">{value}%</p>
+          <p className="numbers">
+            {value}
+            {isDeath ? "" : "%"}
+          </p>
         </div>
       </div>
     </>

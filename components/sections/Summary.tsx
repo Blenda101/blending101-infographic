@@ -155,14 +155,16 @@ const Summary = (props: VariantState) => {
             <div className="main_div">
               <div className="first_text">
                 <h3>
-                  {prevalence}
-                  <span>
-                    <sub>IN</sub> 1000
-                  </span>
+                  {isDeath ? prevalence : `${+prevalence / 10}%`}
+                  {isDeath && (
+                    <span>
+                      <sub>IN</sub> 100000
+                    </span>
+                  )}
                 </h3>
               </div>
               <div className="inner_bg">
-                <h4>Prevalence</h4>
+                <h4>{isDeath ? "Prevalence" : "Incidence"}</h4>
               </div>
             </div>
           </div>

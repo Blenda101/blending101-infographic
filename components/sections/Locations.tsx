@@ -8,13 +8,13 @@ import { GET_STATE_DATA } from "../../graphql/Incidence";
 import { VariantState } from "../../graphql/Infograph";
 
 import styles from "./Locations.module.scss";
-import { useDataset } from "../context/VariantProvider";
+import { useDataset, useVariant } from "../context/VariantProvider";
 
 const Locations = (props: VariantState) => {
   const { year, disease, sex, age, race } = props;
 
+  const isDeath = useVariant();
   const dataSet = useDataset();
-
   const { data } = useQuery(GET_STATE_DATA, {
     variables: {
       sex,
@@ -43,7 +43,7 @@ const Locations = (props: VariantState) => {
             </div>
             <div className={styles.range}>
               <div className={styles.wrapper}>
-                <h5>Prevalence ( % )</h5>
+                <h5>Prevalence ( {isDeath ? "deaths in 100000" : "%"} )</h5>
                 <div className={styles.stacked}>
                   <div>
                     <span

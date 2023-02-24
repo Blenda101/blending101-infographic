@@ -9,7 +9,14 @@ import { GET_COMPARE_TRENDS, GET_TRENDS } from "../../graphql/Incidence";
 import { criteriaVar, VariantState } from "../../graphql/Infograph";
 import AreaGraph from "../graph/AreaGraph";
 import StackedAreaGraph, { IType } from "../graph/StackedAreaGraph";
-import { AGE, DISEASES, RACE, SEX } from "../../data/Category";
+import {
+  AGE,
+  DEATH_AGE,
+  DEATH_DISEASES,
+  DISEASES,
+  RACE,
+  SEX,
+} from "../../data/Category";
 import { useDataset, useVariant } from "../context/VariantProvider";
 
 const Trends = (props: VariantState) => {
@@ -44,8 +51,10 @@ const Trends = (props: VariantState) => {
 
   const compareTrends = useMemo(() => {
     let categories: any[] = [];
-    if (criteria[type]?.compare === "disease") categories = DISEASES;
-    else if (criteria[type]?.compare === "age") categories = AGE;
+    if (criteria[type]?.compare === "disease")
+      categories = isDeath ? DEATH_DISEASES : DISEASES;
+    else if (criteria[type]?.compare === "age")
+      categories = isDeath ? DEATH_AGE : AGE;
     else if (criteria[type]?.compare === "race") categories = RACE;
     else if (criteria[type]?.compare === "sex") categories = SEX;
 
@@ -60,7 +69,7 @@ const Trends = (props: VariantState) => {
       });
       return trend;
     });
-  }, [compareData?.getCompareData, criteria, type]);
+  }, [compareData?.getCompareData, criteria, isDeath, type]);
 
   const handleCompare = async (key: IType) => {
     if (compare === key)
@@ -95,7 +104,12 @@ const Trends = (props: VariantState) => {
           <div className="col-12">
             <div className="tabs">
               <div className="tabs-heading">
-                <h3>Trends</h3>
+                <h3>
+                  Trends{" "}
+                  <span style={{ fontSize: 12 }}>
+                    {isDeath ? "( in 100000 )" : ""}
+                  </span>
+                </h3>
               </div>
               <div className={styles.graph}>
                 <div className={styles.graph__panel}>

@@ -11,16 +11,24 @@ import {
 import { criteriaVar } from "../../graphql/Infograph";
 import { GET_CRITERIA } from "../../graphql/Incidence";
 import useWindowSize from "../../hooks/useWindowSize";
-import { useVariant } from "../context/VariantProvider";
+import {
+  useCriteria,
+  useDataset,
+  useVariant,
+} from "../context/VariantProvider";
 import styles from "./AreaGraph.module.scss";
 
 const AreaGraph = ({ trends, loading }: any) => {
   const width = useWindowSize();
   const isDeath = useVariant();
+  const type = useDataset();
 
   const changeYearHandler = (year: any) => {
     const criteria = criteriaVar();
-    criteriaVar({ ...criteria, year: year.value });
+    criteriaVar({
+      ...criteria,
+      [type]: { ...criteria[type], year: year.value },
+    });
   };
 
   return (
@@ -104,8 +112,8 @@ const CustomActiveDot = (props: any) => {
 const CustomYears = (props: any) => {
   const { x, y, payload, width } = props;
   const isDeath = useVariant();
-  const { data } = useQuery(GET_CRITERIA);
-  const isSelectedYear = payload.value === data?.criteria?.year;
+  const criteria = useCriteria();
+  const isSelectedYear = payload.value === criteria?.year;
   const isPhone = width < 600;
   return (
     <Fragment>
@@ -140,18 +148,21 @@ const CustomYears = (props: any) => {
 
 const CustomTooltip = (props: any) => {
   const { active, payload, label } = props;
-  const { data } = useQuery(GET_CRITERIA);
+  const criteria = useCriteria();
+  const isDeath = useVariant();
 
   if (active && payload && payload.length) {
     return (
       <div className={styles.areatip}>
         <p>{label}</p>
         <span>
-          {data?.criteria?.disease}
-          {data?.criteria?.param ? `, ${data?.criteria?.param}` : ""}
-          {data?.criteria?.state ? `, ${data?.criteria?.state}` : ""}
+          {criteria?.disease}
+          {criteria?.param ? `, ${criteria?.param}` : ""}
+          {criteria?.state ? `, ${criteria?.state}` : ""}
         </span>
-        <h6>{payload[0].value.toFixed(1)}%</h6>
+        <h6>
+          {payload[0].value.toFixed(1)} {isDeath ? "" : "%"}
+        </h6>
       </div>
     );
   }
