@@ -147,11 +147,11 @@ const INCIDENCE_DISEASES = [
 ];
 
 const DEATH_DISEASES = [
-  { name: "Alzheimer's Disease", image: "/images/Arthritis.svg" },
+  { name: "Alzheimer", image: "/images/Arthritis.svg" },
   { name: "COPD", image: "/images/Lung_Disease.svg" },
   { name: "Cancer", image: "/images/Cancer.svg" },
-  { name: "Cardiovascular Disease", image: "/images/Hear_ Disease.svg" },
+  { name: "Cardiovascular", image: "/images/Hear_ Disease.svg" },
   { name: "Diabetes", image: "/images/Diabetes.svg" },
-  { name: "Kidney Disease", image: "/images/Kidney_Disease.svg" },
+  { name: "Kidney", image: "/images/Kidney_Disease.svg" },
   { name: "Stroke", image: "/images/Hear_ Disease.svg" },
 ];

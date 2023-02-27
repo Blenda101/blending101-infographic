@@ -35,12 +35,12 @@ const DISEASES = [
   "Stroke",
 ];
 const DEATH_DISEASES = [
-  "Alzheimer's Disease",
+  "Alzheimer",
   "COPD",
   "Cancer",
-  "Cardiovascular Disease",
+  "Cardiovascular",
   "Diabetes",
-  "Kidney Disease",
+  "Kidney",
   "Stroke",
 ];
 const DISEASES_DICTIONARY = {
@@ -56,12 +56,12 @@ const DISEASES_DICTIONARY = {
   Stroke: "/images/Stroke.svg",
 };
 const DEATH_DISEASES_DICTIONARY = {
-  "Alzheimer's Disease": "/images/Arthritis.svg",
+  Alzheimer: "/images/Arthritis.svg",
   COPD: "/images/Lung_Disease.svg",
   Cancer: "/images/Cancer.svg",
-  "Cardiovascular Disease": "/images/Hear_ Disease.svg",
+  Cardiovascular: "/images/Hear_ Disease.svg",
   Diabetes: "/images/Diabetes.svg",
-  "Kidney Disease": "/images/Kidney_Disease.svg",
+  Kidney: "/images/Kidney_Disease.svg",
   Stroke: "/images/Stroke.svg",
 };
 
