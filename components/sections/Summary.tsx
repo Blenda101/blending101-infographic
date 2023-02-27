@@ -3,6 +3,7 @@ import { useApolloClient } from "@apollo/client";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   AGE_DICTIONARY,
+  DEATH_AGE_DICTIONARY,
   DEATH_DISEASES_DICTIONARY,
   DEATH_YEAR_DICTIONARY,
   DISEASES_DICTIONARY,
@@ -24,11 +25,12 @@ const Summary = (props: VariantState) => {
   const {
     year,
     variant,
-    param,
-    paramImage,
     age,
+    ageImage,
     sex,
+    sexImage,
     race,
+    raceImage,
     disease,
     diseaseImage,
     state,
@@ -98,6 +100,7 @@ const Summary = (props: VariantState) => {
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
+
                 {disease && (
                   <Dropdown
                     image={diseaseImage}
@@ -111,30 +114,45 @@ const Summary = (props: VariantState) => {
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
-                {/* {param && (
+
+                {race && (
                   <Dropdown
-                    value={param}
-                    image={paramImage}
-                    onRemove={() => criteriaRmvHandler("param")}
+                    value={race}
+                    image={raceImage}
+                    onRemove={() => criteriaRmvHandler("race")}
                     isEffectingChart={compare === "disease" || compare === ""}
-                    items={PARAM_DICTIONARY}
-                    keyName="param"
-                    keyImage="paramImage"
+                    items={RACES_DICTIONARY}
+                    keyName="race"
+                    keyImage="raceImage"
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
                 )}
+
+                {sex && (
+                  <Dropdown
+                    value={sex}
+                    image={sexImage}
+                    onRemove={() => criteriaRmvHandler("sex")}
+                    isEffectingChart={compare === "disease" || compare === ""}
+                    items={SEX_DICTIONARY}
+                    keyName="sex"
+                    keyImage="sexImage"
+                    showDropdownState={[showDropdown, setShowDropdown]}
+                  />
+                )}
+
                 {age && (
                   <Dropdown
                     value={age}
                     image={ageImage}
                     onRemove={() => criteriaRmvHandler("age")}
                     isEffectingChart={compare === "disease" || compare === ""}
-                    items={PARAM_DICTIONARY}
+                    items={isDeath ? DEATH_AGE_DICTIONARY : AGE_DICTIONARY}
                     keyName="age"
                     keyImage="ageImage"
                     showDropdownState={[showDropdown, setShowDropdown]}
                   />
-                )} */}
+                )}
 
                 {state && (
                   <Dropdown
@@ -164,7 +182,7 @@ const Summary = (props: VariantState) => {
                 </h3>
               </div>
               <div className="inner_bg">
-                <h4>{isDeath ? "Prevalence" : "Incidence"}</h4>
+                <h4>{isDeath ? "Incidence" : "Prevalence"}</h4>
               </div>
             </div>
           </div>

@@ -152,7 +152,6 @@ export const useCriteria = () => {
   const { data: criteriaState, loading } = useQuery<{
     criteria: CriteriaState;
   }>(GET_CRITERIA);
-  console.log(criteriaState);
   return isDeath
     ? criteriaState?.criteria?.death
     : criteriaState?.criteria?.incidence;

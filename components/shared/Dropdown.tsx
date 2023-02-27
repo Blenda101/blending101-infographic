@@ -3,6 +3,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { criteriaVar, VariantState } from "../../graphql/Infograph";
+import { useDataset } from "../context/VariantProvider";
 import styles from "./Dropdown.module.scss";
 
 interface DropdownProps {
@@ -27,14 +28,18 @@ const Dropdown = (props: DropdownProps) => {
     keyImage,
     showDropdownState,
   } = props;
+  const type = useDataset();
   const criteria = criteriaVar();
 
   const [showDropdown, setShowDropdown] = showDropdownState;
   const criteriaChangeHandler = (iName: string, iImage: string) => {
     criteriaVar({
       ...criteria,
-      [keyName]: iName,
-      [keyImage]: iImage,
+      [type]: {
+        ...criteria[type],
+        [keyName]: iName,
+        [keyImage]: iImage,
+      },
     });
   };
 
@@ -52,7 +57,10 @@ const Dropdown = (props: DropdownProps) => {
         <img src={isEffectingChart ? image : `/filters${image}`} alt="" />
         {value}
         <span>
-          <img src="/images/down.svg" alt="down" />
+          <img
+            src={`/images/down${type === "death" ? "-white" : ""}.svg`}
+            alt="down"
+          />
         </span>
       </span>
 

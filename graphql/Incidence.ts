@@ -104,6 +104,12 @@ export const GET_CRITERIA = gql`
         state
         variant
         compare
+        age
+        ageImage
+        sex
+        sexImage
+        race
+        raceImage
       }
       death {
         year
@@ -114,6 +120,12 @@ export const GET_CRITERIA = gql`
         state
         variant
         compare
+        age
+        ageImage
+        sex
+        sexImage
+        race
+        raceImage
       }
     }
   }

@@ -31,6 +31,7 @@ function Home() {
     },
   });
 
+  console.log(criteria);
   return (
     <Fragment>
       <Head>
@@ -50,7 +51,8 @@ function Home() {
               diseases={data?.showInfoData?.diseases || []}
             />
             <Race
-              active={criteria?.race || ""}
+              activeRace={criteria?.race || ""}
+              activeSex={criteria?.sex || ""}
               races={data?.showInfoData?.race || []}
               sex={data?.showInfoData?.sex || []}
             />

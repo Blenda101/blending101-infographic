@@ -42,8 +42,8 @@ const Incidence: VariantState = {
 };
 
 const Death: VariantState = {
-  disease: "Alzheimer & Dementia",
-  diseaseImage: "/images/Arthritis.svg",
+  disease: "Cancer",
+  diseaseImage: "/images/Cancer.svg",
   param: "",
   paramImage: "",
   race: "",

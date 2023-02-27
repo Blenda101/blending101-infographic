@@ -35,11 +35,11 @@ const DISEASES = [
   "Stroke",
 ];
 const DEATH_DISEASES = [
-  "Alzheimer & Dementia",
-  "Ischaemic heart diseases",
-  "Lung Disease",
-  "Hypertension",
-  "Diabetes mellitus",
+  "Alzheimer's Disease",
+  "COPD",
+  "Cancer",
+  "Cardiovascular Disease",
+  "Diabetes",
   "Kidney Disease",
   "Stroke",
 ];
@@ -56,11 +56,11 @@ const DISEASES_DICTIONARY = {
   Stroke: "/images/Stroke.svg",
 };
 const DEATH_DISEASES_DICTIONARY = {
-  "Alzheimer & Dementia": "/images/Arthritis.svg",
-  "Ischaemic heart diseases": "/images/Hear_ Disease.svg",
-  "Lung Disease": "/images/Lung_Disease.svg",
-  Hypertension: "/images/Depression.svg",
-  "Diabetes mellitus": "/images/Diabetes.svg",
+  "Alzheimer's Disease": "/images/Arthritis.svg",
+  COPD: "/images/Lung_Disease.svg",
+  Cancer: "/images/Cancer.svg",
+  "Cardiovascular Disease": "/images/Hear_ Disease.svg",
+  Diabetes: "/images/Diabetes.svg",
   "Kidney Disease": "/images/Kidney_Disease.svg",
   Stroke: "/images/Stroke.svg",
 };
@@ -89,6 +89,15 @@ const AGE_DICTIONARY = {
   "45-54": "/images/age50-59.svg",
   "55-64": "/images/age60-69.svg",
   "65+": "/images/age80+.svg",
+};
+const DEATH_AGE_DICTIONARY = {
+  "25-34": "/images/age30-39.svg",
+  "35-44": "/images/age40-49.svg",
+  "45-54": "/images/age50-59.svg",
+  "55-64": "/images/age60-69.svg",
+  "65-74": "/images/age80+.svg",
+  "75-84": "/images/age80+.svg",
+  "85+": "/images/age80+.svg",
 };
 
 const STATE_DICTIONARIES = {
@@ -152,6 +161,7 @@ export {
   DEATH_YEAR_DICTIONARY,
   DISEASES,
   DEATH_DISEASES,
+  DEATH_AGE_DICTIONARY,
   DISEASES_DICTIONARY,
   DEATH_DISEASES_DICTIONARY,
   RACE,

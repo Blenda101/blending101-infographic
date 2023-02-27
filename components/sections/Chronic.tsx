@@ -52,8 +52,8 @@ const Chronic = (props: ChronicProps) => {
 
   const diseasePercentage = (type: string) => {
     const disease = diseases.find((s) => s._id === type)?.percentage;
-    if (!disease) return "0.0";
-    else return disease.toFixed(1);
+    if (!disease) return isDeath ? "0" : "0.0";
+    else return isDeath ? Math.round(disease) : disease.toFixed(1);
   };
 
   const DISEASES = isDeath ? DEATH_DISEASES : INCIDENCE_DISEASES;
@@ -147,11 +147,11 @@ const INCIDENCE_DISEASES = [
 ];
 
 const DEATH_DISEASES = [
-  { name: "Alzheimer & Dementia", image: "/images/Arthritis.svg" },
-  { name: "Diabetes mellitus", image: "/images/Diabetes.svg" },
-  { name: "Hypertension", image: "/images/Asthma.svg" },
-  { name: "Ischaemic heart diseases", image: "/images/Lung_Disease.svg" },
+  { name: "Alzheimer's Disease", image: "/images/Arthritis.svg" },
+  { name: "COPD", image: "/images/Lung_Disease.svg" },
+  { name: "Cancer", image: "/images/Cancer.svg" },
+  { name: "Cardiovascular Disease", image: "/images/Hear_ Disease.svg" },
+  { name: "Diabetes", image: "/images/Diabetes.svg" },
   { name: "Kidney Disease", image: "/images/Kidney_Disease.svg" },
   { name: "Stroke", image: "/images/Hear_ Disease.svg" },
-  { name: "Lung Disease", image: "/images/Depression.svg" },
 ];

@@ -8,17 +8,19 @@ import {
 import Specs, { ICategory } from "../shared/Specs";
 import { criteriaVar, IVariant } from "../../graphql/Infograph";
 import useSliderButton from "../../hooks/useSliderButton";
-import { useDataset } from "../context/VariantProvider";
+import { useDataset, useVariant } from "../context/VariantProvider";
 
 interface RaceProps {
-  active: string;
+  activeRace: string;
+  activeSex: string;
   races: ICategory[];
   sex: ICategory[];
 }
 
 const Race = (props: RaceProps) => {
-  const { active, races, sex } = props;
+  const { activeRace, activeSex, races, sex } = props;
   const type = useDataset();
+  const isDeath = useVariant();
   const sliderRef = useRef<any>(null);
   const showArrow = useSliderButton([...races, ...sex]);
 
@@ -41,7 +43,16 @@ const Race = (props: RaceProps) => {
     variant: IVariant,
   ) => {
     const criteria = criteriaVar();
-    const isSelected = name === criteria[type].race;
+    const isSelected =
+      name === criteria[type][variant === "SEX" ? "sex" : "race"];
+    const extension = isDeath
+      ? {}
+      : {
+          [variant !== "SEX" ? "sex" : "race"]: "",
+          [variant !== "SEX" ? "sexImage" : "raceImage"]: "",
+          age: "",
+          ageImage: "",
+        };
     if (isSelected) {
       criteriaVar({
         ...criteria,
@@ -58,6 +69,7 @@ const Race = (props: RaceProps) => {
           ...criteria[type],
           [variant === "SEX" ? "sex" : "race"]: name,
           [variant === "SEX" ? "sexImage" : "raceImage"]: img,
+          ...extension,
         },
       });
     }
@@ -65,14 +77,14 @@ const Race = (props: RaceProps) => {
 
   const racePercentage = (type: string) => {
     const race = races.find((s) => s._id === type)?.percentage;
-    if (!race) return "0.0";
-    else return race.toFixed(1);
+    if (!race) return isDeath ? "0" : "0.0";
+    else return isDeath ? Math.round(race) : race.toFixed(1);
   };
 
   const sexPercentage = (type: string) => {
     const varSex = sex.find((s) => s._id === type)?.percentage;
-    if (!varSex) return "0.0";
-    else return varSex.toFixed(1);
+    if (!varSex) return isDeath ? "0" : "0.0";
+    else return isDeath ? Math.round(varSex) : varSex.toFixed(1);
   };
 
   return (
@@ -130,7 +142,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeRace}
               caption={"White"}
               value={racePercentage("White")}
               image="/images/White.svg"
@@ -142,7 +154,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeRace}
               caption={"Black"}
               value={racePercentage("Black")}
               image="/images/Black.svg"
@@ -154,7 +166,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeRace}
               caption={"Hispanic"}
               value={racePercentage("Hispanic")}
               image="/images/hispanic.svg"
@@ -166,7 +178,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeRace}
               caption={"Asian"}
               value={racePercentage("Asian")}
               image="/images/Asian.svg"
@@ -178,7 +190,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeRace}
               caption={"Other"}
               value={racePercentage("Other")}
               image="/images/other.svg"
@@ -191,7 +203,7 @@ const Race = (props: RaceProps) => {
             className="separator"
           >
             <Specs
-              active={active}
+              active={activeSex}
               caption="Male"
               value={sexPercentage("Male")}
               image="/images/Male.svg"
@@ -203,7 +215,7 @@ const Race = (props: RaceProps) => {
             }
           >
             <Specs
-              active={active}
+              active={activeSex}
               caption="Female"
               value={sexPercentage("Female")}
               image="/images/Female.svg"

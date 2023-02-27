@@ -29,9 +29,9 @@ const Trends = (props: VariantState) => {
     variables: {
       state,
       disease,
-      age: variant === "AGE" ? param : "",
-      sex: variant === "SEX" ? param : "",
-      race: variant === "RACE" ? param : "",
+      race,
+      sex,
+      age,
       dataSet: type,
     },
   });
@@ -104,12 +104,7 @@ const Trends = (props: VariantState) => {
           <div className="col-12">
             <div className="tabs">
               <div className="tabs-heading">
-                <h3>
-                  Trends{" "}
-                  <span style={{ fontSize: 12 }}>
-                    {isDeath ? "( in 100000 )" : ""}
-                  </span>
-                </h3>
+                <h3>Trends</h3>
               </div>
               <div className={styles.graph}>
                 <div className={styles.graph__panel}>
@@ -167,7 +162,6 @@ const Trends = (props: VariantState) => {
                     </li>
                   </ul>
                 </div>
-                {/* <div className={styles.graph__chart}> */}
                 {compare === "" ? (
                   <div className={styles.graph__wrapper}>
                     <AreaGraph loading={trendLoading} trends={trends} />
@@ -186,6 +180,7 @@ const Trends = (props: VariantState) => {
           </div>
         </div>
       </div>
+      {isDeath && <span className={styles.note}>Deaths in 1000000</span>}
     </section>
   );
 };
