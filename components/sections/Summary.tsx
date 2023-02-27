@@ -62,8 +62,12 @@ const Summary = (props: VariantState) => {
     const chronic = infoData?.showInfoData?.diseases?.find(
       (sick: any) => sick._id === disease,
     );
-    return chronic ? Math.round((chronic.percentage * 1000) / 100) : 0;
-  }, [disease, infoData?.showInfoData?.diseases]);
+    return chronic
+      ? Math.round(
+          isDeath ? chronic.percentage : (chronic.percentage * 1000) / 100,
+        )
+      : 0;
+  }, [disease, infoData?.showInfoData?.diseases, isDeath]);
 
   const criteriaRmvHandler = (key: keyof VariantState) => {
     const criteria = criteriaVar();

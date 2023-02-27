@@ -91,139 +91,27 @@ const Age = ({ active, ages }: AgeProps) => {
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           )}
-          <Swiper
-            ref={sliderRef}
-            spaceBetween={10}
-            breakpoints={getBreakpoints(ages)}
-            onInit={(e) => {
-              setIsBegin(e.isBeginning);
-              setIsEnd(e.isEnd);
-            }}
-            onSlideChange={(e) => {
-              setIsBegin(e.isBeginning);
-              setIsEnd(e.isEnd);
-            }}
-          >
-            {isDeath ? (
-              <SwiperSlide
-                onClick={() => ageClickHandler("25-34", "/images/age30-39.svg")}
-              >
-                <Specs
-                  caption="25-34"
-                  active={active}
-                  value={agePercentage("25-34")}
-                  image="/images/age30-39.svg"
-                />
-              </SwiperSlide>
-            ) : (
-              <Fragment>
-                <SwiperSlide
-                  onClick={() =>
-                    ageClickHandler("18-24", "/images/age20-29.svg")
-                  }
-                >
-                  <Specs
-                    caption="18-24"
-                    active={active}
-                    value={agePercentage("18-24")}
-                    image="/images/age20-29.svg"
-                  />
-                </SwiperSlide>
-                <SwiperSlide
-                  onClick={() =>
-                    ageClickHandler("25-34", "/images/age30-39.svg")
-                  }
-                >
-                  <Specs
-                    caption="25-34"
-                    active={active}
-                    value={agePercentage("25-34")}
-                    image="/images/age30-39.svg"
-                  />
-                </SwiperSlide>
-              </Fragment>
-            )}
-            <SwiperSlide
-              onClick={() => ageClickHandler("35-44", "/images/age40-49.svg")}
-            >
-              <Specs
-                caption="35-44"
-                active={active}
-                value={agePercentage("35-44")}
-                image="/images/age40-49.svg"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide
-              onClick={() => ageClickHandler("45-54", "/images/age50-59.svg")}
-            >
-              <Specs
-                caption="45-54"
-                active={active}
-                value={agePercentage("45-54")}
-                image="/images/age50-59.svg"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide
-              onClick={() => ageClickHandler("55-64", "/images/age60-69.svg")}
-            >
-              <Specs
-                caption="55-64"
-                active={active}
-                value={agePercentage("55-64")}
-                image="/images/age60-69.svg"
-              />
-            </SwiperSlide>
-            {isDeath ? (
-              <Fragment>
-                <SwiperSlide
-                  onClick={() => ageClickHandler("65-74", "/images/age80+.svg")}
-                >
-                  <Specs
-                    caption="65-74"
-                    active={active}
-                    value={agePercentage("65-74")}
-                    image="/images/age80+.svg"
-                  />
-                </SwiperSlide>
-                <SwiperSlide
-                  onClick={() => ageClickHandler("75-84", "/images/age80+.svg")}
-                >
-                  <Specs
-                    caption="75-84"
-                    active={active}
-                    value={agePercentage("75-84")}
-                    image="/images/age80+.svg"
-                  />
-                </SwiperSlide>
-                <SwiperSlide
-                  onClick={() => ageClickHandler("85+", "/images/age80+.svg")}
-                >
-                  <Specs
-                    caption="85+"
-                    active={active}
-                    value={agePercentage("85+")}
-                    image="/images/age80+.svg"
-                  />
-                </SwiperSlide>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <SwiperSlide
-                  onClick={() => ageClickHandler("65+", "/images/age80+.svg")}
-                >
-                  <Specs
-                    caption="65+"
-                    active={active}
-                    value={agePercentage("65+")}
-                    image="/images/age80+.svg"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>&nbsp;</SwiperSlide>
-              </Fragment>
-            )}
-          </Swiper>
+          {isDeath ? (
+            <DeathCards
+              sliderRef={sliderRef}
+              ages={ages}
+              setIsBegin={setIsBegin}
+              setIsEnd={setIsEnd}
+              active={active}
+              ageClickHandler={ageClickHandler}
+              agePercentage={agePercentage}
+            />
+          ) : (
+            <IncidenceCards
+              sliderRef={sliderRef}
+              ages={ages}
+              setIsBegin={setIsBegin}
+              setIsEnd={setIsEnd}
+              active={active}
+              ageClickHandler={ageClickHandler}
+              agePercentage={agePercentage}
+            />
+          )}
           {!isEnd && showArrow && (
             <div className="next" onClick={handleNext}>
               <FontAwesomeIcon icon={faChevronRight} />
@@ -236,3 +124,188 @@ const Age = ({ active, ages }: AgeProps) => {
 };
 
 export default Age;
+
+const IncidenceCards = ({
+  sliderRef,
+  ages,
+  setIsBegin,
+  setIsEnd,
+  ageClickHandler,
+  active,
+  agePercentage,
+}: any) => {
+  return (
+    <Swiper
+      ref={sliderRef}
+      spaceBetween={10}
+      breakpoints={getBreakpoints(ages)}
+      onInit={(e) => {
+        setIsBegin(e.isBeginning);
+        setIsEnd(e.isEnd);
+      }}
+      onSlideChange={(e) => {
+        setIsBegin(e.isBeginning);
+        setIsEnd(e.isEnd);
+      }}
+    >
+      <SwiperSlide
+        onClick={() => ageClickHandler("18-24", "/images/age20-29.svg")}
+      >
+        <Specs
+          caption="18-24"
+          active={active}
+          value={agePercentage("18-24")}
+          image="/images/age20-29.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide
+        onClick={() => ageClickHandler("25-34", "/images/age30-39.svg")}
+      >
+        <Specs
+          caption="25-34"
+          active={active}
+          value={agePercentage("25-34")}
+          image="/images/age30-39.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide
+        onClick={() => ageClickHandler("35-44", "/images/age40-49.svg")}
+      >
+        <Specs
+          caption="35-44"
+          active={active}
+          value={agePercentage("35-44")}
+          image="/images/age40-49.svg"
+        />
+      </SwiperSlide>
+
+      <SwiperSlide
+        onClick={() => ageClickHandler("45-54", "/images/age50-59.svg")}
+      >
+        <Specs
+          caption="45-54"
+          active={active}
+          value={agePercentage("45-54")}
+          image="/images/age50-59.svg"
+        />
+      </SwiperSlide>
+
+      <SwiperSlide
+        onClick={() => ageClickHandler("55-64", "/images/age60-69.svg")}
+      >
+        <Specs
+          caption="55-64"
+          active={active}
+          value={agePercentage("55-64")}
+          image="/images/age60-69.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide onClick={() => ageClickHandler("65+", "/images/age80+.svg")}>
+        <Specs
+          caption="65+"
+          active={active}
+          value={agePercentage("65+")}
+          image="/images/age80+.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide>&nbsp;</SwiperSlide>
+    </Swiper>
+  );
+};
+
+const DeathCards = ({
+  sliderRef,
+  ages,
+  setIsBegin,
+  setIsEnd,
+  ageClickHandler,
+  active,
+  agePercentage,
+}: any) => {
+  return (
+    <Swiper
+      ref={sliderRef}
+      spaceBetween={10}
+      breakpoints={getBreakpoints(ages)}
+      onInit={(e) => {
+        setIsBegin(e.isBeginning);
+        setIsEnd(e.isEnd);
+      }}
+      onSlideChange={(e) => {
+        setIsBegin(e.isBeginning);
+        setIsEnd(e.isEnd);
+      }}
+    >
+      <SwiperSlide
+        onClick={() => ageClickHandler("25-34", "/images/age30-39.svg")}
+      >
+        <Specs
+          caption="25-34"
+          active={active}
+          value={agePercentage("25-34")}
+          image="/images/age30-39.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide
+        onClick={() => ageClickHandler("35-44", "/images/age40-49.svg")}
+      >
+        <Specs
+          caption="35-44"
+          active={active}
+          value={agePercentage("35-44")}
+          image="/images/age40-49.svg"
+        />
+      </SwiperSlide>
+
+      <SwiperSlide
+        onClick={() => ageClickHandler("45-54", "/images/age50-59.svg")}
+      >
+        <Specs
+          caption="45-54"
+          active={active}
+          value={agePercentage("45-54")}
+          image="/images/age50-59.svg"
+        />
+      </SwiperSlide>
+
+      <SwiperSlide
+        onClick={() => ageClickHandler("55-64", "/images/age60-69.svg")}
+      >
+        <Specs
+          caption="55-64"
+          active={active}
+          value={agePercentage("55-64")}
+          image="/images/age60-69.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide
+        onClick={() => ageClickHandler("65-74", "/images/age80+.svg")}
+      >
+        <Specs
+          caption="65-74"
+          active={active}
+          value={agePercentage("65-74")}
+          image="/images/age80+.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide
+        onClick={() => ageClickHandler("75-84", "/images/age80+.svg")}
+      >
+        <Specs
+          caption="75-84"
+          active={active}
+          value={agePercentage("75-84")}
+          image="/images/age80+.svg"
+        />
+      </SwiperSlide>
+      <SwiperSlide onClick={() => ageClickHandler("85+", "/images/age80+.svg")}>
+        <Specs
+          caption="85+"
+          active={active}
+          value={agePercentage("85+")}
+          image="/images/age80+.svg"
+        />
+      </SwiperSlide>
+    </Swiper>
+  );
+};

@@ -31,7 +31,6 @@ function Home() {
     },
   });
 
-  console.log(criteria);
   return (
     <Fragment>
       <Head>
