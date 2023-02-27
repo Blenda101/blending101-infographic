@@ -43,7 +43,10 @@ const Locations = (props: VariantState) => {
             </div>
             <div className={styles.range}>
               <div className={styles.wrapper}>
-                <h5>Prevalence ( {isDeath ? "deaths in 100000" : "%"} )</h5>
+                <h5>
+                  {isDeath ? "Incidence" : "Prevalence"} ({" "}
+                  {isDeath ? "deaths in 100000" : "%"} )
+                </h5>
                 <div className={styles.stacked}>
                   <div>
                     <span

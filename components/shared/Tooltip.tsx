@@ -29,7 +29,9 @@ const Tooltip = (props: TooltipProps) => {
       <h6 style={{ color: dot ? "#ededed" : "#7bba38" }}>
         <span style={{ backgroundColor: dot }}></span>
         {value
-          ? typeof value === "string"
+          ? isDeath
+            ? Math.round(+value)
+            : typeof value === "string"
             ? parseFloat(value)?.toFixed(1)
             : value.toFixed(1)
           : 0}

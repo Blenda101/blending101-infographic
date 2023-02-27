@@ -152,14 +152,17 @@ const CustomTooltip = (props: any) => {
   const isDeath = useVariant();
 
   if (active && payload && payload.length) {
+    let criteriaFilters = [];
+    criteriaFilters.push(criteria?.disease);
+    criteria?.sex && criteriaFilters.push(criteria?.sex);
+    criteria?.race && criteriaFilters.push(criteria?.race);
+    criteria?.age && criteriaFilters.push(criteria?.age);
+    criteria?.state && criteriaFilters.push(criteria?.state);
+
     return (
       <div className={styles.areatip}>
         <p>{label}</p>
-        <span>
-          {criteria?.disease}
-          {criteria?.param ? `, ${criteria?.param}` : ""}
-          {criteria?.state ? `, ${criteria?.state}` : ""}
-        </span>
+        <span>{criteriaFilters?.join()}</span>
         <h6>
           {payload[0].value.toFixed(1)} {isDeath ? "" : "%"}
         </h6>

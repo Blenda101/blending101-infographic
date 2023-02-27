@@ -69,11 +69,18 @@ const Summary = (props: VariantState) => {
       : 0;
   }, [disease, infoData?.showInfoData?.diseases, isDeath]);
 
-  const criteriaRmvHandler = (key: keyof VariantState) => {
+  const criteriaRmvHandler = (
+    key: keyof VariantState,
+    keyImage: keyof VariantState,
+  ) => {
     const criteria = criteriaVar();
     criteriaVar({
       ...criteria,
-      [key]: "",
+      [dataSet]: {
+        ...criteria[dataSet],
+        [key]: "",
+        [keyImage]: "",
+      },
     });
   };
 
@@ -123,7 +130,7 @@ const Summary = (props: VariantState) => {
                   <Dropdown
                     value={race}
                     image={raceImage}
-                    onRemove={() => criteriaRmvHandler("race")}
+                    onRemove={() => criteriaRmvHandler("race", "raceImage")}
                     isEffectingChart={compare === "disease" || compare === ""}
                     items={RACES_DICTIONARY}
                     keyName="race"
@@ -136,7 +143,7 @@ const Summary = (props: VariantState) => {
                   <Dropdown
                     value={sex}
                     image={sexImage}
-                    onRemove={() => criteriaRmvHandler("sex")}
+                    onRemove={() => criteriaRmvHandler("sex", "sexImage")}
                     isEffectingChart={compare === "disease" || compare === ""}
                     items={SEX_DICTIONARY}
                     keyName="sex"
@@ -149,7 +156,7 @@ const Summary = (props: VariantState) => {
                   <Dropdown
                     value={age}
                     image={ageImage}
-                    onRemove={() => criteriaRmvHandler("age")}
+                    onRemove={() => criteriaRmvHandler("age", "ageImage")}
                     isEffectingChart={compare === "disease" || compare === ""}
                     items={isDeath ? DEATH_AGE_DICTIONARY : AGE_DICTIONARY}
                     keyName="age"
@@ -162,7 +169,7 @@ const Summary = (props: VariantState) => {
                   <Dropdown
                     image={"/images/location.svg"}
                     value={state}
-                    onRemove={() => criteriaRmvHandler("state")}
+                    onRemove={() => criteriaRmvHandler("state", "state")}
                     isEffectingChart
                     items={STATE_DICTIONARIES}
                     keyName="state"

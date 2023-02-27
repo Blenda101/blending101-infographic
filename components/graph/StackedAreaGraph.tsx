@@ -180,18 +180,22 @@ const CustomYears = (props: any) => {
 
 const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
   const { active, payload, label, type } = props;
-  const data = useCriteria();
+  const criteria = useCriteria();
   const isDeath = useVariant();
   if (active && payload && payload.length) {
-    let criteria = [];
-    if (type !== "disease") criteria.push(data?.disease);
-    if (type === "disease") criteria.push(data?.param);
-    if (data?.state) criteria.push(data?.state);
+    let criteriaFilters = [];
+    if (type !== "disease") criteriaFilters.push(criteria?.disease);
+    if (type === "disease") {
+      criteria?.sex && criteriaFilters.push(criteria?.sex);
+      criteria?.race && criteriaFilters.push(criteria?.race);
+      criteria?.age && criteriaFilters.push(criteria?.age);
+    }
+    criteria?.state && criteriaFilters.push(criteria?.state);
     return (
       <div className={styles.linetip}>
         <p>
           {label}
-          <br /> <span>{criteria.join(", ")}</span>
+          <br /> <span>{criteriaFilters.join(", ")}</span>
         </p>
         <ul>
           {payload?.map((item: any) => (

@@ -48,9 +48,10 @@ const Dropdown = (props: DropdownProps) => {
       className={`${styles.element} ${
         isEffectingChart ? styles["element--active"] : ""
       }`}
-      onClick={() => {
+      onClick={(e) => {
         if (showDropdown === keyName) setShowDropdown("");
         else setShowDropdown(keyName);
+        e.stopPropagation();
       }}
     >
       <span>
@@ -64,7 +65,15 @@ const Dropdown = (props: DropdownProps) => {
         </span>
       </span>
 
-      {onRemove && <FontAwesomeIcon icon={faTimes} onClick={onRemove} />}
+      {onRemove && (
+        <FontAwesomeIcon
+          icon={faTimes}
+          onClick={(e) => {
+            onRemove();
+            e.stopPropagation();
+          }}
+        />
+      )}
       {showDropdown === keyName && (
         <ul className={styles.dropdown}>
           {Object.keys(items).map((item) => (
