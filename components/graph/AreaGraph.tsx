@@ -162,7 +162,7 @@ const CustomTooltip = (props: any) => {
     return (
       <div className={styles.areatip}>
         <p>{label}</p>
-        <span>{criteriaFilters?.join()}</span>
+        <span>{criteriaFilters?.join(", ")}</span>
         <h6>
           {payload[0].value.toFixed(1)} {isDeath ? "" : "%"}
         </h6>
