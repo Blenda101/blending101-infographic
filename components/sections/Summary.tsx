@@ -131,7 +131,11 @@ const Summary = (props: VariantState) => {
                     value={race}
                     image={raceImage}
                     onRemove={() => criteriaRmvHandler("race", "raceImage")}
-                    isEffectingChart={compare === "disease" || compare === ""}
+                    isEffectingChart={
+                      isDeath
+                        ? ["", "disease", "sex", "age"].includes(compare)
+                        : ["", "disease"].includes(compare)
+                    }
                     items={RACES_DICTIONARY}
                     keyName="race"
                     keyImage="raceImage"
@@ -144,7 +148,11 @@ const Summary = (props: VariantState) => {
                     value={sex}
                     image={sexImage}
                     onRemove={() => criteriaRmvHandler("sex", "sexImage")}
-                    isEffectingChart={compare === "disease" || compare === ""}
+                    isEffectingChart={
+                      isDeath
+                        ? ["", "disease", "race", "age"].includes(compare)
+                        : ["", "disease"].includes(compare)
+                    }
                     items={SEX_DICTIONARY}
                     keyName="sex"
                     keyImage="sexImage"
@@ -157,7 +165,11 @@ const Summary = (props: VariantState) => {
                     value={age}
                     image={ageImage}
                     onRemove={() => criteriaRmvHandler("age", "ageImage")}
-                    isEffectingChart={compare === "disease" || compare === ""}
+                    isEffectingChart={
+                      isDeath
+                        ? ["", "disease", "race", "sex"].includes(compare)
+                        : ["", "disease"].includes(compare)
+                    }
                     items={isDeath ? DEATH_AGE_DICTIONARY : AGE_DICTIONARY}
                     keyName="age"
                     keyImage="ageImage"

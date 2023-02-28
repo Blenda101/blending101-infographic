@@ -164,7 +164,8 @@ const CustomTooltip = (props: any) => {
         <p>{label}</p>
         <span>{criteriaFilters?.join(", ")}</span>
         <h6>
-          {payload[0].value.toFixed(1)} {isDeath ? "" : "%"}
+          {isDeath ? Math.round(payload[0].value) : payload[0].value.toFixed(1)}{" "}
+          {isDeath ? "" : "%"}
         </h6>
       </div>
     );

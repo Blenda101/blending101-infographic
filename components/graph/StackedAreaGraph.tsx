@@ -182,14 +182,13 @@ const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
   const { active, payload, label, type } = props;
   const criteria = useCriteria();
   const isDeath = useVariant();
+  console.log(payload);
   if (active && payload && payload.length) {
     let criteriaFilters = [];
-    if (type !== "disease") criteriaFilters.push(criteria?.disease);
-    if (type === "disease") {
-      criteria?.sex && criteriaFilters.push(criteria?.sex);
-      criteria?.race && criteriaFilters.push(criteria?.race);
-      criteria?.age && criteriaFilters.push(criteria?.age);
-    }
+    type !== "disease" && criteriaFilters.push(criteria?.disease);
+    type !== "sex" && criteria?.sex && criteriaFilters.push(criteria?.sex);
+    type !== "race" && criteria?.race && criteriaFilters.push(criteria?.race);
+    type !== "age" && criteria?.age && criteriaFilters.push(criteria?.age);
     criteria?.state && criteriaFilters.push(criteria?.state);
     return (
       <div className={styles.linetip}>
@@ -202,7 +201,8 @@ const CustomTooltip = (props: { type: IType; [key: string]: any }) => {
             <li key={item.name}>
               <span>{item.name}</span>
               <h6 style={{ color: item.stroke }}>
-                {item?.value?.toFixed(1)} {isDeath ? "" : "%"}
+                {isDeath ? Math.round(item.value) : item.value.toFixed(1)}{" "}
+                {isDeath ? "" : "%"}
               </h6>
             </li>
           ))}
