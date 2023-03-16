@@ -143,6 +143,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeRace}
+              type="RACE"
               caption={"White"}
               value={racePercentage("White")}
               image="/images/White.svg"
@@ -155,6 +156,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeRace}
+              type="RACE"
               caption={"Black"}
               value={racePercentage("Black")}
               image="/images/Black.svg"
@@ -167,6 +169,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeRace}
+              type="RACE"
               caption={"Hispanic"}
               value={racePercentage("Hispanic")}
               image="/images/hispanic.svg"
@@ -179,6 +182,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeRace}
+              type="RACE"
               caption={"Asian"}
               value={racePercentage("Asian")}
               image="/images/Asian.svg"
@@ -191,6 +195,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeRace}
+              type="RACE"
               caption={"Other"}
               value={racePercentage("Other")}
               image="/images/other.svg"
@@ -204,6 +209,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeSex}
+              type="SEX"
               caption="Male"
               value={sexPercentage("Male")}
               image="/images/Male.svg"
@@ -216,6 +222,7 @@ const Race = (props: RaceProps) => {
           >
             <Specs
               active={activeSex}
+              type="SEX"
               caption="Female"
               value={sexPercentage("Female")}
               image="/images/Female.svg"

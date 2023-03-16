@@ -107,14 +107,11 @@ const State = (props: StateProps) => {
           title={maps ? maps[id]?.fullForm : ""}
           value={maps ? maps[id]?.percentage : 0}
           dot={color}
+          type="STATE"
         />
       }
       placement="bottom"
       delay={[2000, 200]}
-      // TO DEBUG THE TOOLTIP
-      // hideOnClick={false}
-      // trigger={"click"}
-      // interactive
     >
       <g
         id={id}

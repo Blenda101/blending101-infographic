@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import Tippy from "@tippyjs/react";
 import React from "react";
 import { useVariant } from "../context/VariantProvider";
 import styles from "./Specs.module.scss";
+import Tooltip from "./Tooltip";
 
 export type ICategory = { _id: string; percentage: number };
 
@@ -13,13 +15,18 @@ interface SpecsProps {
   icon?: IconDefinition;
   image?: string;
   onClick?: any;
+  type?: "DISEASE" | "RACE" | "SEX" | "AGE" | "STATE";
 }
 
 const Specs = (props: SpecsProps) => {
-  const { active, caption, value, icon, image, onClick } = props;
+  const { active, caption, value, type, image, onClick } = props;
   const isDeath = useVariant();
   return (
-    <>
+    <Tippy
+      content={<Tooltip title={caption} value={value} type={type} />}
+      placement="bottom"
+      delay={[2000, 200]}
+    >
       <div
         id={caption}
         className={`small-icon ${
@@ -117,7 +124,7 @@ const Specs = (props: SpecsProps) => {
           </p>
         </div>
       </div>
-    </>
+    </Tippy>
   );
 };
 

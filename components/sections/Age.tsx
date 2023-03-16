@@ -98,6 +98,7 @@ const Age = ({ active, ages }: AgeProps) => {
               setIsBegin={setIsBegin}
               setIsEnd={setIsEnd}
               active={active}
+              type="AGE"
               ageClickHandler={ageClickHandler}
               agePercentage={agePercentage}
             />
@@ -108,6 +109,7 @@ const Age = ({ active, ages }: AgeProps) => {
               setIsBegin={setIsBegin}
               setIsEnd={setIsEnd}
               active={active}
+              type="AGE"
               ageClickHandler={ageClickHandler}
               agePercentage={agePercentage}
             />
@@ -154,6 +156,7 @@ const IncidenceCards = ({
         <Specs
           caption="18-24"
           active={active}
+          type="AGE"
           value={agePercentage("18-24")}
           image="/images/age20-29.svg"
         />
@@ -164,6 +167,7 @@ const IncidenceCards = ({
         <Specs
           caption="25-34"
           active={active}
+          type="AGE"
           value={agePercentage("25-34")}
           image="/images/age30-39.svg"
         />
@@ -174,6 +178,7 @@ const IncidenceCards = ({
         <Specs
           caption="35-44"
           active={active}
+          type="AGE"
           value={agePercentage("35-44")}
           image="/images/age40-49.svg"
         />
@@ -185,6 +190,7 @@ const IncidenceCards = ({
         <Specs
           caption="45-54"
           active={active}
+          type="AGE"
           value={agePercentage("45-54")}
           image="/images/age50-59.svg"
         />
@@ -196,6 +202,7 @@ const IncidenceCards = ({
         <Specs
           caption="55-64"
           active={active}
+          type="AGE"
           value={agePercentage("55-64")}
           image="/images/age60-69.svg"
         />
@@ -204,6 +211,7 @@ const IncidenceCards = ({
         <Specs
           caption="65+"
           active={active}
+          type="AGE"
           value={agePercentage("65+")}
           image="/images/age80+.svg"
         />
@@ -242,6 +250,7 @@ const DeathCards = ({
         <Specs
           caption="25-34"
           active={active}
+          type="AGE"
           value={agePercentage("25-34")}
           image="/images/age30-39.svg"
         />
@@ -252,6 +261,7 @@ const DeathCards = ({
         <Specs
           caption="35-44"
           active={active}
+          type="AGE"
           value={agePercentage("35-44")}
           image="/images/age40-49.svg"
         />
@@ -263,6 +273,7 @@ const DeathCards = ({
         <Specs
           caption="45-54"
           active={active}
+          type="AGE"
           value={agePercentage("45-54")}
           image="/images/age50-59.svg"
         />
@@ -274,6 +285,7 @@ const DeathCards = ({
         <Specs
           caption="55-64"
           active={active}
+          type="AGE"
           value={agePercentage("55-64")}
           image="/images/age60-69.svg"
         />
@@ -284,6 +296,7 @@ const DeathCards = ({
         <Specs
           caption="65-74"
           active={active}
+          type="AGE"
           value={agePercentage("65-74")}
           image="/images/age80+.svg"
         />
@@ -294,6 +307,7 @@ const DeathCards = ({
         <Specs
           caption="75-84"
           active={active}
+          type="AGE"
           value={agePercentage("75-84")}
           image="/images/age80+.svg"
         />
@@ -302,6 +316,7 @@ const DeathCards = ({
         <Specs
           caption="85+"
           active={active}
+          type="AGE"
           value={agePercentage("85+")}
           image="/images/age80+.svg"
         />

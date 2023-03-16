@@ -113,6 +113,7 @@ const Chronic = (props: ChronicProps) => {
                 onClick={() => diseaseClickHandler(disease.name, disease.image)}
               >
                 <Specs
+                  type="DISEASE"
                   active={active}
                   caption={disease.name}
                   value={diseasePercentage(disease.name)}

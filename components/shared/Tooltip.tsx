@@ -1,33 +1,36 @@
-import { useApolloClient, useQuery } from "@apollo/client";
-import React, { Fragment, useEffect, useState } from "react";
-import { Tooltip as Popover, ITooltip } from "react-tooltip";
-import { GET_CRITERIA, GET_STATE_DATA } from "../../graphql/Incidence";
+import React from "react";
 import { useCriteria, useVariant } from "../context/VariantProvider";
 
 import styles from "./Tooltip.module.scss";
 
-interface TooltipProps extends ITooltip {
+interface TooltipProps {
   title?: string;
   value?: string | number;
+  type?: "DISEASE" | "RACE" | "SEX" | "AGE" | "STATE";
   dot?: string;
 }
 
 const Tooltip = (props: TooltipProps) => {
-  const { title, value, dot } = props;
+  const { title, value, type, dot } = props;
   const criteria = useCriteria();
   const isDeath = useVariant();
+
+  let criteriaFilters = [];
+  criteria?.year && criteriaFilters.push(criteria?.year);
+  type !== "DISEASE" &&
+    criteria?.disease &&
+    criteriaFilters.push(criteria?.disease);
+  type !== "SEX" && criteria?.sex && criteriaFilters.push(criteria?.sex);
+  type !== "RACE" && criteria?.race && criteriaFilters.push(criteria?.race);
+  type !== "AGE" && criteria?.age && criteriaFilters.push(criteria?.age);
+  type !== "STATE" && criteria?.state && criteriaFilters.push(criteria?.state);
 
   return (
     <div id="tooltip" className={styles.tooltip}>
       <p id="tooltip-title">{title}</p>
-      <span>
-        {criteria?.year ? `${criteria?.year}, ` : ""}
-        {criteria?.disease}
-        {criteria?.param ? `, ${criteria?.param}` : ""}
-        {!dot && criteria?.state ? `, ${criteria?.state}` : ""}
-      </span>
+      <span>{criteriaFilters?.join(", ")}</span>
       <h6 style={{ color: dot ? "#ededed" : "#7bba38" }}>
-        <span style={{ backgroundColor: dot }}></span>
+        {dot && <span style={{ backgroundColor: dot }}></span>}
         {value
           ? isDeath
             ? Math.round(+value)
